@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Button x:Name="SpeakBtn" Content="START" HorizontalAlignment="Left" Margin="369,278,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.552,-0.187" Click="SpeakBtn_Click"/>
+        <Button x:Name="StopBtn" Content="STOP" HorizontalAlignment="Left" Margin="446,278,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.797,2.333" Click="StopBtn_Click"/>
+        <TextBox x:Name="Responsetxt" HorizontalAlignment="Left" Height="77" Margin="10,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
+        <Button x:Name="AnalyzeStart"  Content="Second" HorizontalAlignment="Left" Margin="29,278,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.552,-0.187" Click="AnalyzeStart_Click"/>
+        <TextBox x:Name="keyPhrasesTxt" HorizontalAlignment="Left" Height="34" Margin="10,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="498"/>
+        <TextBox x:Name="sentimentTxt" HorizontalAlignment="Left" Height="34" Margin="10,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="498"/>
 
     </Grid>
 </Window>
