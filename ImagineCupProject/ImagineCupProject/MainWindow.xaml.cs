@@ -83,16 +83,14 @@ namespace ImagineCupProject
         }
 
         //Text Analytics API 사용 감정상태 분석
-        private async void MakeRequest()
+        private async void keyPhrasesRequest()
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             var keyPhrasesUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases?" + queryString;   //핵심어구
-            //var sentimentUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment?" + queryString;      //감정상태
             byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
             var content = new ByteArrayContent(byteData);
             HttpResponseMessage keyPhrasesResponse = null;
-            //HttpResponseMessage sentimentUriResponse = null;
 
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "2ee0076fd06543029e0668de66971b68");
             queryString["numberOfLanguagesToDetect"] = "1";
@@ -100,23 +98,17 @@ namespace ImagineCupProject
             keyPhrasesResponse = await client.PostAsync(keyPhrasesUri, content);
             keyPhrasesTxt.Text = keyPhrasesResponse.Content.ReadAsStringAsync().Result;
 
-          
+         
             content.Dispose();
-            //keyPhrasesTxt.Text = keyPhrasesResponse.Content.ReadAsStringAsync().Result;
-            //sentimentTxt.Text = keyPhrasesResponse.Content.ReadAsStringAsync().Result;
-
-            //MessageBox.Show(response.Content.ReadAsStringAsync().Result);
         }
 
-        private async void MakeRequest2()
+        private async void sentimentRequest()
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            //var keyPhrasesUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases?" + queryString;   //핵심어구
             var sentimentUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment?" + queryString;      //감정상태
-            byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
-            var content = new ByteArrayContent(byteData);
-            //HttpResponseMessage keyPhrasesResponse = null;
+             byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
+             var content = new ByteArrayContent(byteData);
             HttpResponseMessage sentimentUriResponse = null;
 
             
@@ -135,8 +127,8 @@ namespace ImagineCupProject
 
         private void AnalyzeStart_Click(object sender, RoutedEventArgs e)
         {
-            MakeRequest();
-            MakeRequest2();
+            keyPhrasesRequest();
+            sentimentRequest();
         }
     }
 }
