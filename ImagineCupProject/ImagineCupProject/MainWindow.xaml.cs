@@ -15,6 +15,7 @@ using Google.Protobuf.Collections;
 using System.Collections.Generic;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.IO;
+using Google.Cloud.Speech.V1;
 
 namespace ImagineCupProject
 {
@@ -36,9 +37,10 @@ namespace ImagineCupProject
             
         }
 
+        //Azure SpeechToText
         private void ConvertSpeechToText()
         {
-            var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;  //LongDictation 대신 ShortPhrase 선택
+            var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
             string subscriptionKey = ConfigurationManager.AppSettings["MicrosoftSpeechApiKey"].ToString();
             _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
@@ -90,7 +92,7 @@ namespace ImagineCupProject
             }));
         }
 
-        //Text Analytics API 사용 감정상태 분석
+        //Text Analytics API 사용 핵심어구 분석
         private async void keyPhrasesRequest()
         {
             var client = new HttpClient();
@@ -111,6 +113,7 @@ namespace ImagineCupProject
             content.Dispose();
         }
 
+        //Text Analytics API 사용 감정상태 분석
         private async void sentimentRequest()
         {
             var client = new HttpClient();
@@ -128,12 +131,9 @@ namespace ImagineCupProject
             sentimentTxt.Text = sentimentUriResponse.Content.ReadAsStringAsync().Result.Substring(15).Split(',')[0];
 
             content.Dispose();
-            //keyPhrasesTxt.Text = keyPhrasesResponse.Content.ReadAsStringAsync().Result;
-            //sentimentTxt.Text = keyPhrasesResponse.Content.ReadAsStringAsync().Result;
-
-            //MessageBox.Show(response.Content.ReadAsStringAsync().Result);
         }
         
+        //텍스트 분석 클릭버튼
         private void AzureAnalyzeStart_Click(object sender, RoutedEventArgs e)
         {
             keyPhrasesRequest();
@@ -170,19 +170,6 @@ namespace ImagineCupProject
             WriteEntitySentiment(response4.Entities);
         }
 
-        /*
-        private async void GoogleNLPStart_Click(object sender, RoutedEventArgs e)
-        {
-            string text = "my favorite country is south korea because there are many beautiful citys.";
-            var client = LanguageServiceClient.Create();
-            var response = client.AnalyzeSentiment(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteSentiment(response.DocumentSentiment, response.Sentences);
-        }*/
-
         //sentiment
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
         {
@@ -205,30 +192,11 @@ namespace ImagineCupProject
                 googleAnalyzeEntities.Text += $"\nName: {entity.Name}";
                 googleAnalyzeEntities.Text += $"\tType: {entity.Type}";
                 googleAnalyzeEntities.Text += $"\tSalience: {entity.Salience}";
-                /*
-                googleAnalyzeEntities.Text += "\tMentions:";
-                foreach (var mention in entity.Mentions)
-                { 
-                    googleAnalyzeEntities.Text += $"\t\t{mention.Text.BeginOffset}: {mention.Text.Content}";
-                }
-                googleAnalyzeEntities.Text += "\tMetadata:";
-                foreach (var keyval in entity.Metadata)
-                {
-                    googleAnalyzeEntities.Text += $"\t\t{keyval.Key}: {keyval.Value}";
-                }
-                */
             }
         }
         //syntax
         private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
         {
-            /*
-            googleAnnotateText.Text += "Sentences:";
-            foreach (var sentence in sentences)
-            {
-                googleAnnotateText.Text += $"\t{sentence.Text.BeginOffset}: {sentence.Text.Content}"; 
-            }
-            */
             //googleAnnotateText.Text += "Tokens:";
             foreach (var token in tokens)
             {
@@ -246,6 +214,53 @@ namespace ImagineCupProject
                 googleAnalyzeEntitySentiment.Text += $"\tMagnitude { entity.Sentiment.Magnitude}\n";
 
             }
+        }
+
+        //Google Storage에서 FlacFile Load
+        private void loadFlacFile_Click(object sender, RoutedEventArgs e)
+        {
+            AsyncRecognizeGcs("gs://emergencycall/55.flac");
+        }
+
+        //Google Cloud Storage에있는 (1분이내) 오디오 파일에서 동기식 음성 인식을 직접 수행
+        static object SyncRecognizeGcs(string storageUri)
+        {
+            var speech = SpeechClient.Create();
+            var response = speech.Recognize(new RecognitionConfig()
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                SampleRateHertz = 16000,
+                LanguageCode = "en",
+            }, RecognitionAudio.FromStorageUri(storageUri));
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    Console.WriteLine(alternative.Transcript);
+                }
+            }
+            return 0;
+        }
+        // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
+        public object AsyncRecognizeGcs(string storageUri)
+        {
+            var speech = SpeechClient.Create();
+            var longOperation = speech.LongRunningRecognize(new RecognitionConfig()
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                SampleRateHertz = 44100,
+                LanguageCode = "en",
+            }, RecognitionAudio.FromStorageUri(storageUri));
+            longOperation = longOperation.PollUntilCompleted();
+            var response = longOperation.Result;
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    Responsetxt.Text = (alternative.Transcript);
+                }
+            }
+            return 0;
         }
     }
 }

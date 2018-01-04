@@ -5,18 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImagineCupProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1029">
+        Title="MainWindow" Height="750" Width="1150">
     <Grid>
-        <Button x:Name="SpeakBtn" Content="START" HorizontalAlignment="Left" Margin="731,565,0,0" VerticalAlignment="Top" Width="182" RenderTransformOrigin="0.552,-0.187" Click="SpeakBtn_Click"/>
-        <Button x:Name="StopBtn" Content="STOP" HorizontalAlignment="Left" Margin="947,565,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.797,2.333" Click="StopBtn_Click"/>
-        <TextBox x:Name="Responsetxt" HorizontalAlignment="Left" Height="77" Margin="10,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1002"/>
-        <Button x:Name="AzureAnalyzeStart"  Content="Second" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.552,-0.187" Click="AzureAnalyzeStart_Click"/>
-        <TextBox x:Name="keyPhrasesTxt" HorizontalAlignment="Left" Height="34" Margin="10,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1002"/>
-        <TextBox x:Name="sentimentTxt" HorizontalAlignment="Left" Height="34" Margin="10,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1002"/>
-        <TextBox x:Name="googleAnalyzeSentiment" HorizontalAlignment="Left" Height="68" Margin="10,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1002"/>
-        <TextBox x:Name="googleAnalyzeEntities" HorizontalAlignment="Left" Height="85" Margin="10,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1002"/>
-        <TextBox x:Name="googleAnnotateText" HorizontalAlignment="Left" Margin="10,358,0,129" TextWrapping="Wrap" Text="" Width="1002"/>
+        <Button x:Name="SpeakBtn" Content="START" HorizontalAlignment="Left" Margin="879,692,0,0" VerticalAlignment="Top" Width="182" RenderTransformOrigin="0.552,-0.187" Click="SpeakBtn_Click"/>
+        <Button x:Name="StopBtn" Content="STOP" HorizontalAlignment="Left" Margin="1072,692,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.797,2.333" Click="StopBtn_Click"/>
+        <TextBox x:Name="Responsetxt" HorizontalAlignment="Left" Height="77" Margin="10,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1124"/>
+        <Button x:Name="AzureAnalyzeStart"  Content="Analyze" HorizontalAlignment="Left" Margin="10,692,0,0" VerticalAlignment="Top" Width="58" RenderTransformOrigin="0.552,-0.187" Click="AzureAnalyzeStart_Click"/>
+        <TextBox x:Name="keyPhrasesTxt" HorizontalAlignment="Left" Height="34" Margin="10,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1124"/>
+        <TextBox x:Name="sentimentTxt" HorizontalAlignment="Left" Height="34" Margin="10,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1124"/>
+        <TextBox x:Name="googleAnalyzeSentiment" HorizontalAlignment="Left" Height="68" Margin="10,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1124"/>
+        <TextBox x:Name="googleAnalyzeEntities" HorizontalAlignment="Left" Height="85" Margin="10,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1124"/>
+        <TextBox x:Name="googleAnnotateText" HorizontalAlignment="Left" Margin="10,358,0,247.8" TextWrapping="Wrap" Text="" Width="1124"/>
         <TextBox x:Name="googleAnalyzeEntitySentiment" HorizontalAlignment="Left" Height="60" Margin="10,496,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1002"/>
+        <Button x:Name="loadFlacFile" Content="Load Flac" HorizontalAlignment="Left" Margin="688,692,0,0" VerticalAlignment="Top" Width="182" RenderTransformOrigin="0.552,-0.187" Click="loadFlacFile_Click"/>
 
     </Grid>
 </Window>
