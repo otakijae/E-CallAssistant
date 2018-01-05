@@ -26,21 +26,21 @@ namespace ImagineCupProject
     {
         AutoResetEvent _FinalResponceEvent;
         MicrophoneRecognitionClient _microphoneRecognitionClient;
-
+        String temp;
         public MainWindow()
         {
             InitializeComponent();
-            SpeakBtn.Content = "Start Recording";
+            speakBtn.Content = "Start Recording";
             _FinalResponceEvent = new AutoResetEvent(false);
-            Responsetxt.Background = Brushes.White;
-            Responsetxt.Foreground = Brushes.Black;
+            responsetxt.Background = Brushes.White;
+            responsetxt.Foreground = Brushes.Black;
             
         }
 
         //Azure SpeechToText
         private void ConvertSpeechToText()
         {
-            var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
+            var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
             string subscriptionKey = ConfigurationManager.AppSettings["MicrosoftSpeechApiKey"].ToString();
             _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
@@ -59,19 +59,28 @@ namespace ImagineCupProject
         {
             string result = e.PartialResult;
             Dispatcher.Invoke(() =>
-            {
-                Responsetxt.Text = (e.PartialResult);
-                Responsetxt.Text += ("\n");
+            { 
+                /*
+                if(e.PartialResult.Contains("am"))
+                {
+                    temp = e.PartialResult;
+                    Responsetxt.Text = temp.Replace("am", "is"); ;
+                    Responsetxt.Text += ("\n");
+
+                }
+                */
+                responsetxt.Text = (e.PartialResult);
+                responsetxt.Text += ("\n");
             });
         }
 
         //START버튼 누른후 음성인식 시작
         private void SpeakBtn_Click(object sender, RoutedEventArgs e)   
         {
-            SpeakBtn.Content = "Listening ...";
-            SpeakBtn.IsEnabled = false;
-            Responsetxt.Background = Brushes.Green;
-            Responsetxt.Foreground = Brushes.White;
+            speakBtn.Content = "Listening ...";
+            speakBtn.IsEnabled = false;
+            responsetxt.Background = Brushes.Green;
+            responsetxt.Foreground = Brushes.White;
             ConvertSpeechToText();
 
         }
@@ -85,10 +94,10 @@ namespace ImagineCupProject
                 _microphoneRecognitionClient.EndMicAndRecognition();
                 _microphoneRecognitionClient.Dispose();
                 _microphoneRecognitionClient = null;
-                SpeakBtn.Content = "Start Recording";
-                SpeakBtn.IsEnabled = true;
-                Responsetxt.Background = Brushes.White;
-                Responsetxt.Foreground = Brushes.Black;
+                speakBtn.Content = "Start Recording";
+                speakBtn.IsEnabled = true;
+                responsetxt.Background = Brushes.White;
+                responsetxt.Foreground = Brushes.Black;
             }));
         }
 
@@ -98,7 +107,7 @@ namespace ImagineCupProject
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             var keyPhrasesUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases?" + queryString;   //핵심어구
-            byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
+            byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + responsetxt.Text + "'}]}");
             //byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
             var content = new ByteArrayContent(byteData);
             HttpResponseMessage keyPhrasesResponse = null;
@@ -119,7 +128,7 @@ namespace ImagineCupProject
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             var sentimentUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment?" + queryString;      //감정상태
-             byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + Responsetxt.Text + "'}]}");
+             byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + responsetxt.Text + "'}]}");
              var content = new ByteArrayContent(byteData);
             HttpResponseMessage sentimentUriResponse = null;
 
@@ -136,9 +145,18 @@ namespace ImagineCupProject
         //텍스트 분석 클릭버튼
         private void AzureAnalyzeStart_Click(object sender, RoutedEventArgs e)
         {
+            if(keyPhrasesTxt.Text!="")
+            { 
+                keyPhrasesTxt.Text = null;
+                sentimentTxt.Text = null;
+                googleAnalyzeSentiment.Text = null;
+                googleAnalyzeEntities.Text = null;
+                googleAnnotateText.Text = null;
+                googleAnalyzeEntitySentiment.Text = null;
+            }
             keyPhrasesRequest();
             sentimentRequest();
-            string text = Responsetxt.Text;
+            string text = responsetxt.Text;
             var client = LanguageServiceClient.Create();
             var response = client.AnalyzeSentiment(new Document()
             {
@@ -173,7 +191,7 @@ namespace ImagineCupProject
         //sentiment
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
         {
-            googleAnalyzeSentiment.Text += "Overall document sentiment(주어진 텍스트를 검사하고 텍스트 내에서 우세한 감정적인 의견을 확인)";
+            googleAnalyzeSentiment.Text += "Overall document sentiment(핵심 단어에 대한 종류를 파악하고 중요도 추출)";
             googleAnalyzeSentiment.Text += $"\nScore: {sentiment.Score}";
             googleAnalyzeSentiment.Text += $"\tMagnitude: {sentiment.Magnitude}\n";
             googleAnalyzeSentiment.Text += "Sentence level sentiment:";
@@ -198,6 +216,7 @@ namespace ImagineCupProject
         private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
         {
             //googleAnnotateText.Text += "Tokens:";
+            googleAnnotateText.Text += "형태소분석\n";
             foreach (var token in tokens)
             {
                 googleAnnotateText.Text += $"{token.PartOfSpeech.Tag} "+ $"{token.Text.Content}\n";
@@ -206,7 +225,7 @@ namespace ImagineCupProject
         //entity sentiment
         private async void WriteEntitySentiment(IEnumerable<Entity> entities)
         {
-            googleAnalyzeEntitySentiment.Text += "Entity Sentiment(엔티티 분석 및 감정 분석을 결합하고 텍스트 내의 엔티티에 대해 표현 된 정서를 결정)\n";
+            googleAnalyzeEntitySentiment.Text += "Entity Sentiment(핵심 단어 추출 및 감정 분석)\n";
             foreach (var entity in entities)
             {
                 googleAnalyzeEntitySentiment.Text += $"{entity.Name} "+ $"({(int)(entity.Salience * 100)}%)";
@@ -257,7 +276,7 @@ namespace ImagineCupProject
             {
                 foreach (var alternative in result.Alternatives)
                 {
-                    Responsetxt.Text = (alternative.Transcript);
+                    responsetxt.Text = (alternative.Transcript);
                 }
             }
             return 0;
