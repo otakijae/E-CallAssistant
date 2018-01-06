@@ -11,21 +11,23 @@
         <Button x:Name="stopBtn" Content="STOP" HorizontalAlignment="Left" Margin="1072,692,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.797,2.333" Click="StopBtn_Click"/>
         <TextBox x:Name="responsetxt" HorizontalAlignment="Left" Height="555" Margin="10,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="441"/>
         <Button x:Name="azureAnalyzeStart"  Content="Analyze" HorizontalAlignment="Left" Margin="4,692,0,0" VerticalAlignment="Top" Width="62"  Click="AzureAnalyzeStart_Click" Height="19"/>
-        <TextBox x:Name="keyPhrasesTxt" HorizontalAlignment="Left" Height="46" Margin="574,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540"/>
-        <TextBox x:Name="sentimentTxt" HorizontalAlignment="Left" Height="46" Margin="574,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540"/>
-        <TextBox x:Name="googleAnalyzeSentiment" HorizontalAlignment="Left" Height="46" Margin="574,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540"/>
-        <TextBox x:Name="googleAnalyzeEntities" Height="85" Margin="574,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="540"/>
-        <TextBox x:Name="googleAnnotateText" HorizontalAlignment="Left" Margin="574,329,0,276.8" TextWrapping="Wrap" Text="" Width="540" Height="115"/>
-        <TextBox x:Name="googleAnalyzeEntitySentiment" HorizontalAlignment="Left" Height="60" Margin="574,444,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="operatorText" Text="손장원" HorizontalAlignment="Left" Height="46" Margin="574,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="locationText" Text="" HorizontalAlignment="Left" Height="46" Margin="574,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="googleAnalyzeSentiment" Text=""  HorizontalAlignment="Left" Height="46" Margin="574,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="googleAnalyzeEntities" Text="신재혁" Height="85" Margin="574,244,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="540"/>
+        <TextBox x:Name="googleAnnotateText" HorizontalAlignment="Left" Margin="574,329,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540" Height="115"/>
+        <TextBox x:Name="googleAnalyzeEntitySentiment" HorizontalAlignment="Left" Height="60" Margin="574,444,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="540"/>
         <Button x:Name="loadFlacFile" Content="Load Flac" HorizontalAlignment="Left" Margin="688,692,0,0" VerticalAlignment="Top" Width="182" RenderTransformOrigin="0.552,-0.187" Click="loadFlacFile_Click"/>
-        <TextBox x:Name="operatorText" Text="Operator" HorizontalAlignment="Left" Padding="12" TextAlignment="Center" Height="46" Margin="456,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="locationText" HorizontalAlignment="Left" Height="46" Padding="12" TextAlignment="Center" Margin="456,152,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="phoneText" HorizontalAlignment="Left" Height="46" Padding="12" TextAlignment="Center" Margin="456,198,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="callerNameText" HorizontalAlignment="Left" Height="85" Padding="25" TextAlignment="Center" Margin="456,244,0,0" TextWrapping="Wrap" Text="Caller Name" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="problemName" HorizontalAlignment="Left" Height="115" Padding="0" TextAlignment="Center" Margin="456,329,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Problem" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="timeName" HorizontalAlignment="Left" Height="60" Padding="18" TextAlignment="Center" Margin="456,444,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="codeName" HorizontalAlignment="Left" Height="60" Padding="18" TextAlignment="Center" Margin="456,504,0,0" TextWrapping="Wrap" Text="Code" VerticalAlignment="Top" Width="118"/>
+        <TextBox  Text="Operator" HorizontalAlignment="Left" Padding="12" TextAlignment="Center" Height="46" Margin="456,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"/>
+        <TextBox  HorizontalAlignment="Left" Height="46" Padding="12" TextAlignment="Center" Margin="456,152,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="118"/>
+        <TextBox HorizontalAlignment="Left" Height="46" Padding="12" TextAlignment="Center" Margin="456,198,0,0" TextWrapping="Wrap" Text="Phone" VerticalAlignment="Top" Width="118"/>
+        <TextBox  HorizontalAlignment="Left" Height="85" Padding="0" TextAlignment="Center" Margin="456,244,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;&#xD;&#xA;Caller Name" VerticalAlignment="Top" Width="118"/>
+        <TextBox  HorizontalAlignment="Left" Height="115" Padding="0" TextAlignment="Center" Margin="456,329,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Problem" VerticalAlignment="Top" Width="118"/>
+        <TextBox  HorizontalAlignment="Left" Height="60" Padding="18" TextAlignment="Center" Margin="456,444,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Width="118"/>
+        <TextBox HorizontalAlignment="Left" Height="60" Padding="18" TextAlignment="Center" Margin="456,504,0,0" TextWrapping="Wrap" Text="Code" VerticalAlignment="Top" Width="118"/>
         <TextBox x:Name="codeNameText" HorizontalAlignment="Left" Height="60" Margin="574,504,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="sentimentText" HorizontalAlignment="Left" Height="73" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="564"/>
+        <TextBox x:Name="entityText" HorizontalAlignment="Left" Height="73" Margin="579,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="535"/>
 
     </Grid>
 </Window>

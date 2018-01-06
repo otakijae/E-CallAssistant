@@ -101,6 +101,7 @@ namespace ImagineCupProject
             }));
         }
 
+        /*
         //Text Analytics API 사용 핵심어구 분석
         private async void keyPhrasesRequest()
         {
@@ -121,41 +122,19 @@ namespace ImagineCupProject
          
             content.Dispose();
         }
-
-        //Text Analytics API 사용 감정상태 분석
-        private async void sentimentRequest()
-        {
-            var client = new HttpClient();
-            var queryString = HttpUtility.ParseQueryString(string.Empty);
-            var sentimentUri = "https://eastasia.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment?" + queryString;      //감정상태
-             byte[] byteData = Encoding.UTF8.GetBytes("{'documents': [{ 'id': 'inputText', 'text': '" + responsetxt.Text + "'}]}");
-             var content = new ByteArrayContent(byteData);
-            HttpResponseMessage sentimentUriResponse = null;
-
-            
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "2ee0076fd06543029e0668de66971b68");
-            queryString["numberOfLanguagesToDetect"] = "1";
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            sentimentUriResponse = await client.PostAsync(sentimentUri, content);
-            sentimentTxt.Text = sentimentUriResponse.Content.ReadAsStringAsync().Result.Substring(15).Split(',')[0];
-
-            content.Dispose();
-        }
-        
+        */
         //텍스트 분석 클릭버튼
         private void AzureAnalyzeStart_Click(object sender, RoutedEventArgs e)
         {
-            if(keyPhrasesTxt.Text!="")
-            { 
-                keyPhrasesTxt.Text = null;
-                sentimentTxt.Text = null;
-                googleAnalyzeSentiment.Text = null;
-                googleAnalyzeEntities.Text = null;
+            
+            if(googleAnnotateText.Text!="")
+            {
+                sentimentText.Text = null;
+                entityText.Text = null;
                 googleAnnotateText.Text = null;
-                googleAnalyzeEntitySentiment.Text = null;
+                locationText.Text = null;
             }
-            keyPhrasesRequest();
-            sentimentRequest();
+            //keyPhrasesRequest();
             string text = responsetxt.Text;
             var client = LanguageServiceClient.Create();
             var response = client.AnalyzeSentiment(new Document()
@@ -179,59 +158,42 @@ namespace ImagineCupProject
             },
             new Features() { ExtractSyntax = true });
             WriteSentences(response3.Sentences, response3.Tokens);
-
-            var response4 = client.AnalyzeEntitySentiment(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteEntitySentiment(response4.Entities);
+            
         }
 
         //sentiment
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
         {
-            googleAnalyzeSentiment.Text += "Overall document sentiment(핵심 단어에 대한 종류를 파악하고 중요도 추출)";
-            googleAnalyzeSentiment.Text += $"\nScore: {sentiment.Score}";
-            googleAnalyzeSentiment.Text += $"\tMagnitude: {sentiment.Magnitude}\n";
-            googleAnalyzeSentiment.Text += "Sentence level sentiment:";
+            sentimentText.Text += $"Score: {sentiment.Score}";
+            sentimentText.Text += $"\tMagnitude: {sentiment.Magnitude}\n";
+            sentimentText.Text += "Sentence level sentiment:";
             foreach (var sentence in sentences)
             {
-                googleAnalyzeSentiment.Text += $" ({sentence.Sentiment.Score})";   //"\t{sentence.Text.Content}: "+ $
-                
+                sentimentText.Text += $" ({(int)sentence.Sentiment.Score * 100}%)";   //"\t{sentence.Text.Content}: "+ $
+               
             }
         }
         //entities
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
-            googleAnalyzeEntities.Text = "Entities(텍스트를 검사하고 해당 엔티티에 대한 정보를 반환)";
             foreach (var entity in entities)
             {
-                googleAnalyzeEntities.Text += $"\nName: {entity.Name}";
-                googleAnalyzeEntities.Text += $"\tType: {entity.Type}";
-                googleAnalyzeEntities.Text += $"\tSalience: {entity.Salience}";
+                if(entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
+                {
+                    locationText.Text += entity.Name;
+                    locationText.Text += "\n";
+                }
+                entityText.Text += $"Name: {entity.Name}";
+                entityText.Text += $"\tType: {entity.Type}";
+                entityText.Text += $"\tSalience: {entity.Salience}\n";
             }
         }
         //syntax
         private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
         {
-            //googleAnnotateText.Text += "Tokens:";
-            googleAnnotateText.Text += "형태소분석\n";
             foreach (var token in tokens)
             {
                 googleAnnotateText.Text += $"{token.PartOfSpeech.Tag} "+ $"{token.Text.Content}\n";
-            }
-        }
-        //entity sentiment
-        private async void WriteEntitySentiment(IEnumerable<Entity> entities)
-        {
-            googleAnalyzeEntitySentiment.Text += "Entity Sentiment(핵심 단어 추출 및 감정 분석)\n";
-            foreach (var entity in entities)
-            {
-                googleAnalyzeEntitySentiment.Text += $"{entity.Name} "+ $"({(int)(entity.Salience * 100)}%)";
-                googleAnalyzeEntitySentiment.Text += $"\tScore: {entity.Sentiment.Score}";
-                googleAnalyzeEntitySentiment.Text += $"\tMagnitude { entity.Sentiment.Magnitude}\n";
-
             }
         }
 
