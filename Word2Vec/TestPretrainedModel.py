@@ -28,3 +28,4 @@ while(word != "exit") :
     print(model.most_similar_to_given(word, ['fire', 'watersupply', 'woman', 'teenager', 'gas', 'suicide', 'elder', 'child', 'disaster', 'rescue']))
     print(model.most_similar(positive=['grandfather', 'cancer', 'emergency']))
     word = raw_input("Input word : ")
+ 
