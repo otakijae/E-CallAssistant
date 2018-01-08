@@ -274,16 +274,18 @@
                     <Button x:Name="stopBtn" Content="STOP" Width="150" Height="50" Grid.Column="1" Grid.Row="0"/>
                     <Button x:Name="azureAnalyzeStart"  Content="AzureAnalyze" Width="150" Height="50" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0"/>
 
-                    <TextBox x:Name="OperatorText" Text="손장원" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue"/>
-                    <TextBox x:Name="TimeText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue"/>
-                    <TextBox x:Name="LocationText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue"/>
-                    <TextBox x:Name="PhoneNumberText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue"/>
-                    <TextBox x:Name="CallerNameText" Text="신재혁" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue"/>
-                    <TextBox x:Name="ProblemText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue"/>
-                    <TextBox x:Name="CodeText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="7" Background="AliceBlue"/>
+                    <TextBox x:Name="OperatorText" Text="손장원" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="TimeText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="LocationText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="PhoneNumberText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="CallerNameText" Text="신재혁" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="ProblemText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="CodeText" Text="" FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="7" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
 
-                    <TextBox x:Name="stt" Text="stt : " FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Background="AliceBlue"/>
-                    <TextBox x:Name="summary" Text="summary : " FontSize="28" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Grid.RowSpan="3" Background="AliceBlue"/>
+                    <TextBox x:Name="stt" Text="stt : " FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="entityRecognition" Text="EntityRecognition : " FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="keyPhrase" Text="KeyPhrase : " FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Grid.RowSpan="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="summary" Text="summary : " FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
 
                 </Grid>
             </Grid>
