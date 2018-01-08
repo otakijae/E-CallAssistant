@@ -106,7 +106,7 @@ print(ldamodel.print_topics(num_topics=3, num_words=3))
 
 '''
 #Gensim word2vec basic examples
-# getting word vectors of a word
+#getting word vectors of a word
 dog = model['dog']
 
 #performing king queen magic
