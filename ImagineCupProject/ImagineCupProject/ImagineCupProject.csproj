@@ -125,14 +125,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Resource Include="Assets\back.jpg" />
     <Resource Include="Assets\pexels-photo-247885.jpeg" />
-    <Resource Include="Assets\pexels-photo-374592.jpeg" />
-    <Resource Include="Assets\pexels-photo-701026.jpeg" />
-    <Resource Include="Assets\pexels-photo-701337.jpeg" />
-    <Resource Include="Assets\pexels-photo-701449.jpeg" />
-    <Resource Include="Assets\pexels-photo-701762.jpeg" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -141,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\profile.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

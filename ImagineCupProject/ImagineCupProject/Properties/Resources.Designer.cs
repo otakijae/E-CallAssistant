@@ -83,49 +83,9 @@ namespace ImagineCupProject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pexels_photo_374592 {
+        internal static System.Drawing.Bitmap profile {
             get {
-                object obj = ResourceManager.GetObject("pexels_photo_374592", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pexels_photo_701026 {
-            get {
-                object obj = ResourceManager.GetObject("pexels_photo_701026", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pexels_photo_701337 {
-            get {
-                object obj = ResourceManager.GetObject("pexels_photo_701337", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pexels_photo_701449 {
-            get {
-                object obj = ResourceManager.GetObject("pexels_photo_701449", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pexels_photo_701762 {
-            get {
-                object obj = ResourceManager.GetObject("pexels_photo_701762", resourceCulture);
+                object obj = ResourceManager.GetObject("profile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
