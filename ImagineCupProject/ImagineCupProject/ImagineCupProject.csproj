@@ -139,7 +139,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\profile.jpg" />
+    <Resource Include="Assets\ROYSHOUSE_1_Thread_Des.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -83,9 +83,9 @@ namespace ImagineCupProject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap profile {
+        internal static System.Drawing.Bitmap ROYSHOUSE_1_Thread_Des {
             get {
-                object obj = ResourceManager.GetObject("profile", resourceCulture);
+                object obj = ResourceManager.GetObject("ROYSHOUSE_1_Thread_Des", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

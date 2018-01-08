@@ -107,7 +107,7 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                     <Button.Background>
-                        <ImageBrush ImageSource="/Assets/pexels-photo-247885.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
                     </Button.Background>
                 </Button>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
@@ -205,7 +205,7 @@
                 <Image Height="150" VerticalAlignment="Top" Source="Assets/back.jpg" Stretch="UniformToFill"/>
                 <Ellipse Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20 100" Stroke="White">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="/Assets/pexels-photo-247885.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Text="John" Foreground="White" FontSize="28" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
