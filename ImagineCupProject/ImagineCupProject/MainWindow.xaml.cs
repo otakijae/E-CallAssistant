@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Threading;
 using System.Configuration;
 using Microsoft.CognitiveServices.SpeechRecognition;
+using System.Collections;
 using System.Net.Http;
 using System.Web;
 using System.Text;
@@ -27,6 +28,8 @@ namespace ImagineCupProject
         AutoResetEvent _FinalResponceEvent;
         MicrophoneRecognitionClient _microphoneRecognitionClient;
         String temp;
+        ArrayList textArrayList = new ArrayList();
+        ArrayList textShapeArrayList = new ArrayList();
         public MainWindow()
         {
             InitializeComponent();
@@ -42,14 +45,14 @@ namespace ImagineCupProject
         {
             var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
-            string subscriptionKey = ConfigurationManager.AppSettings["MicrosoftSpeechApiKey"].ToString();
+            string subscriptionKey = ConfigurationManager.AppSettings["1b5dac5aae4e47e5bc1fbb190eafb8c8"].ToString();
             _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
                 speechRecognitionMode,
                 language,
                 subscriptionKey
                 );
-        
-        
+
+            //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
             _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
             _microphoneRecognitionClient.StartMicAndRecognition();
         }
@@ -69,7 +72,7 @@ namespace ImagineCupProject
 
                 }
                 */
-                responsetxt.Text = (e.PartialResult);
+                responsetxt.Text += (e.PartialResult);
                 responsetxt.Text += ("\n");
             });
         }
@@ -176,9 +179,19 @@ namespace ImagineCupProject
         //entities
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
+            if (responsetxt.Text.Contains("kill"))
+            {
+                entityText.Text += $"Name: kill";
+                entityText.Text += $"\tType: Event\n";
+            }
+            if (responsetxt.Text.Contains("shot"))
+            {
+                entityText.Text += $"Name: shot";
+                entityText.Text += $"\tType: Event\n";
+            }
             foreach (var entity in entities)
             {
-                if(entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
+                if (entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
                 {
                     locationText.Text += entity.Name;
                     locationText.Text += "\n";
@@ -196,12 +209,7 @@ namespace ImagineCupProject
                 googleAnnotateText.Text += $"{token.PartOfSpeech.Tag} "+ $"{token.Text.Content}\n";
             }
         }
-
-        //Google Storage에서 FlacFile Load
-        private void loadFlacFile_Click(object sender, RoutedEventArgs e)
-        {
-            AsyncRecognizeGcs("gs://emergencycall/55.flac");
-        }
+        
 
         //Google Cloud Storage에있는 (1분이내) 오디오 파일에서 동기식 음성 인식을 직접 수행
         static object SyncRecognizeGcs(string storageUri)
@@ -243,5 +251,52 @@ namespace ImagineCupProject
             }
             return 0;
         }
+
+        private void cleanTextBox_Click(object sender, RoutedEventArgs e)
+        {
+            responsetxt.Text = null;
+        }
+
+        private void Correct_Click(object sender, RoutedEventArgs e)
+        {
+            //AsyncRecognizeGcs("gs://emergencycall/test2.flac");
+            string text = responsetxt.Text;
+            var client = LanguageServiceClient.Create();
+            var response4 = client.AnnotateText(new Document()
+            {
+                Content = text,
+                Type = Document.Types.Type.PlainText
+            },
+            new Features() { ExtractSyntax = true });
+            CorrectSentences(response4.Sentences, response4.Tokens);
+        }
+
+        //syntax
+        private async void CorrectSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
+        {
+            foreach (var token in tokens)
+            {
+                if (token.PartOfSpeech.Tag.ToString().Equals("Verb"))
+                {
+                    if (textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Det") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Noun") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Pron"))
+                    {
+                        if (!(textArrayList.Count.ToString().Equals("1") | textArrayList.Count.ToString().Equals("2")))
+                        {
+                            string temp = textArrayList[textArrayList.Count - 2].ToString().Remove(textArrayList[textArrayList.Count - 2].ToString().Length - 1) + ". ";
+                            textArrayList.RemoveAt(textArrayList.Count - 2);
+                            textArrayList.Insert(textArrayList.Count - 1, temp);
+                        }
+                    }
+                }
+                textArrayList.Add(token.Text.Content + " ");
+                textShapeArrayList.Add(token.PartOfSpeech.Tag);
+            }
+            responsetxt.Text = null;
+            for (int i = 0; i < textArrayList.Count; i++)
+            {
+                responsetxt.Text += textArrayList[i];
+            }
+        }
+
     }
 }
