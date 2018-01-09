@@ -27,6 +27,7 @@ using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.IO;
 using Google.Cloud.Speech.V1;
+using System.Data.SqlClient;
 
 namespace ImagineCupProject
 {
@@ -35,8 +36,7 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainPage : UserControl
     {
-        StartPage firstPage = new StartPage();
-        StartPage secondPage = new StartPage();
+        AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
         AutoResetEvent _FinalResponceEvent;
         MicrophoneRecognitionClient _microphoneRecognitionClient;
@@ -49,6 +49,7 @@ namespace ImagineCupProject
             InitializeComponent();
             _FinalResponceEvent = new AutoResetEvent(false);
             timeText.Text = time;
+            azureDatabase = new AzureDatabase();
 
         }
 
@@ -142,7 +143,7 @@ namespace ImagineCupProject
         //텍스트 분석 클릭버튼
         private void analyzeBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (entityRecognition.Text != "")
             {
                 entityRecognition.Text = null;
@@ -176,9 +177,10 @@ namespace ImagineCupProject
             new Features() { ExtractSyntax = true });
             WriteSentences(response3.Sentences, response3.Tokens);
 
+            azureDatabase.insertData(operatorText.Text,timeText.Text,locationText.Text,phoneNumberText.Text,callerNameText.Text,problemText.Text,codeText.Text);
         }
 
-        //sentiment
+        //긍정 부정 분석 google api
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
         {
             sentimentRecognition.Text += $"Score: {sentiment.Score}";
@@ -191,7 +193,7 @@ namespace ImagineCupProject
             }
         }
 
-        //entities
+        //entity분석 google api
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
             if (summary.Text.Contains("kill"))
@@ -211,7 +213,7 @@ namespace ImagineCupProject
                 if (entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
                 {
                     locationText.Text += entity.Name;
-                    locationText.Text += "\n";
+                    locationText.Text += " ";
                 }
                 if(entity.Type.ToString().Equals("Event"))
                 {
@@ -219,11 +221,10 @@ namespace ImagineCupProject
                 }
                 entityRecognition.Text += $"Name: {entity.Name}";
                 entityRecognition.Text += $" /{entity.Type}\n";
-                //entityRecognition.Text += $" {entity.Salience}\n";
             }
         }
 
-        //syntax
+        //형태소 분석 google api
         private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
         {
             syntaxRecognition.Text += "\n";
@@ -271,7 +272,7 @@ namespace ImagineCupProject
             CorrectSentences(response4.Sentences, response4.Tokens);
         }*/
 
-        //distinguish sentence
+        //음성 stop버튼 누르면 문장을 . 표시로 구별해주기
         private async void CorrectSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
         {
             foreach (var token in tokens)
