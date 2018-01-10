@@ -1,33 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Threading;
-using System.Configuration;
 using Microsoft.CognitiveServices.SpeechRecognition;
 using System.Collections;
-using System.Net.Http;
-using System.Web;
-using System.Net.Http.Headers;
-using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Language.V1;
-using Google.Cloud.Storage.V1;
 using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
-using System.IO;
-using Google.Cloud.Speech.V1;
-using System.Data.SqlClient;
 
 namespace ImagineCupProject
 {
@@ -84,7 +66,6 @@ namespace ImagineCupProject
                     temp = e.PartialResult;
                     Responsetxt.Text = temp.Replace("am", "is"); ;
                     Responsetxt.Text += ("\n");
-
                 }
                 */
                 responseText.Text = (e.PartialResult);
@@ -177,7 +158,7 @@ namespace ImagineCupProject
             new Features() { ExtractSyntax = true });
             WriteSentences(response3.Sentences, response3.Tokens);
 
-            azureDatabase.insertData(operatorText.Text,timeText.Text,locationText.Text,phoneNumberText.Text,callerNameText.Text,problemText.Text,codeText.Text);
+            azureDatabase.insertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
         //긍정 부정 분석 google api
@@ -188,8 +169,7 @@ namespace ImagineCupProject
             //stt.Text += "Sentence level sentiment:";
             foreach (var sentence in sentences)
             {
-                sentimentRecognition.Text += $"{sentence.Text.Content}:"+$" ({sentence.Sentiment.Score * 100}%)\n";   //"\t{sentence.Text.Content}: "+ $
-
+                sentimentRecognition.Text += $"{sentence.Text.Content}:" + $" ({sentence.Sentiment.Score * 100}%)\n";   //"\t{sentence.Text.Content}: "+ $
             }
         }
 
@@ -215,7 +195,7 @@ namespace ImagineCupProject
                     locationText.Text += entity.Name;
                     locationText.Text += " ";
                 }
-                if(entity.Type.ToString().Equals("Event"))
+                if (entity.Type.ToString().Equals("Event"))
                 {
                     codeText.Text += entity.Name;
                 }
@@ -233,7 +213,7 @@ namespace ImagineCupProject
                 syntaxRecognition.Text += $"{token.PartOfSpeech.Tag} " + $"{token.Text.Content}\n";
             }
         }
-        
+
         // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
         /*
         public object AsyncRecognizeGcs(string storageUri)
@@ -303,5 +283,51 @@ namespace ImagineCupProject
         {
 
         }
+
+        private void word2vec_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //다른 파이썬으로 실행
+                string python = @"C:\Python36\python.exe";
+                //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
+                string myPythonApp = "WordClassification.py";
+
+                //string으로 핵심단어들 받아서, List에 넣고, List에서 단어 하나씩 뽑아서 하나의 string으로 만듬
+                //string wordOne, wordTwo, keyWords = "";
+                //List<string> exampleList = new List<string>();
+                //exampleList.Add("ONE");
+                //exampleList.Add("TWO");
+                //exampleList.Add("THREE");
+                //foreach (string i in exampleList)
+                //{
+                //    keyWords = keyWords + i + ",";
+                //}
+                //keyWords = keyWords.Remove(keyWords.Length - 1);
+
+                string keyWords = problemText.Text.Remove(problemText.Text.Length - 1);
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                string codeResult = myStreamReader.ReadToEnd();
+                myProcess.WaitForExit();
+                myProcess.Close();
+
+                codeText.Text = codeResult;
+            }
+            catch (Exception ex)
+            {
+                codeText.Text = ex.Message;
+            }
+        }
+
+
     }
 }

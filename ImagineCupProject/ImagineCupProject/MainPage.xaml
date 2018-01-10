@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ImagineCupProject"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1150">
+             d:DesignHeight="1000" d:DesignWidth="1700">
 
     <FrameworkElement.Resources>
         <Storyboard x:Key="OpenMenu">
@@ -81,10 +81,11 @@
             <BeginStoryboard x:Name="CloseMenu_BeginStoryboard" Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </FrameworkElement.Triggers>
+  
+  
 
     <Grid Background="#FF3580BF">
-
-        <StackPanel x:Name="StackPanelMenu" Width="215" HorizontalAlignment="Left" Margin="-220,0,0,0.4" RenderTransformOrigin="0.5,0.5">
+        <StackPanel x:Name="StackPanelMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0" RenderTransformOrigin="0.5,0.5">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -93,7 +94,8 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100" HorizontalAlignment="Center" Width="250" Margin="0,0,-24.6,0">
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100" HorizontalAlignment="Center">
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
                     <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"/>
                 </Button>
@@ -110,10 +112,11 @@
                         <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
                     </Button.Background>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="0">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
                     <materialDesign:PackIcon Kind="InformationOutline" Width="40" Height="40"/>
                 </Button>
             </StackPanel>
+          
             <ListView>
                 <ListViewItem x:Name="listViewItem" Height="60" RenderTransformOrigin="0.5,0.5">
                     <ListViewItem.RenderTransform>
@@ -187,6 +190,7 @@
                 </ListViewItem>
             </ListView>
         </StackPanel>
+      
         <Grid x:Name="GridMain" Background="#FFFBFBFB" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -202,8 +206,8 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="1" Background="#FF3580BF">
-                <Image Height="100" VerticalAlignment="Top" Source="Assets/back.jpg" Stretch="UniformToFill"/>
-                <Ellipse Height="70" Width="70" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20 70" Stroke="White">
+                <Image Height="150" VerticalAlignment="Top" Source="Assets/back.jpg" Stretch="UniformToFill"/>
+                <Ellipse Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20 100" Stroke="White">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
@@ -213,6 +217,9 @@
                     <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Margin="10" Foreground="#FFFBFBFB" FontSize="14" Height="443"></TextBlock>
                 </StackPanel>
                 <Button x:Name="nextButton" Content="Button" HorizontalAlignment="Left" Margin="10,640,0,0" VerticalAlignment="Top" Width="75" Height="62" Click="nextButton_Click"/>
+                <StackPanel Margin="0 150">
+                    <TextBlock TextWrapping="Wrap" Margin="50" Foreground="#FFFBFBFB" FontSize="14">요약한 문장 및 매뉴얼 이쪽에 </TextBlock>
+                </StackPanel>
             </Grid>
 
             <Grid>
@@ -258,6 +265,7 @@
                     <Button x:Name="speakBtn" Content="START" Width="100" Height="30" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Click="speakBtn_Click"/>
                     <Button x:Name="stopBtn" Content="STOP" Width="100" Height="30" Grid.Column="1" Grid.Row="0" Click="stopBtn_Click" />
                     <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Click="analyzeBtn_Click"/>
+                    <Button x:Name="word2vec"  Content="Word2Vec" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="word2vec_Click"/>
 
                     <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
                     <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
@@ -272,11 +280,8 @@
                     <TextBox x:Name="sentimentRecognition" Text="" TextWrapping="Wrap"  FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.4,0.4,0" Grid.RowSpan="2"/>
                     <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0,0.4,-0.4"/>
 
-
-
                 </Grid>
             </Grid>
-
         </Grid>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="10">
