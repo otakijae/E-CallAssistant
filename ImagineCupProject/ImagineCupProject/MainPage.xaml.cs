@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,70 +30,51 @@ namespace ImagineCupProject
         public MainPage()
         {
             InitializeComponent();
-
-            //firstPage.Width = canvas.ActualWidth;
-            //firstPage.Height = canvas.ActualHeight;
-
-            //secondPage.Width = canvas.ActualWidth;
-            //secondPage.Height = canvas.ActualHeight;
-            //secondPage.Visibility = Visibility.Hidden;
-
-            //canvas.Children.Add(firstPage);
-            //canvas.Children.Add(secondPage);
-
-            //firstPage.previous.Click += Previous_Click;
-            //firstPage.next.Click += Next_Click;
-            //secondPage.previous.Click += Previous_Click;
-            //secondPage.next.Click += Next_Click;
         }
 
-        //private void Next_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int previousPage = 0;
-        //    int currentPage = 1;
+        private void word2vec_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //다른 파이썬으로 실행
+                string python = @"C:\Python36\python.exe";
+                //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
+                string myPythonApp = "WordClassification.py";
 
-        //    DoubleAnimation doubleAnimation = new DoubleAnimation();
-        //    doubleAnimation.From = 0.0;
-        //    doubleAnimation.To = -this.Width;
-        //    doubleAnimation.Duration = duration;
-        //    doubleAnimation.FillBehavior = FillBehavior.HoldEnd;
-        //    doubleAnimation.Completed += delegate (object sender1, EventArgs e1)
-        //    {
-        //        canvas.Children[previousPage].Visibility = Visibility.Hidden;
-        //    };
-        //    DoubleAnimation doubleAnimationTwo = new DoubleAnimation();
-        //    doubleAnimationTwo.From = this.Width - 800;
-        //    doubleAnimationTwo.To = 0.0;
-        //    doubleAnimationTwo.Duration = duration;
-        //    doubleAnimationTwo.FillBehavior = FillBehavior.HoldEnd;
-        //    canvas.Children[currentPage].Visibility = Visibility.Visible;
-        //    canvas.Children[previousPage].BeginAnimation(Canvas.LeftProperty, doubleAnimation);
-        //    canvas.Children[currentPage].BeginAnimation(Canvas.LeftProperty, doubleAnimationTwo);
-        //}
+                //string으로 핵심단어들 받아서, List에 넣고, List에서 단어 하나씩 뽑아서 하나의 string으로 만듬
+                //string wordOne, wordTwo, keyWords = "";
+                //List<string> exampleList = new List<string>();
+                //exampleList.Add("ONE");
+                //exampleList.Add("TWO");
+                //exampleList.Add("THREE");
+                //foreach (string i in exampleList)
+                //{
+                //    keyWords = keyWords + i + ",";
+                //}
+                //keyWords = keyWords.Remove(keyWords.Length - 1);
 
-        //private void Previous_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int previousPage = 1;
-        //    int currentPage = 0;
+                string keyWords = problemText.Text.Remove(problemText.Text.Length - 1);
 
-        //    DoubleAnimation doubleAnimation = new DoubleAnimation();
-        //    doubleAnimation.From = 0.0;
-        //    doubleAnimation.To = this.Width - 800;
-        //    doubleAnimation.Duration = duration;
-        //    doubleAnimation.FillBehavior = FillBehavior.HoldEnd;
-        //    doubleAnimation.Completed += delegate (object sender1, EventArgs e1)
-        //    {
-        //        canvas.Children[previousPage].Visibility = Visibility.Hidden;
-        //    };
-        //    DoubleAnimation doubleAnimationTwo = new DoubleAnimation();
-        //    doubleAnimationTwo.From = -this.Width;
-        //    doubleAnimationTwo.To = 0.0;
-        //    doubleAnimationTwo.Duration = duration;
-        //    doubleAnimationTwo.FillBehavior = FillBehavior.HoldEnd;
-        //    canvas.Children[currentPage].Visibility = Visibility.Visible;
-        //    canvas.Children[previousPage].BeginAnimation(Canvas.LeftProperty, doubleAnimation);
-        //    canvas.Children[currentPage].BeginAnimation(Canvas.LeftProperty, doubleAnimationTwo);
-        //}
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                string codeResult = myStreamReader.ReadToEnd();
+                myProcess.WaitForExit();
+                myProcess.Close();
+
+                codeText.Text = codeResult;
+            }
+            catch (Exception ex)
+            {
+                codeText.Text = ex.Message;
+            }
+        }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
