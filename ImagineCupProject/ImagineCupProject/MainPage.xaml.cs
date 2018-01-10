@@ -10,6 +10,7 @@ using System.Collections;
 using Google.Cloud.Language.V1;
 using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
+using System.Threading.Tasks;
 
 namespace ImagineCupProject
 {
@@ -284,7 +285,65 @@ namespace ImagineCupProject
 
         }
 
+        //private void word2vec_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //다른 파이썬으로 실행
+        //        string python = @"C:\Python36\python.exe";
+        //        //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
+        //        string myPythonApp = "WordClassification.py";
+
+        //        //string으로 핵심단어들 받아서, List에 넣고, List에서 단어 하나씩 뽑아서 하나의 string으로 만듬
+        //        //string wordOne, wordTwo, keyWords = "";
+        //        //List<string> exampleList = new List<string>();
+        //        //exampleList.Add("ONE");
+        //        //exampleList.Add("TWO");
+        //        //exampleList.Add("THREE");
+        //        //foreach (string i in exampleList)
+        //        //{
+        //        //    keyWords = keyWords + i + ",";
+        //        //}
+        //        //keyWords = keyWords.Remove(keyWords.Length - 1);
+
+        //        string keyWords = problemText.Text.Remove(problemText.Text.Length - 1);
+
+        //        ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+        //        myProcessStartInfo.UseShellExecute = false;
+        //        myProcessStartInfo.RedirectStandardOutput = true;
+        //        myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+
+        //        Process myProcess = new Process();
+        //        myProcess.StartInfo = myProcessStartInfo;
+        //        myProcess.Start();
+        //        StreamReader myStreamReader = myProcess.StandardOutput;
+        //        string codeResult = myStreamReader.ReadToEnd();
+        //        myProcess.WaitForExit();
+        //        myProcess.Close();
+
+        //        codeText.Text = codeResult;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        codeText.Text = ex.Message;
+        //    }
+        //}
+
         private void word2vec_Click(object sender, RoutedEventArgs e)
+        {
+            Run(problemText.Text);
+        }
+
+        private async void Run(string keyWords)
+        {
+            // 비동기로 Worker Thread에서 도는 task1
+            //var word2vecTask = Task<int>.Run(() => WordClassificationAsync(keyWords));
+
+            this.codeText.Text = await WordClassificationAsync(keyWords);
+            this.word2vec.IsEnabled = true;
+        }
+
+        private async Task<string> WordClassificationAsync(string keyWords)
         {
             try
             {
@@ -293,38 +352,24 @@ namespace ImagineCupProject
                 //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
                 string myPythonApp = "WordClassification.py";
 
-                //string으로 핵심단어들 받아서, List에 넣고, List에서 단어 하나씩 뽑아서 하나의 string으로 만듬
-                //string wordOne, wordTwo, keyWords = "";
-                //List<string> exampleList = new List<string>();
-                //exampleList.Add("ONE");
-                //exampleList.Add("TWO");
-                //exampleList.Add("THREE");
-                //foreach (string i in exampleList)
-                //{
-                //    keyWords = keyWords + i + ",";
-                //}
-                //keyWords = keyWords.Remove(keyWords.Length - 1);
-
-                string keyWords = problemText.Text.Remove(problemText.Text.Length - 1);
-
                 ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords.Remove(problemText.Text.Length - 1);
 
                 Process myProcess = new Process();
                 myProcess.StartInfo = myProcessStartInfo;
                 myProcess.Start();
                 StreamReader myStreamReader = myProcess.StandardOutput;
-                string codeResult = myStreamReader.ReadToEnd();
+                string codeResult = await myStreamReader.ReadToEndAsync();
                 myProcess.WaitForExit();
                 myProcess.Close();
 
-                codeText.Text = codeResult;
+                return codeResult;
             }
             catch (Exception ex)
             {
-                codeText.Text = ex.Message;
+                return ex.Message;
             }
         }
 
