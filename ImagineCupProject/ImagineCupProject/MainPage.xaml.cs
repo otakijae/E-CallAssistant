@@ -24,7 +24,7 @@ namespace ImagineCupProject
         AutoResetEvent _FinalResponceEvent;
         MicrophoneRecognitionClient _microphoneRecognitionClient;
         String temp;
-        ArrayList textArrayList = new ArrayList();
+        ArrayList textArrayList = new ArrayList(); 
         ArrayList textShapeArrayList = new ArrayList();
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
         public MainPage()
@@ -33,7 +33,6 @@ namespace ImagineCupProject
             _FinalResponceEvent = new AutoResetEvent(false);
             timeText.Text = time;
             azureDatabase = new AzureDatabase();
-
         }
 
         //Azure SpeechToText
@@ -310,6 +309,7 @@ namespace ImagineCupProject
                 string python = @"C:\Python36\python.exe";
                 //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
                 string myPythonApp = "WordClassification.py";
+                //string myPythonApp = Environment.CurrentDirectory + @"\Python\WordClassification.py"; // => 지금 바이너리 파일 못 찾아서 문제 되고 있음.
 
                 ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
                 myProcessStartInfo.UseShellExecute = false;

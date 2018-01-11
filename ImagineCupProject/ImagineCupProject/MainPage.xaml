@@ -222,7 +222,6 @@
                 </StackPanel>
 
                 <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>
-
             </Grid>
 
             <Grid>

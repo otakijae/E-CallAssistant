@@ -89,5 +89,15 @@ namespace ImagineCupProject.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] WordClassification {
+            get {
+                object obj = ResourceManager.GetObject("WordClassification", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
