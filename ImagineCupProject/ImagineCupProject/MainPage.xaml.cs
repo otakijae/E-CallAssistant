@@ -288,6 +288,7 @@ namespace ImagineCupProject
         private void word2vec_Click(object sender, RoutedEventArgs e)
         {
             Run(problemText.Text);
+            this.loadingProcess.Visibility = Visibility.Visible;
         }
 
         private async void Run(string keyWords)
@@ -297,6 +298,8 @@ namespace ImagineCupProject
 
             this.codeText.Text = await WordClassificationAsync(keyWords);
             this.word2vec.IsEnabled = true;
+            this.loadingProcess.Visibility = Visibility.Hidden;
+            //나중에 완료하면 Toast알림 띄우기도 좋을 듯
         }
 
         private async Task<string> WordClassificationAsync(string keyWords)

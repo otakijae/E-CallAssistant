@@ -214,12 +214,15 @@
                 </Ellipse>
                 <TextBlock Text="Jangwon" Foreground="White" FontSize="20" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
                 <StackPanel Margin="0 150">
-                    <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Margin="10" Foreground="#FFFBFBFB" FontSize="14" Height="443"></TextBlock>
+                    <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Margin="10" Foreground="#FFFBFBFB" FontSize="14" Height="443">ddd</TextBlock>
                 </StackPanel>
                 <Button x:Name="nextButton" Content="Button" HorizontalAlignment="Left" Margin="10,640,0,0" VerticalAlignment="Top" Width="75" Height="62" Click="nextButton_Click"/>
                 <StackPanel Margin="0 150">
                     <TextBlock TextWrapping="Wrap" Margin="50" Foreground="#FFFBFBFB" FontSize="14">요약한 문장 및 매뉴얼 이쪽에 </TextBlock>
                 </StackPanel>
+
+                <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>
+
             </Grid>
 
             <Grid>
