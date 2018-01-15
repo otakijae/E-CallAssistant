@@ -1,0 +1,56 @@
+﻿<Page x:Class="ImagineCupProject.MainQuestion"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ImagineCupProject"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="850"
+      Title="MainQuestion">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Operator" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock Text="Time" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="2"/>
+        <TextBlock Text="Location" Foreground="Black" FontSize="23" TextAlignment="Center" Padding="25" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="100" Margin="0,99.6,339.6,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+        <TextBlock Text="Phone Number" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="21" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="4"/>
+        <TextBlock Text="Caller Name" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="5"/>
+        <TextBlock Text="Problem" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="6"/>
+        <TextBlock Text="Code" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="7"/>
+
+        <Button x:Name="speakBtn" Content="START" Width="100" Height="30" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Click="speakBtn_Click"/>
+        <Button x:Name="stopBtn" Content="STOP" Width="100" Height="30" Grid.Column="1" Grid.Row="0" Click="stopBtn_Click" />
+        <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Click="analyzeBtn_Click"/>
+
+        <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="locationText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="phoneNumberText" Text="01033836782" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="callerNameText" Text="Shin Jaehyuk" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="problemText" Text="" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="codeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="7" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+
+        <TextBox x:Name="responseText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="entityRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Grid.RowSpan="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.2,0.4,0"/>
+        <TextBox x:Name="sentimentRecognition" Text="" TextWrapping="Wrap"  FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.4,0.4,0" Grid.RowSpan="2"/>
+        <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0,0.4,-0.4"/>
+        <Button x:Name="mapButton" Content="mapButton" Grid.Column="2" HorizontalAlignment="Left" Margin="10.4,10,0,0" VerticalAlignment="Top" Width="75" Click="mapButton_Click" Height="30"/>
+
+    </Grid>
+</Page>
