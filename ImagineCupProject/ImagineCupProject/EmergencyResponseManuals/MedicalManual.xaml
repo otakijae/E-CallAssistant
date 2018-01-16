@@ -1,0 +1,411 @@
+﻿<UserControl x:Class="ImagineCupProject.EmergencyResponseManuals.MedicalManual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="4000" d:DesignWidth="1700">
+    
+    <Grid x:Name="medicalManualGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="alteredLevelOfConsciousness" Grid.Row="0" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="ALTERED LEVEL OF CONSCIOUSNESS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    The patient's level of consciousness is assessed by how well they respond to questions. <LineBreak/>
+                    The ALOC Nature Code is used for patients that are not responding in a manner that is normal for them. <LineBreak/>
+                    <LineBreak/>
+                    The ALOC Nature Code is not used when patients are completely unresponsive. <LineBreak/>
+                    A patient that is completely unresponsive has a more critical need for airway management and breathing assessment. <LineBreak/>
+                    The UNC Nature Code will give specific questions to assess these patients for the need to perform rescue breathing or CPR. <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of ALOC is stated and the following questions would be asked after the initial call has been dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    1. Does the patient have a history of any medical problems? <LineBreak/>
+                    2. How long has the patient been acting this way? <LineBreak/>
+                    3. What was he/she doing prior to this? <LineBreak/>
+                    4. Has the patient experienced any recent injuries/falls? <LineBreak/>
+                    5. Was the patient complaining of any pain? <LineBreak/>
+                    6. Has the patient taken any medication or drugs? <LineBreak/>
+                    7. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient in comfortable position <LineBreak/>
+                    If patient fell, do not move him <LineBreak/>
+                    Protect from harm <LineBreak/>
+                    Consider airway management/c-spine stabilization <LineBreak/>
+                    Nothing to eat or drink <LineBreak/>
+                    Gather all medications the patient takes and have ready for the paramedics <LineBreak/>
+                    If anything changes before we get there call back
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="chestPain" Grid.Row="0" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="CHEST PAIN" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Chest pain is the most common specific medical complaint for which EMS services are routinely called. <LineBreak/>
+                    Chest pain as the chief complaint may indicate a heart attack, pulmonary embolism, and other serious conditions; <LineBreak/>
+                    or, may indicate a benign condition requiring little or no medical intervention. <LineBreak/>
+                    Since it is very difficult to determine the severity or nature of the pain over the phone, all chest pain calls are considered ALS. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of CP is stated and the following questions would be asked after the initial call has been dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    1. Does the patient have a history of heart problems? <LineBreak/>
+                    2. How long has the patient been having this pain? <LineBreak/>
+                    3. What was the patient doing when the pain started? <LineBreak/>
+                    4. Does the patient have any other symptoms besides the pain? <LineBreak/>
+                    5. Has the patient taken anything to relieve the pain? <LineBreak/>
+                    6. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient calm <LineBreak/>
+                    Assume position of comfort, sitting up may be preferred <LineBreak/>
+                    Loosen any tight or restricting clothing <LineBreak/>
+                    Have patient take slow, deep breaths <LineBreak/>
+                    Nothing to eat or drink, or medication <LineBreak/>
+                    Gather all medications the patient takes and have ready for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="fallInjury" Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="FALL INJURY" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Reporting of fall victims is common. The FED will dispatch a BLS response unless <LineBreak/>
+                    there are reports of ALS signs/symptoms or that the fall was from greater than ten feet. <LineBreak/>
+                    Falls of greater than ten feet are considered long falls and require an ALS response. <LineBreak/>
+                    With any long fall, a possible spinal injury exists. The length of the fall is the easiest <LineBreak/>
+                    determinant of severity. The FED must consider the possibility that external trauma as <LineBreak/>
+                    well as internal injuries may exist. <LineBreak/>
+                    <LineBreak/>
+                    Pre-arrival instructions should be limited to controlling any gross bleeding and <LineBreak/>
+                    cautioning the caller not to move the victim so that further injury is not caused. <LineBreak/>
+                    FALL is a BLS response. FALLA is an ALS response. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions Nature Code <LineBreak/>
+                    <LineBreak/>
+                    1. Did the patient ever lose consciousness or have ALOC? <LineBreak/>
+                    If Yes …………………………………………………………. FALLA <LineBreak/>
+                    2. How far did the patient fall? <LineBreak/>
+                    If greater than 10 feet ………………………………………. FALLA <LineBreak/>
+                    3. What caused the patient to fall? <LineBreak/>
+                    4. Is the patient c/o of pain? What part of the body is injured? <LineBreak/>
+                    If paralysis ……………………….………………………….. FALLA <LineBreak/>
+                    5. If bleeding, are you able to control the bleeding? <LineBreak/>
+                    If no ………………………………………………………….. FALLA <LineBreak/>
+                    6. Anyone in the residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Do not move the patient <LineBreak/>
+                    Suspected fractures or dislocations – immobilize extremity <LineBreak/>
+                    Control bleeding <LineBreak/>
+                    Nothing to eat or drink <LineBreak/>
+                    Gather all medications the patient takes and have ready for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="gunshotWound" Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="GUNSHOT WOUND" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Each gunshot wound incident involves violence with police priorities. It is important to <LineBreak/>
+                    gather information regarding scene security and the assailant in addition to patient <LineBreak/>
+                    information. <LineBreak/>
+                    <LineBreak/>
+                    Penetrating trauma to the extremities is not as serious as penetrating trauma to the <LineBreak/>
+                    torso, but both should be considered potentially life threatening. <LineBreak/>
+                    <LineBreak/>
+                    Many callers reporting these incidents often have an emotional response to the <LineBreak/>
+                    situation. Proper calming techniques should be used. Pre-arrival instructions should <LineBreak/>
+                    address calming the victim and bleeding control. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of GSW <LineBreak/>
+                    is stated and the following questions would be asked after the initial call has been <LineBreak/>
+                    dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    1. What part of the body is injured? <LineBreak/>
+                    2. What type of weapon? <LineBreak/>
+                    3. Is the assailant still there? <LineBreak/>
+                    4. Description of assailant or vehicle. <LineBreak/>
+                    5. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Control bleeding, both entrance and exit wound <LineBreak/>
+                    Maintain airway <LineBreak/>
+                    Confirm police department is responding <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="illPerson" Grid.Row="2" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="ILL PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Approximately 25% of all EMS calls originate as unknown medical problems. A sick <LineBreak/>
+                    person is a patient who has an indefinable chief complaint, unclear symptoms, or when <LineBreak/>
+                    the caller provides specific information on a previous diagnosis. A second party caller is <LineBreak/>
+                    often the reporting person. <LineBreak/>
+                    <LineBreak/>
+                    Once it has been established that there are no life threatening problems, the FED will <LineBreak/>
+                    try to ascertain a chief complaint. If the chief complaint continues to be vague, this <LineBreak/>
+                    protocol should be utilized. When a major complaint is not readily distinguishable it is <LineBreak/>
+                    difficult to make triage decisions. Use common sense and ask questions if time permits. <LineBreak/>
+                    <LineBreak/>
+                    Multiple patients complaining of headaches, nausea or being disorientated may be <LineBreak/>
+                    victims of carbon monoxide poisoning. Instruct this caller to evacuate the building or at <LineBreak/>
+                    least ventilate as best as possible. <LineBreak/>
+                    ILL is a BLS response. ILLA is an ALS response. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions Nature Code <LineBreak/>
+                    <LineBreak/>
+                    1. What kinds of problems are they having? <LineBreak/>
+                    (consider other appropriate Nature Code if not determined) <LineBreak/>
+                    2. Are they having any pain? <LineBreak/>
+                    If pain radiating to arm/jaw ……………………………… ILLA <LineBreak/>
+                    3. Passing or vomiting any blood? ………………………….. INTB <LineBreak/>
+                    4. Do they have any major medical problems that could be contributing? <LineBreak/>
+                    If diabetes, heart disease, stroke, kidney failure ……… ILLA <LineBreak/>
+                    5. Severe weakness? …………………………………………. ILLA <LineBreak/>
+                    6. Post Surgery? ………………………………………………. ILLA <LineBreak/>
+                    7. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient in comfortable position <LineBreak/>
+                    Nothing to eat or drink, or medication <LineBreak/>
+                    Gather all medications the patient takes and have ready for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="internalBleeding" Grid.Row="2" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="INTERNAL BLEEDING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Internal bleeding is difficult to determine but can also be life threatening. The most <LineBreak/>
+                    significant signs and symptoms are vomiting or passing blood. Patients may also have <LineBreak/>
+                    medical conditions that they may be susceptible to bleeding internally. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of INTB <LineBreak/>
+                    is stated and the following questions would be asked after the initial call has been <LineBreak/>
+                    dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    8. Where is the patient bleeding from? <LineBreak/>
+                    9. Is the patient complaining of any pain? <LineBreak/>
+                    10.Where is the pain located? <LineBreak/>
+                    11.Has this ever happened before? <LineBreak/>
+                    12.Is the patient on any medications? <LineBreak/>
+                    13.Anyone in the residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient in a comfortable position <LineBreak/>
+                    Nothing to eat or drink, or medication <LineBreak/>
+                    Advise patient not to use the restroom <LineBreak/>
+                    If vomiting, instruct them to save it if possible <LineBreak/>
+                    Gather all medications the patient takes and have ready for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="motorVehicleAccidents" Grid.Row="3" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="MOTOR VEHICLE ACCIDENTS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    About 14% of the EMS calls dispatched are for traffic injuries of some kind. This <LineBreak/>
+                    category includes auto-versus-auto, auto-versus-motorcycle, and auto-versuspedestrian <LineBreak/>
+                    or bicycle. Many of these calls entering the 9-1-1 system are reported by <LineBreak/>
+                    second or third party callers with vague or incomplete information. <LineBreak/>
+                    <LineBreak/>
+                    Attempt to gather as much information about the accident as possible. Number of <LineBreak/>
+                    patients, types of injuries, and extent of vehicle damage are all pieces of information <LineBreak/>
+                    that can help in making decisions on the resources needed. <LineBreak/>                    <LineBreak/>                    Key Questions Nature Code <LineBreak/>
+                    <LineBreak/>
+                    1. Can you tell me what happened? <LineBreak/>
+                    2. If NO additional details ………………………………… 962 <LineBreak/>
+                    3. If YES - Find out what is involved <LineBreak/>
+                    a. If it involves a pedestrian ………………………….. 962P <LineBreak/>
+                    b. If it involves a motorcycle …………………………. 962MC <LineBreak/>
+                    c. If it involves a bicycle ………………………………. 962BC <LineBreak/>
+                    d. If the vehicle is on fire ……………………………… 962F <LineBreak/>
+                    e. If it involves a person trapped …………………….. 962X <LineBreak/>
+                    f. If ejection, t-bone, high speed, head-on …………. 962A <LineBreak/>
+                    4. How many people are injured? <LineBreak/>
+                    5. Consider additional resources if numerous and/or seriously injured <LineBreak/>
+                    6. Is anyone seriously injured? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Instruct caller not to move the patient/s <LineBreak/>
+                    Maintain c-spine if applicable <LineBreak/>
+                    Control bleeding if applicable <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="overdose" Grid.Row="3" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="OVERDOSE" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Overdoses are typically thought of as over consumption of a drug or medication. The <LineBreak/>
+                    product can be ingested, inhaled, absorbed or injected and have toxic effects on the <LineBreak/>
+                    body. The severity of the toxin depends on many things such as amount or length of <LineBreak/>
+                    time exposed, potency of substances, patient’s age, and medical history. <LineBreak/>
+                    <LineBreak/>
+                    Accidental ingestion of medication is common in children and the elderly. Intentional <LineBreak/>
+                    overdoses will probably include some element of psychiatric problem and patients may <LineBreak/>
+                    be a possible danger to themselves and others. Alert the responding crew of any <LineBreak/>
+                    potential for violent behavior. Pre-arrival instructions are aimed at maintaining an <LineBreak/>
+                    airway. If vomiting is present instruct the caller to turn the victim on his side. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of OD <LineBreak/>
+                    stated and the following questions would be asked after the initial call has been dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    1. What did the patient take? <LineBreak/>
+                    2. When did the patient take it? <LineBreak/>
+                    3. Did they do it on purpose? <LineBreak/>
+                    If YES, are they a danger to anyone? (consider police) <LineBreak/>
+                    4. Has the patient consumed any alcohol? <LineBreak/>
+                    If YES, what amount? <LineBreak/>
+                    5. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient calm <LineBreak/>
+                    Give nothing by mouth <LineBreak/>
+                    Do not induce vomiting <LineBreak/>
+                    If lethargic or unconscious, lay on left side <LineBreak/>
+                    Have patient take slow, deep breaths <LineBreak/>
+                    Gather remaining product or bottle for identification for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="poisoning" Grid.Row="4" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="POISONING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Poisonings are typically a person consuming a product that is not meant to be <LineBreak/>
+                    consumed such as a child ingesting bleach or an insecticide. The product can be <LineBreak/>
+                    ingested, inhaled or absorbed. How severe a toxic substance is on the body is <LineBreak/>
+                    dependent upon the amount or length of time exposed, potency of substance, patients <LineBreak/>
+                    age and medical history. <LineBreak/>
+                    <LineBreak/>
+                    Pre-arrival instructions are aimed at maintaining an airway. If vomiting is present <LineBreak/>
+                    instruct the caller to turn the victim on his side. Do not instruct the caller to administer <LineBreak/>
+                    ipecac or make the victim vomit. Do not advise the caller to give antidotes of any kind. <LineBreak/>
+                    <LineBreak/>
+                    Once all questioning has been completed, a three-way call may be initiated with Banner <LineBreak/>
+                    Poison Control for further assistance. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of <LineBreak/>
+                    POISN is stated and the following questions would be asked after the initial call has <LineBreak/>
+                    been dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions <LineBreak/>
+                    <LineBreak/>
+                    1. What did the patient take? <LineBreak/>
+                    2. Any there any burns in the mouth? <LineBreak/>
+                    3. Are they having any other problems? <LineBreak/>
+                    4. How much was ingested? <LineBreak/>
+                    5. Anyone in residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Keep patient calm <LineBreak/>
+                    Give nothing by mouth <LineBreak/>
+                    Do not induce vomiting <LineBreak/>
+                    If lethargic or unconscious, lay on left side <LineBreak/>
+                    Gather remaining product or bottle for identification for the paramedics <LineBreak/>
+                    If anything changes before we get there call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="unconsciousPerson" Grid.Row="4" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="UNCONSCIOUS PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    This Nature Code is reserved for patients who are confirmed to be unconscious. <LineBreak/>
+                    The caller should be able to verify this by attempting to wake the patient. <LineBreak/>
+                    <LineBreak/>
+                    When interrogating the caller ask if trauma is involved. Find out if the caller knows the <LineBreak/>
+                    victim’s medical history or possible complaint before the unconscious episode. Instruct <LineBreak/>
+                    the caller how to maintain the victim’s airway and turn him on his side if he vomits, all <LineBreak/>
+                    while maintaining spinal stabilization if trauma is involved. <LineBreak/>
+                    <LineBreak/>
+                    An immediate ALS response will be dispatched as soon as the chief complaint of UNC <LineBreak/>
+                    is stated and the following questions would be asked after the initial call has been <LineBreak/>
+                    dispatched. <LineBreak/>
+                    <LineBreak/>
+                    Key Questions Nature Code <LineBreak/>
+                    <LineBreak/>
+                    1. Confirm again the patient is breathing. <LineBreak/>
+                    If NO ……………………………………………………… CODE <LineBreak/>
+                    2. Is the patient bleeding? <LineBreak/>
+                    3. Does the patient have a history of medical problems? <LineBreak/>
+                    4. What was the patient doing prior to this happening? <LineBreak/>
+                    5. Was the patient drinking alcohol? <LineBreak/>
+                    6. Has the patient taken any medications prior to this? <LineBreak/>
+                    7. Anyone in the residence have any contagious diseases? <LineBreak/>
+                    <LineBreak/>
+                    Pre-Arrival Instructions <LineBreak/>
+                    <LineBreak/>
+                    Reassure help is on the way <LineBreak/>
+                    Lay patient on his back on a flat surface <LineBreak/>
+                    Continue to monitor patient’s breathing and watch for vomiting <LineBreak/>
+                    If patient vomits turn head to side and clear out mouth <LineBreak/>
+                    May need to tilt head back to open airway <LineBreak/>
+                    Patient should breathe every 3-5 seconds. If not, start Rescue Breathing/CPR <LineBreak/>
+                    Control any bleeding that may be present: apply clean dry cloth with pressure <LineBreak/>
+                    If anything changes before we get there, call back <LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

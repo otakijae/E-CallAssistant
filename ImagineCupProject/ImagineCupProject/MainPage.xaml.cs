@@ -11,6 +11,7 @@ using Google.Cloud.Language.V1;
 using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.Threading.Tasks;
+using ImagineCupProject.EmergencyResponseManuals;
 
 namespace ImagineCupProject
 {
@@ -33,6 +34,14 @@ namespace ImagineCupProject
             _FinalResponceEvent = new AutoResetEvent(false);
             timeText.Text = time;
             azureDatabase = new AzureDatabase();
+
+            //Manual xaml 들어갈 곳
+            SimpleManual simpleManual = new SimpleManual();
+            StandardManual standardManual = new StandardManual();
+            MedicalManual medicalManual = new MedicalManual();
+            this.simpleManualGrid.Children.Add(simpleManual);
+            this.standardManualGrid.Children.Add(standardManual);
+            this.medicalManualGrid.Children.Add(medicalManual);
         }
 
         //Azure SpeechToText
@@ -277,11 +286,6 @@ namespace ImagineCupProject
             {
                 responseText.Text += textArrayList[i];
             }
-        }
-
-        private void nextButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
         
         private void word2vec_Click(object sender, RoutedEventArgs e)

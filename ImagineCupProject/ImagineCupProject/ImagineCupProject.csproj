@@ -167,6 +167,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AzureDatabase.cs" />
+    <Compile Include="EmergencyResponseManuals\MedicalManual.xaml.cs">
+      <DependentUpon>MedicalManual.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoadingControl\LoadingAnimation.xaml.cs">
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>
@@ -176,9 +179,19 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmergencyResponseManuals\SimpleManual.xaml.cs">
+      <DependentUpon>SimpleManual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyResponseManuals\StandardManual.xaml.cs">
+      <DependentUpon>StandardManual.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="EmergencyResponseManuals\MedicalManual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoadingControl\LoadingAnimation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +216,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="EmergencyResponseManuals\SimpleManual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmergencyResponseManuals\StandardManual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

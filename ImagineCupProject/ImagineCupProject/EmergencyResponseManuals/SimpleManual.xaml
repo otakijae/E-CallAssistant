@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="ImagineCupProject.SimpleManual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImagineCupProject"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="500">
+    
+    <Grid x:Name="simpleManualGrid">
+        <StackPanel>
+            <Label Content="# Routine Questioning Pattern" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top"/>
+            <Label Content="The components of caller interviewing are : " />
+            <Label Content="    1. Determine location of emergency, including address details"/>
+            <Label Content="     - This is 911, what is the location of your emergency?"/>
+            <Label Content="     - This is 911, what is the address we need to go to?"/>
+            <Label Content="         - What city?"/>
+            <Label Content="         - House, apartment or business?"/>
+            <Label Content="         - Name of the apartment complex/business?"/>
+            <Label Content="         - Building number?"/>
+            <Label Content="         - Directional? (North of, South of, East of, West of)"/>
+            <Label Content="         - Area of the building/complex/warehouse?"/>
+            <Label Content="         - Major cross streets?"/>
+            <Label Content="    2. Determine source/callback information"/>
+            <Label Content="    3. Initial triage to determine nature of emergency"/>
+            <Label Content="    4. Secondary questioning and information gathering"/>
+            <Label Content="    5. Pre-Arrival instructions"/>
+            <Label Content="# Patient or Medical Information questions" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top"/>
+            <Label Content="    1) Determine patients CHIEF COMPLAINT" />
+            <Label Content="    2) Are you with the patient?" />
+            <Label Content="    3) Is the patient AWAKE/ABLE TO TALK to you?" />
+            <Label Content="    4) Is the patient BREATHING normal?" />
+            <Label Content="    5) Is the patient BLEEDING?" />
+            <Label Content="    6) Patient's AGE and SEX?" />
+            <Label Content="    7) Reassure caller, HELP IS ON THE WAY" />
+        </StackPanel>
+    </Grid>
+    
+</UserControl>
