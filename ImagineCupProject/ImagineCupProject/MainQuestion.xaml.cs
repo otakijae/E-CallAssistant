@@ -28,6 +28,7 @@ using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.IO;
 using Google.Cloud.Speech.V1;
 using System.Data.SqlClient;
+//using Aylien.TextApi;
 
 namespace ImagineCupProject
 {
@@ -44,6 +45,7 @@ namespace ImagineCupProject
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
+        string result;
         public MainQuestion()
         {
             InitializeComponent();
@@ -54,7 +56,7 @@ namespace ImagineCupProject
         //Azure SpeechToText
         private void ConvertSpeechToText()
         {
-            var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;  //LongDictation 대신 ShortPhrase 선택
+            var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
             string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
             //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
@@ -66,13 +68,15 @@ namespace ImagineCupProject
 
             //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
             _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
+            //_microphoneRecognitionClient.OnResponseReceived += OnMicShortPhraseResponseReceivedHandler;
+            _microphoneRecognitionClient.OnResponseReceived += OnMicDictationResponseReceivedHandler;
             _microphoneRecognitionClient.StartMicAndRecognition();
         }
 
         //Textbox에 text입력
         private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
         {
-            string result = e.PartialResult;
+            result = e.PartialResult;
             //locationText.Text += result;
             Dispatcher.Invoke(() =>
             {
@@ -86,9 +90,56 @@ namespace ImagineCupProject
                 }
                 */
                 responseText.Text = (e.PartialResult);
-                responseText.Text += ("\n");
             });
         }
+
+        //LongDictation으로 설정했을때 receiveHandlear (문장 초기화 되기 전)
+        private void OnMicDictationResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
+        {
+            //if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout)
+            //{
+                Dispatcher.Invoke(
+                    (Action)(() =>
+                    {
+                        //_microphoneRecognitionClient.EndMicAndRecognition();
+
+                        WriteResponseResult(e);
+                    }));
+            //}
+
+        }
+
+        //ShortPhrase으로 설정했을때 receiveHandlear
+        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
+        {
+            Dispatcher.Invoke((Action)(() =>
+            {
+                //codeText.Text += e;
+
+                WriteResponseResult(e);
+            }));
+        }
+
+        //receiveHandlear 내용 출력 메소드
+        private void WriteResponseResult(SpeechResponseEventArgs e)
+        {
+            if (e.PhraseResponse.Results.Length == 0)
+            {
+                //codeText.Text += "No phrase response is available.";
+            }
+            else
+            {
+                //codeText.Text += "********* Final n-BEST Results *********";
+                for (int i = 0; i < e.PhraseResponse.Results.Length; i++)
+                {
+                    problemText.Text +=   e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
+                }
+
+                //codeText.Text += "\n";
+            }
+        }
+
+        /*
         //START버튼 누른후 음성인식 시작
         private void speakBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +169,7 @@ namespace ImagineCupProject
             },
             new Features() { ExtractSyntax = true });
             CorrectSentences(response4.Sentences, response4.Tokens);
-        }
+        }*/
 
         //텍스트 분석 클릭버튼
         private void analyzeBtn_Click(object sender, RoutedEventArgs e)
@@ -160,6 +211,8 @@ namespace ImagineCupProject
 
             azureDatabase.insertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
+
+       
 
         //긍정 부정 분석 google api
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
