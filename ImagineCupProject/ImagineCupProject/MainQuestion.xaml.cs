@@ -28,6 +28,8 @@ using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.IO;
 using Google.Cloud.Speech.V1;
 using System.Data.SqlClient;
+using System.Net;
+using Newtonsoft.Json;
 //using Aylien.TextApi;
 
 namespace ImagineCupProject
@@ -210,9 +212,10 @@ namespace ImagineCupProject
             WriteSentences(response3.Sentences, response3.Tokens);
 
             azureDatabase.insertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            googlePlacesAPI();
         }
 
-       
+
 
         //긍정 부정 분석 google api
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
@@ -333,10 +336,51 @@ namespace ImagineCupProject
             }
         }
 
-        private void mapButton_Click(object sender, RoutedEventArgs e)
+        public void googlePlacesAPI()
         {
-            googleMapWindow googleMapWindow = new googleMapWindow();
-            googleMapWindow.Show();
+            string url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationText.Text + "&language=en&key=AIzaSyB55GQJ3tv_L2aALoWxIa4vkfJRdtunMtU";
+            string json = "";
+            using (WebClient wc = new WebClient())
+            {
+                json = wc.DownloadString(url);
+            }
+            RootObject test = JsonConvert.DeserializeObject<RootObject>(json);
+            foreach (var singleResult in test.predictions)
+            {
+                var location = singleResult.description;
+                MessageBox.Show(location);
+
+            }
+
         }
+
+        public class MatchedSubstring
+        {
+            public int length { get; set; }
+            public int offset { get; set; }
+        }
+
+        public class Term
+        {
+            public int offset { get; set; }
+            public string value { get; set; }
+        }
+
+        public class Prediction
+        {
+            public string description { get; set; }
+            public string id { get; set; }
+            public List<MatchedSubstring> matched_substrings { get; set; }
+            public string reference { get; set; }
+            public List<Term> terms { get; set; }
+            public List<string> types { get; set; }
+        }
+
+        public class RootObject
+        {
+            public List<Prediction> predictions { get; set; }
+            public string status { get; set; }
+        }
+
     }
 }

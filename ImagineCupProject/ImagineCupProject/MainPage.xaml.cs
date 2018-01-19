@@ -29,6 +29,7 @@ using Google.Cloud.Speech.V1;
 using System.Data.SqlClient;
 using Aylien.TextApi;
 using Microsoft.CognitiveServices.SpeechRecognition;
+using Google.Cloud.Language.V1;
 
 namespace ImagineCupProject
 {
@@ -44,6 +45,8 @@ namespace ImagineCupProject
         string text = "Yes, I am a teacher at Columbine high school. There is a student here with a gun. He just shot out a window. I believe one um.   I don't know if it's. I don't know what's in my shoulder.  I am. Yes, yes! And the school is in panic and I'm in the library. I've got students down under the tables. Kids! Heads under the tables.  Um, Kids are screaming.  We need police here.  Can you please hurry? I do not know who the student is. ... I was on hall duty, I saw a gun. I said, " +
                 "What's going on out there? And the kid that was following me said it was a film production, probably a joke And I said, well I don't think that's a good idea. And went walking outside to see what was going on.  He turned the gun straight at us and shot and, my god, the window went out. I am scared.I want to go home. ";
         string speechRecognitionResult;
+        ArrayList textArrayList = new ArrayList();
+        ArrayList textShapeArrayList = new ArrayList();
         public MainPage()
         {
             InitializeComponent();
@@ -119,7 +122,7 @@ namespace ImagineCupProject
         //  SentimentAnalyze -  AYLIEN Text Analysis API 
         public void sentimentAnalysis()
         {
-            Sentiment sentiment2 = client.Sentiment(text: text);
+            Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
             summary.Text += "\nsentiment : ";
             summary.Text += sentiment2.Polarity + " " + sentiment2.PolarityConfidence;
             summary.Text += "\n";
@@ -206,11 +209,48 @@ namespace ImagineCupProject
                 for (int i = 0; i < e.PhraseResponse.Results.Length; i++)
                 {
                     //아래내용 다른 textbox에 +=하면 된다. 
-                    //speechRecognition.Text += e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
+                    //speechResult.Text += e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
+                    string text = e.PhraseResponse.Results[i].DisplayText;
+                    var client = LanguageServiceClient.Create();
+                    var response = client.AnnotateText(new Document()
+                    {
+                        Content = text,
+                        Type = Document.Types.Type.PlainText
+                    },
+                    new Features() { ExtractSyntax = true });
+                    CorrectSentences(response.Sentences, response.Tokens);
                 }
 
+                
                 //codeText.Text += "\n";
             }
+        }
+
+        //음성 끊길때마다 문장을 . 표시로 구별해주기
+        private async void CorrectSentences(IEnumerable<Google.Cloud.Language.V1.Sentence> sentences, RepeatedField<Token> tokens)
+        {
+            foreach (var token in tokens)
+            {
+                if (token.PartOfSpeech.Tag.ToString().Equals("Verb"))
+                {
+                    if (textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Det") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Noun") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Pron"))
+                    {
+                        if (!(textArrayList.Count.ToString().Equals("1") | textArrayList.Count.ToString().Equals("2")))
+                        {
+                            string temp = textArrayList[textArrayList.Count - 2].ToString().Remove(textArrayList[textArrayList.Count - 2].ToString().Length - 1) + ". ";
+                            textArrayList.RemoveAt(textArrayList.Count - 2);
+                            textArrayList.Insert(textArrayList.Count - 1, temp);
+                        }
+                    }
+                }
+                textArrayList.Add(token.Text.Content + " ");
+                textShapeArrayList.Add(token.PartOfSpeech.Tag);
+            }
+            for (int i = 0; i < textArrayList.Count; i++)
+            {
+                speechResult.Text += textArrayList[i];
+            }
+            textArrayList.Clear();
         }
 
     }

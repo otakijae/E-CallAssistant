@@ -167,9 +167,6 @@
       <DependentUpon>AdditionalQuestion.xaml</DependentUpon>
     </Compile>
     <Compile Include="AzureDatabase.cs" />
-    <Compile Include="googleMapWindow.xaml.cs">
-      <DependentUpon>googleMapWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainQuestion.xaml.cs">
       <DependentUpon>MainQuestion.xaml</DependentUpon>
     </Compile>
@@ -180,10 +177,6 @@
       <DependentUpon>TotalPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AdditionalQuestion.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="googleMapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
