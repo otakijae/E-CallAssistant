@@ -47,13 +47,19 @@ namespace ImagineCupProject
         string speechRecognitionResult;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
+        MainQuestion mainQuestion = new MainQuestion();
+        TotalPage totalPage = new TotalPage();
+        private int _count = 0;
+        private readonly ToastViewModel _vm;
+
         public MainPage()
         {
             InitializeComponent();
             mainFrame.Content = new MainQuestion();
+            DataContext = _vm = new ToastViewModel();
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             summarize();
-             sentimentAnalysis();
+            sentimentAnalysis();
         }
 
         
@@ -85,20 +91,19 @@ namespace ImagineCupProject
             }
             else
             {
-                mainFrame.Content = new MainQuestion();
-                nextButton.Content = "Next";
+                mainFrame.Content = mainQuestion;
             }
 
         }
 
         private void listViewItem1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            mainFrame.Content = new TotalPage();
+            mainFrame.Content = totalPage;
         }
 
         private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            mainFrame.Content = new MainQuestion();
+            mainFrame.Content = mainQuestion;
         }
 
         //음성인식버튼
@@ -166,6 +171,7 @@ namespace ImagineCupProject
                 }
                 */
                 speechRecognition.Text = (e.PartialResult);
+                //mainQuestion.
             });
         }
 
@@ -177,9 +183,10 @@ namespace ImagineCupProject
             Dispatcher.Invoke(
                 (Action)(() =>
                 {
-                        //_microphoneRecognitionClient.EndMicAndRecognition();
+                    //_microphoneRecognitionClient.EndMicAndRecognition();
 
-                        WriteResponseResult(e);
+                    //mainQuestion.locationText.Text += "HI";
+                    WriteResponseResult(e);
                 }));
             //}
 
@@ -249,9 +256,37 @@ namespace ImagineCupProject
             for (int i = 0; i < textArrayList.Count; i++)
             {
                 speechResult.Text += textArrayList[i];
+                mainQuestion.responseText.Text += textArrayList[i];
+
             }
+            mainQuestion.analyze();
+            //MessageBox.Show(mainQuestion.responseText.Text); 
             textArrayList.Clear();
+
         }
 
+        private void btnSendTo112_Click(object sender, RoutedEventArgs e)
+        {
+            mainQuestion.sendTo112();
+            _vm.ShowWarning(String.Format("{0} Warning", _count++));
+            _vm.ShowError(String.Format("{0} Error", _count++));
+        }
+
+        private void btnSendTo110_Click(object sender, RoutedEventArgs e)
+        {
+            mainQuestion.sendTo110();
+            _vm.ShowInformation(String.Format("{0} Information", _count++));
+            _vm.ShowSuccess(String.Format("{0} Success", _count++));
+        }
+
+        private void listViewItem2_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainFrame.Content = new _112DataPage();
+        }
+
+        private void nextButton1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿<Window x:Class="ToastNotifications.NotificationPopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="NotificationPopup"
+        WindowStyle="None"
+        ShowActivated="False"
+        ShowInTaskbar="False"
+        WindowState="Normal"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        x:Name="Self"
+        MinHeight="300" 
+        Background="Transparent" >
+    <Grid Width="260" x:Name="Container">
+        <ContentPresenter Content="{Binding ElementName=Self, Path=PopupContent}" />
+    </Grid>
+</Window>

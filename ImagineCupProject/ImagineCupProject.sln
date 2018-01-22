@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagineCupProject", "ImagineCupProject\ImagineCupProject.csproj", "{1C6FC316-D35C-48C5-A6B7-BFAF1503FB7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCanvasChart", "WPFCanvasChart\WPFCanvasChart.csproj", "{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFChartControl", "WPFChartControl\WPFChartControl.csproj", "{463766C2-C063-4970-96C8-72A39B2A3474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToastNotifications", "ToastNotifications\ToastNotifications.csproj", "{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +27,35 @@ Global
 		{1C6FC316-D35C-48C5-A6B7-BFAF1503FB7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C6FC316-D35C-48C5-A6B7-BFAF1503FB7E}.Release|x64.ActiveCfg = Release|x64
 		{1C6FC316-D35C-48C5-A6B7-BFAF1503FB7E}.Release|x64.Build.0 = Release|x64
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B0C5D614-8F9E-4C31-B47D-EB8CFE7679C1}.Release|x64.Build.0 = Release|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Debug|x64.Build.0 = Debug|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Release|x64.ActiveCfg = Release|Any CPU
+		{463766C2-C063-4970-96C8-72A39B2A3474}.Release|x64.Build.0 = Release|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{60C456A0-FE6C-4C00-9E6D-B51A47E5A4F3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46FAA762-9C59-419F-9546-9F0460C0114F}
 	EndGlobalSection
 EndGlobal

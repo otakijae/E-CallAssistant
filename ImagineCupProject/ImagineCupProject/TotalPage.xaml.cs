@@ -27,6 +27,7 @@ namespace ImagineCupProject
         public TotalPage()
         {
             InitializeComponent();
+            this.DataContext = new ChartViewModel();
             printData();
         }
 
@@ -49,7 +50,7 @@ namespace ImagineCupProject
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Console.WriteLine("{0},{1},{2},{3},{4},{5},{6}", reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
+                        //Console.WriteLine("{0},{1},{2},{3},{4},{5},{6}", reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
                         totalNumber++;
                         if(reader.GetString(6).Equals("fire"))
                         {

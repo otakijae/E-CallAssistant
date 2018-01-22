@@ -35,14 +35,13 @@ using Newtonsoft.Json;
 namespace ImagineCupProject
 {
     /// <summary>
-    /// MainQuestion.xaml에 대한 상호 작용 논리
+    /// 전화가 시작된 후 우선적으로 장소, 사건 등 기본 정보를 듣는 화면
     /// </summary>
     public partial class MainQuestion : Page
     {
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
-        AutoResetEvent _FinalResponceEvent;
-        MicrophoneRecognitionClient _microphoneRecognitionClient;
+        //AutoResetEvent _FinalResponceEvent;
         String temp;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
@@ -51,132 +50,25 @@ namespace ImagineCupProject
         public MainQuestion()
         {
             InitializeComponent();
-            _FinalResponceEvent = new AutoResetEvent(false);
+            //_FinalResponceEvent = new AutoResetEvent(false);
             timeText.Text = time;
             azureDatabase = new AzureDatabase();
         }
-        //Azure SpeechToText
-        private void ConvertSpeechToText()
+
+        public string TextBoxText
         {
-            var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
-            string language = "en-us";
-            string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
-            //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
-            _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
-                speechRecognitionMode,
-                language,
-                subscriptionKey
-                );
-
-            //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
-            _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
-            //_microphoneRecognitionClient.OnResponseReceived += OnMicShortPhraseResponseReceivedHandler;
-            _microphoneRecognitionClient.OnResponseReceived += OnMicDictationResponseReceivedHandler;
-            _microphoneRecognitionClient.StartMicAndRecognition();
-        }
-
-        //Textbox에 text입력
-        private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
-        {
-            result = e.PartialResult;
-            //locationText.Text += result;
-            Dispatcher.Invoke(() =>
-            {
-                /*
-                if(e.PartialResult.Contains("am"))
-                {
-                    temp = e.PartialResult;
-                    Responsetxt.Text = temp.Replace("am", "is"); ;
-                    Responsetxt.Text += ("\n");
-
-                }
-                */
-                responseText.Text = (e.PartialResult);
-            });
-        }
-
-        //LongDictation으로 설정했을때 receiveHandlear (문장 초기화 되기 전)
-        private void OnMicDictationResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
-        {
-            //if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout)
-            //{
-                Dispatcher.Invoke(
-                    (Action)(() =>
-                    {
-                        //_microphoneRecognitionClient.EndMicAndRecognition();
-
-                        WriteResponseResult(e);
-                    }));
-            //}
-
-        }
-
-        //ShortPhrase으로 설정했을때 receiveHandlear
-        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
-        {
-            Dispatcher.Invoke((Action)(() =>
-            {
-                //codeText.Text += e;
-
-                WriteResponseResult(e);
-            }));
-        }
-
-        //receiveHandlear 내용 출력 메소드
-        private void WriteResponseResult(SpeechResponseEventArgs e)
-        {
-            if (e.PhraseResponse.Results.Length == 0)
-            {
-                //codeText.Text += "No phrase response is available.";
-            }
-            else
-            {
-                //codeText.Text += "********* Final n-BEST Results *********";
-                for (int i = 0; i < e.PhraseResponse.Results.Length; i++)
-                {
-                    problemText.Text +=   e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
-                }
-
-                //codeText.Text += "\n";
+            get { return responseText.Text; }
+            set
+            { 
+                responseText.Text += value;
+                responseText.Text += "test";
             }
         }
 
-        /*
-        //START버튼 누른후 음성인식 시작
-        private void speakBtn_Click(object sender, RoutedEventArgs e)
+        //텍스트 분석 클릭버튼            
+        public void analyze()
         {
-            speakBtn.IsEnabled = false;
-            ConvertSpeechToText();
-        }
-
-        //STOP버튼과 함께 음성인식 종료
-        private void stopBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.Invoke((Action)(() =>
-            {
-                _FinalResponceEvent.Set();
-                _microphoneRecognitionClient.EndMicAndRecognition();
-                _microphoneRecognitionClient.Dispose();
-                _microphoneRecognitionClient = null;
-                speakBtn.Content = "Start Recording";
-                speakBtn.IsEnabled = true;
-            }));
-
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response4 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            CorrectSentences(response4.Sentences, response4.Tokens);
-        }*/
-
-        //텍스트 분석 클릭버튼
-        private void analyzeBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            
             if (entityRecognition.Text != "")
             {
                 entityRecognition.Text = null;
@@ -186,7 +78,7 @@ namespace ImagineCupProject
                 locationText.Text = null;
                 codeText.Text = null;
             }
-
+            
             string text = responseText.Text;
             var client = LanguageServiceClient.Create();
             var response = client.AnalyzeSentiment(new Document()
@@ -271,8 +163,8 @@ namespace ImagineCupProject
             }
         }
 
+        /*
         // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
-
         public object AsyncRecognizeGcs(string storageUri)
         {
             var speech = SpeechClient.Create();
@@ -293,49 +185,7 @@ namespace ImagineCupProject
             }
             return 0;
         }
-
-        /*
-        private void Correct_Click(object sender, RoutedEventArgs e)
-        {
-            //AsyncRecognizeGcs("gs://emergencycall/test2.flac");
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response4 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            CorrectSentences(response4.Sentences, response4.Tokens);
-        }*/
-
-        //음성 stop버튼 누르면 문장을 . 표시로 구별해주기
-        private async void CorrectSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
-        {
-            foreach (var token in tokens)
-            {
-                if (token.PartOfSpeech.Tag.ToString().Equals("Verb"))
-                {
-                    if (textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Det") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Noun") | textShapeArrayList[textShapeArrayList.Count - 1].ToString().Equals("Pron"))
-                    {
-                        if (!(textArrayList.Count.ToString().Equals("1") | textArrayList.Count.ToString().Equals("2")))
-                        {
-                            string temp = textArrayList[textArrayList.Count - 2].ToString().Remove(textArrayList[textArrayList.Count - 2].ToString().Length - 1) + ". ";
-                            textArrayList.RemoveAt(textArrayList.Count - 2);
-                            textArrayList.Insert(textArrayList.Count - 1, temp);
-                        }
-                    }
-                }
-                textArrayList.Add(token.Text.Content + " ");
-                textShapeArrayList.Add(token.PartOfSpeech.Tag);
-            }
-            responseText.Text = null;
-            for (int i = 0; i < textArrayList.Count; i++)
-            {
-                responseText.Text += textArrayList[i];
-            }
-        }
-
+        */
         public void googlePlacesAPI()
         {
             string url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationText.Text + "&language=en&key=AIzaSyB55GQJ3tv_L2aALoWxIa4vkfJRdtunMtU";
@@ -343,15 +193,16 @@ namespace ImagineCupProject
             using (WebClient wc = new WebClient())
             {
                 json = wc.DownloadString(url);
-            }
-            RootObject test = JsonConvert.DeserializeObject<RootObject>(json);
-            foreach (var singleResult in test.predictions)
-            {
-                var location = singleResult.description;
-                MessageBox.Show(location);
+
+                RootObject test = JsonConvert.DeserializeObject<RootObject>(json);
+                foreach (var singleResult in test.predictions)
+                {
+                    var location = singleResult.description;
+                    MessageBox.Show(location);
+
+                }
 
             }
-
         }
 
         public class MatchedSubstring
@@ -382,5 +233,14 @@ namespace ImagineCupProject
             public string status { get; set; }
         }
 
+        public void sendTo112()
+        {
+            azureDatabase.sendDataTo112(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+        }
+
+        public void sendTo110()
+        {
+            azureDatabase.sendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+        }
     }
 }

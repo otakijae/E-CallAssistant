@@ -34,8 +34,8 @@
         <TextBlock Text="Problem" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="6"/>
         <TextBlock Text="Code" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="7"/>
 
-        <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Click="analyzeBtn_Click"/>
-
+        <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" />
+        
         <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
         <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
         <TextBox x:Name="locationText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
@@ -44,11 +44,11 @@
         <TextBox x:Name="problemText" Text="" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
         <TextBox x:Name="codeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="7" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
 
-        <TextBox x:Name="responseText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+        <TextBox x:Name="responseText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Row="1" Grid.Column="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Grid.RowSpan="2"/>
         <TextBox x:Name="entityRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Grid.RowSpan="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.2,0.4,0"/>
         <TextBox x:Name="summarizeText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="3" Grid.RowSpan="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.2,0.4,0"/>
         <TextBox x:Name="sentimentRecognition" Text="" TextWrapping="Wrap"  FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.4,0.4,0" Grid.RowSpan="2"/>
         <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0,0.4,-0.4"/>
-        
+
     </Grid>
 </Page>

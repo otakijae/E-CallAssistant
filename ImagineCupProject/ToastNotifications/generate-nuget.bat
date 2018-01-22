@@ -1,0 +1,1 @@
+nuget.exe pack ToastNotifications.csproj -Prop Configuration=Release
