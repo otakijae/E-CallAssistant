@@ -63,6 +63,8 @@ except KeyError:
 - [참고 문헌 / Implementing a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) 
 - 현재 75% 정확도 / 아직 학습해야할 카테고리가 더 있음 / 더 정확도 올릴 예정
 - 기본 예제로 실행했을 시 예측 값
+- Console Predict Command Example : ```python predict.py ./trained_model_1516543243/```
+- JSON file Predict Command Example : ```python predict.py ./trained_model_1516543243/ ./data/sample.json```
 ```
 [
     {

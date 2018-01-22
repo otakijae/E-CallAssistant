@@ -131,6 +131,6 @@ def predict_unseen_data():
 		logging.critical('The prediction is complete')
 
 if __name__ == '__main__':
-	#console_predict()
+	console_predict()
 	# python3 predict.py ./trained_model_1478649295/ ./data/small_samples.json
-	predict_unseen_data()
+	#predict_unseen_data()
