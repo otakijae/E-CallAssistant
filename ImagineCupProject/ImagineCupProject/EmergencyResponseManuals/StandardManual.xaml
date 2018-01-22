@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1700">
     
-    <Grid x:Name="standardManualGrid" ShowGridLines="True">
+    <Grid x:Name="standardManualGrid" ShowGridLines="True" Visibility="Collapsed">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
@@ -33,72 +33,72 @@
         <TextBlock Text="Wrap-Up Guidance &#10; Cooperation Request" Foreground="Black" VerticalAlignment="Center" TextAlignment="Center" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="4" Margin="10"/>
 
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Margin="10">
-            1. (재난지역 파악) 정확한 재난지점, 재난종류, 주변에 중요한 건물 파악, 고속도로 및 터널 상하행선 파악 등 <LineBreak/><LineBreak/>
-            2. (인명구조 및 연소상황 파악) 불꽃이 보이는지 여부, 내부에 사람이 있는지 여부, 사람들 대비여부, 출입문 잠겨있는지 여부, 소방차 진입에 문제가 있는지 여부 <LineBreak/><LineBreak/>
-            3. (신고자 정보 파악) 성명, 전화번호 파악(신고자가 불쾌하게 생각할 수 있으므로 최대한 친절이 응대)
+            1. (Identify disaster areas) Accurate disaster locations, types of disasters, and identification of important buildings in the vicinity, and identification of highways, tunnels on or off course.<LineBreak/><LineBreak/>
+            2. (Identify the condition of rescue and combustion) flame, presence of people inside, evacuation of people, locked doors and entry to fire trucks.<LineBreak/><LineBreak/>
+            3. (Identify the complainant information) Name, telephone number (The complainant may feel offended by the complainant as a favor as possible by the letter)
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Margin="10">
-            1. (출동지령) 신고가 접수된 경우 즉시 출동 원칙, 재난유형․위치․신고자 전화번호 확인하고 출동지령 <LineBreak/>
-                * 신고자의 목소리만 듣고 접수된 신고가 장난 또는 허위 등이라고 단정하지 아니하고 우선 출동조치 <LineBreak/><LineBreak/>
-            2. (재난정보파악) 출동지시를 받은 소방대의 출동상황 확인, 현장의 재난상황 파악 출동대에 전파(대원의 안전과 관련된 사항은 우선 전파) <LineBreak/>
-                * 현장지휘관과 통신수단 및 유관기관과의 비상연락수단 확보, 추가자원 파악․가동, 사상자 현황 및 이송․부상정도 파악 <LineBreak/><LineBreak/>
-            3. (기록관리) 상황접수가 누락되거나 보고․조치가 지연되는 사례가 없도록 상황내용을 시간대별로 파악하여 보고 및 기록 유지
+            1. (Action Order) If a report is received, the principle of immediate action, type of disaster, location, and the reporter's telephone number are checked and the request is given.<LineBreak/>
+                * Listen only to the accuser and move first without deciding that the report received is a joke or a lie.<LineBreak/><LineBreak/>
+            2. (Identifying disaster information) Checking fire brigade members who are instructed to move, and spreading disaster situation report to the issue area (First, dissemination of employees ' safety)<LineBreak/>
+                * Secure emergency contact points with field commanders, communications, and related agencies ; identify the source of the trace ; operation, casualty status and transfer ; and identify injuries<LineBreak/><LineBreak/>
+            3. (Records management) The reception of the situation is omitted or reported.Report, record and sustain rock - based reporting and reporting of activity without delay
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Margin="10">
-            1. 소방차 출동 지시를 내린 후, 상황에 따라 필요한 조치를 할 수 있도록 신고자 또는 주변인에게 고지 <LineBreak/><LineBreak/>
-            2. 응급환자의 경우 구급전담 상황요원이 구급차 도착전 응급처치 지도 시행
+            1. After issuing the fire truck's response order, notify the report maker or nearby personnel to take necessary measures as needed<LineBreak/><LineBreak/>
+            2. In case of an emergency patient, an emergency handling staff should guide the emergency services before the ambulance is delivered
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Margin="10">
-            1. 일반적인 경우에는 일상적인 마무리 안내를 하고, 다른 도움 요청 전화를 받아야하는 경우 긴급 마무리 안내 <LineBreak/>
-                * (예시) 소방차를 보냈습니다. 급한 상황이 있어 지금 전화를 끊어야합니다. 어떤 변화가 생기면 즉시 다시 연락하세요. <LineBreak/><LineBreak/>
-            2. 필요한 경우 유관기관에 통보하고 협조 요청
+            1. Regular completion instructions in general, emergency finishing calls when other calls are needed<LineBreak/>
+                * (Example) We sent a fire truck. I have to hang up now because I have an emergency. If anything changes, contact me again immediately.<LineBreak/><LineBreak/>
+            2. If necessary, report to relevant authorities and request cooperation
         </TextBlock>
 
 
 
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" Margin="10">
-            1. 예 119입니다. 무엇을 도와드릴까요? <LineBreak/><LineBreak/>
-            2. 사고나 환자가 발생한 위치가 어디입니까? <LineBreak/><LineBreak/>
-            3. 전화번호가 어떻게 됩니까? <LineBreak/><LineBreak/>
-            4. 무슨 일이 발생했는지 정확히 말해주시겠습니까?, 환자가 몇 명이나 됩니까?
+            1. Yes, it is 119. What can I do for you? <LineBreak/><LineBreak/>
+            2. Where did the accident or patient occur? <LineBreak/><LineBreak/>
+            3. What is your phone number? <LineBreak/><LineBreak/>
+            4. Can you tell me exactly what happened? How many patients do you have?
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Margin="10">
-            1. 지금 소방차(구조차, 구급차)를 보내겠습니다. 전화를 끊지 마세요? <LineBreak/><LineBreak/>
-            2. 소방차(구급차)를 보냈습니다.(도움 요청자에게 소방차를 보냈음을 재확인시킨다.)
+            1. I'll send a fire truck now. Please don't hang up <LineBreak/><LineBreak/>
+            2. I sent an ambulance.(Redevelop the person who sent the fire truck.)
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="3" TextWrapping="Wrap" Margin="10">
-            1. 지금 환자와 함께 있습니까?(환자가 남자인지, 여자인지, 의식의 유무등 확인) <LineBreak/><LineBreak/>
-            2. (다수환자 발생 시) 주변 상황이 안전한지 확인하세요. 모든 처치는 반드시 당신이 안전한 상태에서 시행해야 합니다. <LineBreak/><LineBreak/>
-            3. (질식) 얼굴을 덮고 있는 것과 입 안에 있는 것을 제거하세요. 그리고환자가 숨을 쉬는지 말해 주세요. <LineBreak/><LineBreak/>
-            4. (물에 빠진 상태) 안전하지 않다면 물로 들어가지 마세요. <LineBreak/><LineBreak/>
-            5. (명백한 기도폐쇄) 등을 두드리지 마세요.
+            1. Are you with the patient now?(Check whether the patient is male, female, or conscious) <LineBreak/><LineBreak/>
+            2. Check to see if the surrounding situation is safe (in case of multiple patients). All remedies must be carried out in a safe state by Vandshire. <LineBreak/><LineBreak/>
+            3. (Suffocation) Remove the covering and the mouth from your face. And tell me if the patient is breathing. <LineBreak/><LineBreak/>
+            4. (dripping) If you are not safe, do not enter the water. <LineBreak/><LineBreak/>
+            5. Do not tap (obvious prayer closure).
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" TextWrapping="Wrap" Margin="10">
-            1. 소방차(구급차)를 보냈습니다, 정말 필요한 경우가 아니면 소방차(구급차)가 도착할 때까지 기다리세요. <LineBreak/><LineBreak/>
-            2. 어떤 변화가 생기면 즉시 다시 연락주세요, 저는 소방교 ㅇㅇㅇ입니다. <LineBreak/><LineBreak/>
-                (긴급상황시 생략가능) <LineBreak/>
-                - (다른 전화를 받기 위해) 급한 상황이 있어 지금 전화를 끊어야 합니다. 어떤 변화가 생기면 즉시 연락 주십시오.(급한 상황인 경우)
+            1. I've sent an ambulance, wait till the fire truck arrives if you really need it. <LineBreak/><LineBreak/>
+            2. Please contact me again immediately if any changes occur, I am Sobanggyo. <LineBreak/><LineBreak/>
+                (Can be omitted in case of an emergency.) <LineBreak/>
+                - I have to hang up now. Please let me know immediately if anything changes.(in case of emergency)
         </TextBlock>
 
 
 
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="3" Grid.Row="1" TextWrapping="Wrap" Margin="10">
-            1. (일반적인 경우) 발생한 장소 확인, 도움 요청자의 전화번호 확인,주증상 확인, 나이 확인, 의식 상태 확인, 환자의 호흡유무 확인 <LineBreak/><LineBreak/>
-            2. (재난 및 다중손상사고의 경우) 재난의 종류, 위치, 사상자의 수,유해물질의 종류 및 유해사고 가능성, 유관기관의 지원 필요성 확인 <LineBreak/><LineBreak/>
-            3. (전염성 감염병 환자인 경우) 감염병의 종류, 전염력의 여부 및 전파력의 정도, 필요한 예방조치와 방호복 필요여부, 방역 특수 구급차의 필요여부 등
+            1. (usually) Check the location of the incident, check the phone number of the person who asked for assistance, check the status of the main certificate, check the age, check the patient's consciousness, and determine the patient's breathing condition<LineBreak/><LineBreak/>
+            2. (in the case of disaster and multiple damages) type, location, number of casualties, types of harmful substances and the likelihood of accidents, and the need for support from related agencies ; <LineBreak/><LineBreak/>
+            3. (In the case of infectious disease patient) type of infection, degree of telekinesis, level of preproduction, necessary preventive measures and protective clothing, and whether or not special protective ambulance is needed
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="3" Grid.Row="2" TextWrapping="Wrap" Margin="10">
-            1. 관내의 가장 가까운 구급차 출동, 획득한 상황정보 구급대원에게 제공(필요시 3자 통화) <LineBreak/><LineBreak/>
-            2. 지속적인 정보수집, 전파 및 추가 출동지시 등
+            1. The nearest ambulance on line 1, which is provided to the source of the obtained situation information (3-digit call if necessary). <LineBreak/><LineBreak/>
+            2. Continuous information collection, dissemination and further action orders
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" Margin="10">
-            1. 구급차 출동 지시를 내린 후, 상황에 따라 필요한 즉각 응급처치 지도(Post-dispatch Instruction)/구급차 도착전 지도(pre-arrival Instruction)를 시행 <LineBreak/><LineBreak/>
-            2. 119구급상황관리센터를 운영하는 경우, 구급전담 상황요원이 구급차 도착전 지도를 시행
+            1. After issuing an ambulance response order, depending on the circumstances, carry out a Post-dispatch InstructionSurival Instruction Map as needed. <LineBreak/><LineBreak/>
+            2. In the case that 119 emergency handling center is operated, an emergency handling staff should provide a map before landing on the ambulance.
         </TextBlock>
         <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="3" Grid.Row="4" TextWrapping="Wrap" Margin="10">
-            1. 일반적인 경우에는 일상적인 마무리 안내를 하고, 다른 도움요청 전화를 받아야 하는 경우에는 긴급 마무리 안내 시행 <LineBreak/>
-                * (예시) 구급차를 보냈습니다. 급한 상황이 있어 지금 전화를 끊어야 합니다. 어떤 변화가 생기면 즉시 다시 연락하세요. <LineBreak/><LineBreak/>
-            2. 상황에 따라 필요한 경우 유관기관에 통보하고 협조 요청
+            1. In general cases, routine finishing guide ; in case other call is needed, emergency finishing guide <LineBreak/>
+                * An ambulance has been sent (example). I have an emergency and need to hang up now. If anything changes, contact me again immediately. <LineBreak/><LineBreak/>
+            2. If necessary, report to relevant authorities and request cooperation
         </TextBlock>
         
     </Grid>

@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImagineCupProject.EmergencyResponseManuals"
              mc:Ignorable="d" 
-             d:DesignHeight="4000" d:DesignWidth="1700">
+             d:DesignHeight="1000" d:DesignWidth="1700">
     
     <Grid x:Name="classifiedManualGrid">
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -18,52 +18,492 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
 
-        <Grid x:Name="terrorAndGunshot" Grid.Row="0" Grid.Column="0">
-            <StackPanel>
-                <TextBlock Text="Terror / Gunshot" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
-                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
-                    1. Immediate Action - Secure the Immediate Area.
-                    - Lock or barricade the door, if able. Block the door using whatever is available - desks, tables, file cabinets, other furniture, books, etc.
-                    - After securing the door, stay behind solid objects away from the door as much as possible.
-                    - If the assailant enters your room and leaves, lock or barricade the door behind them.
-                    - If safe to do so, allow others to seek refuge with you.
-                    
-                    2. Protective Actions: Take appropriate steps to reduce your vulnerability.
-                    - Close blinds.
-                    - Close windows.
-                    - Turn off radios and computer monitors.
-                    - Silence cell phones.
-                    - Place signs in exterior windows to identify your location and the location of injured persons.
-                    - Keep people calm and quiet.
-                    - After securing the room, people should be positioned out of sight and behind items that might offer additional protection - walls, desks, file cabinets, bookshelves, etc.
-                    
-                    3. Unsecured Areas:
-                    - If you find yourself in an open area, immediately seek protection.
-                    - Put something between you and the assailant.
-                    - Consider trying to escape, if you know where the assailant is and there appears to be an escape route immediately available to you.
-                    - If in doubt, find the safest area available and secure it the best way that you can.
-                    
-                    4. CALL 786-4357 (HELP) then 9-911. Critical incident emergency situations should be reported to law enforcement immediately or as soon as possible when it becomes safe to do so. Be prepared to give the following information:
-                    - What is happening.
-                    - Where you are located, including building name, floor and room number.
-                    - Number of people at your specific location.
-                    - Injuries, if any, number of those injured and types of injuries.
-                    - Other information as requested.
-                    - Try to provide information in a calm, clear manner so that the dispatcher can quickly relay your information to responding emergency personnel.
-                    
-                    5. What to Report: Try to note as much as possible about the assailant, including:
-                    - Specific location and direction of the assailant.
-                    - Number of assailants.
-                    - Gender, race, and approximate age of the assailant.
-                    - Clothing color and style.
-                    - Physical features – e.g., height, weight, facial hair, glasses.
-                    - Types of weapons – e.g., handgun, rifle, shotgun, explosives.
-                    - Description of any backpack or bag
-                </TextBlock>
-            </StackPanel>
-        </Grid>
+        <StackPanel>
+
+            <Grid x:Name="earthquake" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Disaster : Earthquake" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Minor earthquake:<LineBreak/>
+                    - EC and DGS will inspect the facility to determine the condition of:<LineBreak/>
+                        1) Piping systems (water, gas, sewer)<LineBreak/>
+                        2) Electrical system<LineBreak/>
+                        3) Telephone system<LineBreak/>
+                        4) Structure – walls, doors, windows, ceiling, etc.<LineBreak/>
+                    - EC and or DGS will report the earthquake and any resulting damage to the Facility Manager.<LineBreak/>
+                    <LineBreak/>
+                    2. Moderate, major or catastrophic earthquake:<LineBreak/>
+                    - Shelter in place if possible until the shaking stops (in doorways and away from windows).<LineBreak/>
+                    - Facility evacuation plan will be implemented once the shaking has stopped.
+                    All employees will follow the emergency evacuation plan and report to their designated areas. A roll-call will be conducted to determine if anyone remains in the building.<LineBreak/>
+                    - The building will be visually inspected by EC and DGS for damage and hazards.<LineBreak/>
+                    - If an employee is missing from the roll-call, and the building appears safe, the EC will check inside.<LineBreak/>
+                    - If no hazards or structurally unsafe damage is found, allow the facility to be reoccupied.<LineBreak/>
+                    - If structural damage and hazards are found:<LineBreak/>
+                        1) Determine if they are hazardous to the building occupants.<LineBreak/>
+                        2) If severe or widespread damage is discovered, do not allow the building to be used.<LineBreak/>
+                        3) Call DCP, who will establish security around the building to prevent unauthorized entry, and notify Richmond Fire Department.<LineBreak/>                        4) If approved by the fire department, escort personnel to their work areas to retrieve personal belongings<LineBreak/>
+                    <LineBreak/>
+                    NOTE: Extreme caution must be used when entering and inspecting the building. If significant wall, floor or roof damage is observed, do not enter the building.<LineBreak/>
+                    <LineBreak/>
+                    3. Prepare for earthquakes.<LineBreak/>
+                    - Securely fasten shelves to walls.<LineBreak/>
+                    - Keep large or heavy objects on lower shelves.<LineBreak/>
+                    - Store breakable items in lower cabinets with doors and latches.<LineBreak/>
+                    <LineBreak/>
+                    4. Plan to act quickly.<LineBreak/>
+                    - During or immediately after an earthquake, the best protection is to get under heavy furniture, such as a desk, table or bench, and staying away from large windows, mirrors or other glass.<LineBreak/>
+                    - The greatest danger is directly outside buildings, at exits, and along exterior walls, due to falling debris. Most deaths and injuries are due to falling walls, flying glass and debris.<LineBreak/>
+                    - If you are already outside, stay clear of buildings, power lines, overpasses and elevated expressways.<LineBreak/>
+                    - Expect aftershocks – smaller quakes (and sometimes larger ones) can often follow hours or days after the initial shake, causing further damage to weakened buildings and structures.<LineBreak/>
+                    - If you smell gas or hear a hissing or blowing noise, open a window and leave the building immediately; turn off the gas at the outside main valve, if possible, and call the gas company.<LineBreak/>
+                    <LineBreak/>
+                    5. Post- earthquake concerns:<LineBreak/>
+                    Following a major or catastrophic earthquake, damage to roads, bridges, utilities and other structures in the vicinity of the state facility may prevent or hinder the employee’s ability to travel home.<LineBreak/>
+                    Consideration must be given to providing information to employees regarding safe or open routes home, and providing temporary shelter if all routes are closed.<LineBreak/>
+                    Additional concerns must be given to the possibility that personal belongings such as keys, briefcases, and medications cannot be retrieved from the damaged building. If damage is widespread and travel is not feasible:<LineBreak/>
+                    - Set up a temporary shelter.<LineBreak/>
+                    - Locate a source of water and stockpile if possible.<LineBreak/>
+                    - Determine location of operating community shelters, and move employees there if possible.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="flood" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Disaster : Flood" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Immediate Action:<LineBreak/>
+                    - Notify EC of flooding situation or forecast.<LineBreak/>
+                    - EC will notify the emergency planning committee (if multi-agency facility).<LineBreak/>
+                    - Anyone can notify the EC of a situation (i.e. maintenance staff of a pipe rupture) or local authorities of river flood forecasts.<LineBreak/>
+                    <LineBreak/>                    
+                    2. Immediate Threat: water is entering the building or affecting the facility.<LineBreak/>
+                    - Determine impact on equipment and facility.<LineBreak/>
+                    - If sewage is affecting the facility, evacuate the affected section(s).<LineBreak/>
+                    - Place important documents in waterproof containers.<LineBreak/>
+                    - Unplug electrical equipment.<LineBreak/>
+                    - Designate employees to prevent additional damage by covering or raising essential equipment, or blocking water flow.<LineBreak/>
+                    - Get emergency supplies and move to higher ground.<LineBreak/>
+                    <LineBreak/>
+                    3. Forecasted Flooding:<LineBreak/>
+                    - EC notifies agency manager if flood warning or forecast is received for area which includes facility.<LineBreak/>
+                    - Determine if facility will be affected.<LineBreak/>
+                    - Determine level of water expected in building.<LineBreak/>
+                    - Remove furniture and equipment from area that could be affected.<LineBreak/>
+                    - Determine if an alternate work site is available or needed.<LineBreak/>
+                    - Inform staff of forecast and plans.<LineBreak/>
+                    - Cut off electrical service to affected area.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="severeWeather" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Disaster : Severe Weather" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Tornado Watch:<LineBreak/>
+                    - Inform agency heads that a watch has been issued.<LineBreak/>
+                    - EC inspects pre-designated safe area to unlock doors if necessary and clear area of stored materials.<LineBreak/>
+                    - Inform other employees of the tornado watch.<LineBreak/>
+                    - EC continues to monitor local Emergency Alert System (EAS).<LineBreak/>
+                    <LineBreak/>
+                    2. Tornado Warning:<LineBreak/>
+                    - Inform employees that a warning has been issued (a tornado has been seen).<LineBreak/>
+                    - EC should move all employees to the safe area within the building.<LineBreak/>
+                    - Employees should remain in the safe area until the warning has been cancelled.<LineBreak/>
+                    <LineBreak/>
+                    3. Tornado hits the building:<LineBreak/>
+                    - EC, with the help of others, visually inspects the building for damage (i.e., piping systems, electrical, and structural).<LineBreak/>
+                    - If building and utilities are damaged, you may need to evacuate - call Richmond Fire Department (9-911).<LineBreak/>
+                    - Establish security around building to prevent unauthorized entry and looting.<LineBreak/>
+                    - Report damage to facility to DGS or the building manager<LineBreak/>
+                    <LineBreak/>
+                    4. Determine in advance where you will take shelter.<LineBreak/>
+                    - Storm cellars and basements provide the best protection.<LineBreak/>
+                    - If underground shelter is not available, go into a windowless interior room or hallway on the lowest floor possible.<LineBreak/>
+                    - Stay away from windows, doors and outside walls. Go to the center of the room. Stay away from corners - they attract debris.<LineBreak/>
+                    - If shelter is not available, lie flat in a ditch or other low-lying area.<LineBreak/>
+                    - Plan to stay in the shelter location until the storm has passed.<LineBreak/>
+                    <LineBreak/>
+                    5. Stay Informed.<LineBreak/>
+                    - Listen to weather-alert radios to stay informed.<LineBreak/>
+                    - Monitor commercial radio, television and the internet, if possible.<LineBreak/>
+                    - Keep in mind that after a tornado, it could be hours, or even days, before emergency personnel are able to reach you.<LineBreak/>
+                    <LineBreak/>
+                    6. Hurricane/Severe Thunderstorm Watch:<LineBreak/>
+                    - Notify agency managers of the situation.<LineBreak/>
+                    - Inspect building for open windows and doors, and move or secure outside items such as tables, chairs, and trash receptacles.<LineBreak/>
+                    <LineBreak/>
+                    7. Hurricane/Severe Thunderstorm Warning:<LineBreak/>
+                    - Notify agency managers about the warning.<LineBreak/>
+                    - Close windows and doors.<LineBreak/>
+                    - Move outside tables, chairs, trash receptacles, etc.<LineBreak/>
+                    - Clear all desks and table tops of small, loose items.<LineBreak/>
+                    - If hurricane and/or severe thunderstorm are imminent, the EC should monitor emergency weather channels and have employees follow the area’s emergency evacuation plan.<LineBreak/>
+                    - Information on safe routes should be provided to employees.<LineBreak/>
+                    <LineBreak/>
+                    8. Winter Storm Watch:<LineBreak/>
+                    - Notify agency managers about the watch.<LineBreak/>
+                    - Monitor EAS for storm reports.<LineBreak/>
+                    <LineBreak/>
+                    9. Winter Storm Warning:<LineBreak/>
+                    - Notify agency managers of the warning.<LineBreak/>
+                    - Monitor EAS for storm reports.<LineBreak/>
+                    - Determine if reducing staffing levels to key staff members only is warranted.<LineBreak/>
+                    <LineBreak/>
+                    10. If you work in high-rise buildings, keep these things in mind:<LineBreak/>
+                    - Note where the closest emergency exit is.<LineBreak/>
+                    - Know another way out in case your first choice is blocked.<LineBreak/>
+                    - Take cover under a desk or table if things are falling.<LineBreak/>
+                    - Stay away from file cabinets, bookshelves or other things that might fall.<LineBreak/>
+                    - Face away from windows and glass.<LineBreak/>
+                    - Move away from exterior walls.<LineBreak/>
+                    - Determine if you should stay where you are or get away.<LineBreak/>
+                    - Listen and follow instructions.<LineBreak/>
+                    - Take your emergency supply kit.<LineBreak/>
+                    - Never use elevators.<LineBreak/>
+                    - Stay to the right while going down stairwells to allow emergency workers to come up.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="fire" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Fire / Rescue" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Immediate Action:<LineBreak/>
+                    - Notify the Richmond Fire Department (9-911).<LineBreak/>
+                    - Give the dispatcher the address, location of the fire, and if there are any injuries.<LineBreak/>
+                    - Notify DCP (786-4357).<LineBreak/>
+                    - If the internal fire alarm system has not activated, or fails to operate, immediately activate the system.<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency Escape Actions:<LineBreak/>
+                    - Stay calm.<LineBreak/>
+                    - Immediately stop what you are doing.<LineBreak/>
+                    - Follow the building’s Building Emergency Evacuation Plan (BEEP) and report to your designated staging area. Stay low to the ground to avoid rising smoke.<LineBreak/>
+                    - In multi-level buildings, sometimes the safest action may be for employees to stay inside and protect themselves from the smoke and fire.
+                    “Safe areas” should be identified before-hand where employees or employees with disabilities will gather prior to the arrival of the fire department.<LineBreak/>
+                    When this happens, employees should:<LineBreak/>
+                        1) Take steps to protect themselves, and stay calm.<LineBreak/>
+                        2) Exterior windows and all doors should be properly marked to alert emergency personnel that employees are gathered inside.<LineBreak/>
+                        3) Make sure there is a phone in the safe areas.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="terrorAndGunshot" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Terror / Gunshot" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Immediate Action - Secure the Immediate Area.<LineBreak/>
+                    - Lock or barricade the door, if able. Block the door using whatever is available - desks, tables, file cabinets, other furniture, books, etc.<LineBreak/>
+                    - After securing the door, stay behind solid objects away from the door as much as possible.<LineBreak/>
+                    - If the assailant enters your room and leaves, lock or barricade the door behind them.<LineBreak/>
+                    - If safe to do so, allow others to seek refuge with you.<LineBreak/>
+                    <LineBreak/>
+                    2. Protective Actions: Take appropriate steps to reduce your vulnerability.<LineBreak/>
+                    - Close blinds.<LineBreak/>
+                    - Close windows.<LineBreak/>
+                    - Turn off radios and computer monitors.<LineBreak/>
+                    - Silence cell phones.<LineBreak/>
+                    - Place signs in exterior windows to identify your location and the location of injured persons.<LineBreak/>
+                    - Keep people calm and quiet.<LineBreak/>
+                    - After securing the room, people should be positioned out of sight and behind items that might offer additional protection - walls, desks, file cabinets, bookshelves, etc.<LineBreak/>
+                    <LineBreak/>
+                    3. Unsecured Areas:<LineBreak/>
+                    - If you find yourself in an open area, immediately seek protection.<LineBreak/>
+                    - Put something between you and the assailant.<LineBreak/>
+                    - Consider trying to escape, if you know where the assailant is and there appears to be an escape route immediately available to you.<LineBreak/>
+                    - If in doubt, find the safest area available and secure it the best way that you can.<LineBreak/>
+                    <LineBreak/>
+                    4. CALL 9-911. Critical incident emergency situations should be reported to law enforcement immediately or as soon as possible when it becomes safe to do so. Be prepared to give the following information:<LineBreak/>
+                    - What is happening.<LineBreak/>
+                    - Where you are located, including building name, floor and room number.<LineBreak/>
+                    - Number of people at your specific location.<LineBreak/>
+                    - Injuries, if any, number of those injured and types of injuries.<LineBreak/>
+                    - Other information as requested.<LineBreak/>
+                    - Try to provide information in a calm, clear manner so that the dispatcher can quickly relay your information to responding emergency personnel.<LineBreak/>
+                    <LineBreak/>
+                    5. What to Report: Try to note as much as possible about the assailant, including:<LineBreak/>
+                    - Specific location and direction of the assailant.<LineBreak/>
+                    - Number of assailants.<LineBreak/>
+                    - Gender, race, and approximate age of the assailant.<LineBreak/>
+                    - Clothing color and style.<LineBreak/>
+                    - Physical features – e.g., height, weight, facial hair, glasses.<LineBreak/>
+                    - Types of weapons – e.g., handgun, rifle, shotgun, explosives.<LineBreak/>
+                    - Description of any backpack or bag<LineBreak/>
+                    - Do you recognize the assailant? Do you know their name?<LineBreak/>
+                    - What exactly have you seen or heard – e.g.,explosions, gunshots, etc.<LineBreak/>
+                    <LineBreak/>
+                    6. Treat the Injured. The dispatcher will notify law enforcement and other emergency services (EMS) agencies – fire and rescue.
+                    EMS will respond to the site, but will not be able to enter the area until it is secured by law enforcement. 
+                    You may have to treat the injured as best you can until the area is secured. Remember basic first aid:<LineBreak/>
+                    - For bleeding, apply pressure and elevate.
+                    Many items can be used for this purpose - e.g., clothing, paper towels, feminine hygiene products, newspapers, etc.<LineBreak/>
+                    - Reassure those in the area that help will arrive. Try to stay quiet and calm.<LineBreak/>
+                    <LineBreak/>
+                    7. The assailant may not stop until his objectives have been met, or until engaged and neutralized by law enforcement.<LineBreak/>
+                    - Always consider the risk of exposure by opening the door for any reason.<LineBreak/>
+                    - Attempt to rescue people only if it can be done without further endangering the persons inside of a secured area.<LineBreak/>
+                    - Be aware that the assailant may bang on the door, yell for help, or otherwise attempt to entice you to open the door of a secured area.<LineBreak/>
+                    - If there is any doubt about the safety of the individuals inside the room, the area needs to remain secured.<LineBreak/>
+                    <LineBreak/>
+                    8. Help is on the way. It is important for you to remain calm and stay in the secured area.<LineBreak/>
+                    - Law Enforcement will locate, contain, and stop the assailant.<LineBreak/>
+                    - The safest place for you to be is inside a secure room.<LineBreak/>
+                    - The assailant may not flee when law enforcement enters the building, but instead may target responding officers.<LineBreak/>
+                    <LineBreak/>
+                    9. Initial responding officers will not treat the injured or begin evacuation until the threat is neutralized and the area is secure.<LineBreak/>
+                    - You may need to explain this to others in order to calm them.<LineBreak/>
+                    - Once the threat is neutralized, officers and other emergency units will begin treatment and evacuation.<LineBreak/>
+                    <LineBreak/>
+                    10. Evacuations: Responding officers will establish safe corridors for persons to evacuate.<LineBreak/>
+                    - This is time consuming.<LineBreak/>
+                    - Remain in secure areas until instructed otherwise.<LineBreak/>
+                    - You may be instructed to keep your hands on your head.<LineBreak/>
+                    - You may be searched.<LineBreak/>
+                    - You may be escorted out of the building by law enforcement - follow their directions.<LineBreak/>
+                    - After evacuation, you may be taken to a staging or holding area for medical care, interviewing, counseling, etc.<LineBreak/>
+                    - You will not be permitted to retrieve items or access areas until it is released by law enforcement.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="womenViolence" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Women Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Emergency female report<LineBreak/>
+                    1. Main contents of the emergency report on female violence<LineBreak/>
+                    - Consulting phone concerning domestic violence, sexual violence, and other violence against women, including divorce counseling on the basis of violence against women, etc.<LineBreak/>
+                    - Connecting to the female protection facilities, guiding professional counselors, talking directly to each other, providing a wide range of information regarding women, etc.<LineBreak/>
+                    - Counselling call for prostitutes<LineBreak/>
+                    <LineBreak/>
+                    Women's Emergency Call is involved in the protection of their privacy and requires more attention when connecting with or taking action<LineBreak/>
+                        * Use female employees when handling third-party call connections and simple connections.<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency situation<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case an emergency patient transfer due to violence (domestic violence, sexual violence, etc.) is required, a reporter requests firefighting activities.<LineBreak/>
+                    Case : <LineBreak/>
+                    - An emergency situation in which a drunken husband assaulted heavily, causing head bleeding.<LineBreak/>
+                    Response : <LineBreak/>
+                    - Action is taken according to 119 response manuals for each city and province<LineBreak/>
+                    - Check the location of the perpetrators and notify the relevant authorities after the police request to move in at the same time<LineBreak/>
+                        ※ If sexual violence is suspected, female emergency paramedics should be dispatched whenever possible.<LineBreak/>
+                    <LineBreak/>
+                    3. 3-party currency<LineBreak/>
+                    Target :<LineBreak/>
+                    - Due to the nature of a female phone call, they are reluctant to disclose their status and thus can not be distinguished as " disaster report " or " simple call to action "<LineBreak/>
+                    Case : <LineBreak/>
+                    - Difficulty in disclosing details of the person who was sexually assaulted<LineBreak/>
+                    Response : <LineBreak/>
+                    - Understand the status of the complainant (are you injured or injured? Is it hard to say? Do you need a sex counselor?)<LineBreak/>
+                        => If the accuser does not explain the situation to the extent that the caller can not grasp the report, ask a reporter to lead the report.<LineBreak/>
+                    - Inform the reporter of the connection to the female consultation and promptly make a 3-party call<LineBreak/>
+                    - least amount of information necessary to determine an emergency<LineBreak/>
+                    <LineBreak/>
+                    4. Simple connection processing<LineBreak/>
+                    Target :<LineBreak/>
+                    - Simple civil petitions to contact the women's protection facilities and consult various types of facilities<LineBreak/>
+                    Case :<LineBreak/>
+                    - Home violence is so strong, I need a place to leave my house and stay away from my husband.<LineBreak/>
+                    Response : <LineBreak/>
+                    First of all, isn't it dangerous that it could turn into a disaster situation?) Check if any and connect to phone<LineBreak/>
+                    - Explain the call to the complainant and then make a quick call to the relevant authorities, asking for a few minutes to understand
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="teenageViolence" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Teenage Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Report of Teenage Violence<LineBreak/>
+                    1. Major contents of the 1388 Youth violence report<LineBreak/>
+                        A) Providing basic psychological counseling as well as an urgent crisis resolution such as school violence (bullying, racketeering, bullying, verbal violence, etc.)<LineBreak/>
+                        B) Consulting and treatment concerning cyber problems, docs, and drug addiction<LineBreak/>
+                        C) Reporting harmful environment for teenagers and providing information to non-adolescent people (parents, etc.)<LineBreak/>
+                    <LineBreak/>
+                    Youth Protection Act? Youth means those under 19 years of age, usually for elementary, middle, and high school students excluding preschoolers.<LineBreak/>
+                        * Preschool children are targeted by the Child Protection Center<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency situation<LineBreak/>
+                    Target :<LineBreak/>
+                    - Prompt rescue of reports such as school violence, drug addiction, or suicide attempt.<LineBreak/>
+                    Case : <LineBreak/>
+                    - An assault in ○○ Middle School classroom caused by bullying by classmates (bleeding head)<LineBreak/>
+                    Response : <LineBreak/>
+                    - For handling accidents, take action swiftly according to 119 response manual by city or province.<LineBreak/>
+                    <LineBreak/>
+                    3. 3-party currency<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case it is difficult to distinguish " disaster report " or " simple report on handling connection " by avoiding identification exposure and refusing to disclose one's situation<LineBreak/>
+                    Case : <LineBreak/>
+                    - My daughter, who attends ◈ Middle School (2nd grade, 15th grade, and 8th grade), complained of difficulty in school due to bullying and verbal violence to her mother, and reported to me through a psychological division that she would like to move to a hospital and consult.<LineBreak/>
+                    Response : <LineBreak/>
+                    - Understand the status of the complainant (are you injured or injured? Is there any chance of hurting yourself? After identification, call professional institution to connect to third party call<LineBreak/>
+                    - Share data by sending a report reception record swiftly for the reporter information (phone number, location information, etc.) and the report<LineBreak/>
+                    - Pay attention to the conversation with the accuser after connecting telephone lines and determine if firefighting is necessary, but be cautious of respect for privacy of whistleblowers<LineBreak/>
+                        ※ Precautions during the 3-party call : warning and advice on the values of teenagers should not be made. Minimize intervention unless needed for firefighting activities.<LineBreak/>
+                    <LineBreak/>
+                    4. Simple connection processing<LineBreak/>
+                    Target : <LineBreak/>
+                    - Youth Consultative Phone<LineBreak/>
+                    Case : <LineBreak/>
+                    - Need to consult on bullying, home issues, gatekeeping, suicidal ideation, drug Middle East, and teenage working rights.<LineBreak/>
+                    Response : <LineBreak/>
+                    First of all, isn't it dangerous that it could turn into a disaster situation?) Check whether there is a connection and take action to connect to the phone<LineBreak/>
+                    - Explain the call to the complainant and then make a quick call to the relevant authorities, asking for a few minutes to understand<LineBreak/>
+                    - In case a call is lost, notify us ' Call 1388 and we can handle your complaint quickly
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="suicide" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Suicide" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Report of suicides<LineBreak/>
+                    1. Key contents of the report on the suicide case in the mental health center<LineBreak/>
+                        A) If experiencing psychological anxiety due to depression, ask for counseling with the relevant experts (person, family member, or neighbors)<LineBreak/>
+                        B) Request for protection against neurosciences, counseling about mental illnesses, and counseling about the inpatients in a psychiatric patient<LineBreak/>
+                    <LineBreak/>
+                    "I'd like you to move your mental patients." I'm running wild inside my house. Please take me to the hospital.First, we ask the police to protect patients with mental disabilities, or to accommodate the hospital.<LineBreak/>
+                    Police protection and hospital accommodation are only relevant when the symptoms of mental illness are evident (always be warned that transferring the mentally ill can be used as a vice).<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency situation<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case the report needs fire, rescue, emergency, etc.<LineBreak/>
+                    - In case of an ambiguous symptom or traumatic transfer request<LineBreak/>
+                    Case : <LineBreak/>
+                    - A patient who suffers from depression usually locks the front door of an apartment and may commit suicide inside the home<LineBreak/>
+                    Response : <LineBreak/>
+                    - Action is taken according to 119 response manuals for each city and province<LineBreak/>
+                        ==> If violent behavior due to mental illness occurs, protective measures are taken at the local police station.<LineBreak/>
+                    - Information to the relevant authorities and request for simultaneous action in the related cases<LineBreak/>
+                    <LineBreak/>
+                    3. 3-party currency<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case it is difficult to clearly distinguish between a " disaster report " and a " simple report on handling connection "<LineBreak/>
+                    Case : <LineBreak/>
+                    - A woman in her 30s who had depression locked up and told her parents she was going to die. (Usually this happened two days later)<LineBreak/>
+                    Response : <LineBreak/>
+                    - Explain to the complainant that it is necessary to talk with the relevant authorities, and then quickly make a 3-party call asking for their time.<LineBreak/>
+                    - Share data by sending a report reception record swiftly for the reporter information (phone number, location information, etc.) and the report<LineBreak/>
+                    - Pay attention to the conversation with the accuser after connecting telephone lines and determine if firefighting is necessary, but be cautious of respect for privacy of whistleblowers<LineBreak/>
+                    <LineBreak/>
+                    4. Simple connection processing<LineBreak/>
+                    Target : <LineBreak/>
+                    - If consultation or expert advice on mental illnesses is requested<LineBreak/>
+                    Case : <LineBreak/>
+                    - Consulting about the social life, and other places to listen to tired, ask about hospitalization of mental patients and counseling about mental illness such as alcoholism<LineBreak/>
+                    Response : <LineBreak/>
+                    - First, check to see if there is a possibility of spreading to disaster situations (always connect with the phone in case of a suicide, it could cause sudden psychological turbulence in a short time)<LineBreak/>
+                    - Explain the call to the complainant and then make a quick call to the relevant authorities, asking for a few minutes to understand<LineBreak/>
+                    - In case the connection is lost during the call, call 1577-0199 to arrange a complaint immediately.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="elderlyCruelTreatment" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Elderly Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Report of abuse by the elderly<LineBreak/>
+                    1. Main contents of reports on abuse of the elderly<LineBreak/>
+                        A) Mediation counseling for resolving the various elder abuse situations and problems<LineBreak/>
+                        B) Psychology for the abuse of elderly people.Counseling to deal with emotional harm, counseling to the family of the elderly<LineBreak/>
+                    <LineBreak/>
+                    Abuse of the term? to make physical, psychological, emotional, and economic exploitation, or to act harshly towards or to dispose of the elderly<LineBreak/>
+                    The beneficiary of services for senior citizens ' protection agencies should be over 60 years old.<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency situation<LineBreak/>
+                    Target : <LineBreak/>
+                    - If fire fighting is needed due to physical abuse in progress at the time of a report or due to serious injury resulting from abuse, fire fighting is needed due to risk of life<LineBreak/>
+                    - Other whistleblowers call for firefighting.<LineBreak/>
+                    Case : <LineBreak/>
+                    - An elderly person is thrown into a dangerous situation due to injury from violence, neglect for an extended period of time (without food, clothing, or medical care)<LineBreak/>
+                    Response : <LineBreak/>
+                    - Action is taken according to 119 response manuals for each city and province<LineBreak/>
+                        ==> Take steps to ensure the safety of the reported elderly person at the same time<LineBreak/>
+                    - Information and request for simultaneous action from relevant agencies for related cases<LineBreak/>
+                    <LineBreak/>
+                    3. 3-party currency<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case it is difficult to clearly distinguish between a " disaster report " and a " simple report on handling connection "<LineBreak/>
+                    Case : <LineBreak/>
+                    - In case it is difficult to verify the truth by reporting that an elder is being abused anonymously or to withdraw a report shortly after a report is made<LineBreak/>
+                    Response : <LineBreak/>
+                    - Explain to the complainant that it is necessary to talk with the relevant authorities, and then quickly make a 3-party call asking for their time.<LineBreak/>
+                    - Share data by sending a report reception record swiftly for the reporter information (phone number, location information, etc.) and the report<LineBreak/>
+                    - Pay attention to the conversation with the accuser after connecting telephone lines and determine if firefighting is necessary, but be cautious of respect for privacy of whistleblowers<LineBreak/>
+                    <LineBreak/>
+                    4. Simple connection processing<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case consultation and expert advice regarding the elderly is requested<LineBreak/>
+                    Case : <LineBreak/>
+                    - simply entering an elderly facility or asking for information on institutions<LineBreak/>
+                    - In case consultation is requested in a legal dispute, such as a conflict of assets between children<LineBreak/>
+                    Response : <LineBreak/>
+                    - Connect the phone after obtaining only the information necessary to protect the privacy of individuals<LineBreak/>
+                    - Explain the call to the complainant and then make a quick call to the relevant authorities, asking for a few minutes to understand<LineBreak/>
+                    - In case the connection is lost during the call, call 1577-1389 and we will have to handle the complaint promptly.<LineBreak/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="childCruelTreatment" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Child Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Report of child abuse<LineBreak/>
+                    1. Main contents of reports of abuse of children from <LineBreak/>
+                        A) Mediation counseling for resolving various child abuse situations and issues<LineBreak/>
+                        B) Psychology for child abuse.Counseling to deal with emotional harm, counseling to the families of children who have been involved in school or in harm<LineBreak/>
+                    <LineBreak/>
+                    What is child abuse? According to the definition of Article 2 of the Children's Welfare Act, it is the physical abuse of children by sex persons, including guardians, by their health, neglect of welfare or by physical violence that could impair their normal development, and physical violence against their soul.<LineBreak/>
+                    In other words, child abuse includes not only active behavior against persons under the age of 18, but also passive neglect.<LineBreak/>
+                    <LineBreak/>
+                    2. Emergency situation<LineBreak/>
+                    Target : <LineBreak/>
+                    - If fire fighting is needed due to physical abuse being carried out at the time of a report or due to the serious condition of the child due to the abuse<LineBreak/>
+                    - Other whistleblowers call for firefighting.<LineBreak/>
+                    Case : <LineBreak/>
+                    - Children are abandoned when injured by violence, neglect for long periods of time (without food, clothing, or medical care)<LineBreak/>
+                    Response : <LineBreak/>
+                    - Action is taken according to 119 response manuals for each city and province<LineBreak/>
+                        ==> Police and other simultaneous actions to secure the safety of the child to be reported (isolated from the perpetrator)<LineBreak/>
+                    - Information and request for simultaneous action from relevant agencies for related cases<LineBreak/>
+                    <LineBreak/>
+                    3. 3-party currency<LineBreak/>
+                    Target : <LineBreak/>
+                    - In case it is difficult to clearly distinguish between a " disaster report " and a " simple report on handling connection "<LineBreak/>
+                    Case : <LineBreak/>
+                    - In case a neighbor's child abuse report is considered to be a one-time physical punishment, as opposed to a report<LineBreak/>
+                    (Lack of knowledge and skills in the care of the neighbors ' children)<LineBreak/>
+                    Response : <LineBreak/>
+                    - Explain to the complainant that it is necessary to talk with the relevant authorities, and then quickly make a 3-party call asking for their time.<LineBreak/>
+                    - Share data by sending a report reception record swiftly for the reporter information (phone number, location information, etc.) and the report<LineBreak/>
+                    - Pay attention to the conversation with the accuser after connecting telephone lines and determine if firefighting is necessary, but be cautious of respect for privacy of whistleblowers<LineBreak/>
+                    <LineBreak/>
+                    4. Simple connection processing<LineBreak/>
+                    Target : <LineBreak/>
+                    - If consultation or expert advice on children's issues is requested<LineBreak/>
+                    Case : <LineBreak/>
+                    - Case of consultation on children's upbringing and emotional behavior<LineBreak/>
+                    Response : <LineBreak/>
+                    - Connect the phone after obtaining only the information necessary to protect the privacy of individuals<LineBreak/>
+                    - Explain the call to the complainant and then make a quick call to the relevant authorities, asking for a few minutes to understand<LineBreak/>
+                    - In case a call is lost during the call, call 1577-1391 and ask if you can handle the complaint quickly.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
 
     </Grid>
 </UserControl>

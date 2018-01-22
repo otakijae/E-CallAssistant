@@ -12,6 +12,7 @@ using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.Threading.Tasks;
 using ImagineCupProject.EmergencyResponseManuals;
+using System.Windows.Controls.Primitives;
 
 namespace ImagineCupProject
 {
@@ -28,6 +29,14 @@ namespace ImagineCupProject
         ArrayList textArrayList = new ArrayList(); 
         ArrayList textShapeArrayList = new ArrayList();
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
+
+        SimpleManual simpleManual = new SimpleManual();
+        StandardManual standardManual = new StandardManual();
+        ClassifiedManual classifiedManual = new ClassifiedManual();
+        MedicalManual medicalManual = new MedicalManual();
+
+        string classifiedResult;
+
         public MainPage()
         {
             InitializeComponent();
@@ -36,12 +45,11 @@ namespace ImagineCupProject
             azureDatabase = new AzureDatabase();
 
             //Manual xaml 들어갈 곳
-            SimpleManual simpleManual = new SimpleManual();
-            StandardManual standardManual = new StandardManual();
-            MedicalManual medicalManual = new MedicalManual();
             this.simpleManualGrid.Children.Add(simpleManual);
             this.standardManualGrid.Children.Add(standardManual);
+            this.classifiedManualGrid.Children.Add(classifiedManual);
             this.medicalManualGrid.Children.Add(medicalManual);
+
         }
 
         //Azure SpeechToText
@@ -304,7 +312,29 @@ namespace ImagineCupProject
             this.loadingProcess.Visibility = Visibility.Hidden;
 
             //나중에 완료하면 Toast알림 띄우기 및 대응 매뉴얼 띄우기
-
+            switch(classifiedResult)
+            {
+                case "Disaster":
+                    classifiedManual.earthquake.Visibility = Visibility.Visible;
+                    classifiedManual.flood.Visibility = Visibility.Visible;
+                    classifiedManual.severeWeather.Visibility = Visibility.Visible;
+                    break;
+                case "Terror":
+                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Visible;
+                    break;
+                case "Fire":
+                    classifiedManual.fire.Visibility = Visibility.Visible;
+                    break;
+                case "Violence":
+                    classifiedManual.womenViolence.Visibility = Visibility.Visible;
+                    classifiedManual.teenageViolence.Visibility = Visibility.Visible;
+                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Visible;
+                    classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
+                    classifiedManual.suicide.Visibility = Visibility.Visible;
+                    break;
+                case "Motor vehicle accidents":
+                    break;
+            }
         }
 
         private async Task<string> TextClassificationAsync(string keyWords)
@@ -351,7 +381,7 @@ namespace ImagineCupProject
                 myProcess.StartInfo = myProcessStartInfo;
                 myProcess.Start();
                 StreamReader myStreamReader = myProcess.StandardOutput;
-                string classifiedResult = await myStreamReader.ReadToEndAsync();
+                classifiedResult = await myStreamReader.ReadToEndAsync();
                 myProcess.WaitForExit();
                 myProcess.Close();
 
@@ -363,7 +393,12 @@ namespace ImagineCupProject
             }
         }
 
-
-
+        private void StandardResponse_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as ToggleButton).IsChecked == true)
+                standardManual.standardManualGrid.Visibility = Visibility.Visible;
+            else
+                standardManual.standardManualGrid.Visibility = Visibility.Collapsed;
+        }
     }
 }
