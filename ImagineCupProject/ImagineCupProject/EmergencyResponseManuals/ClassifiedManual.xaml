@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="ImagineCupProject.EmergencyResponseManuals.ClassifiedManual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImagineCupProject.EmergencyResponseManuals"
+             mc:Ignorable="d" 
+             d:DesignHeight="4000" d:DesignWidth="1700">
+    
+    <Grid x:Name="classifiedManualGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="terrorAndGunshot" Grid.Row="0" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Terror / Gunshot" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    1. Immediate Action - Secure the Immediate Area.
+                    - Lock or barricade the door, if able. Block the door using whatever is available - desks, tables, file cabinets, other furniture, books, etc.
+                    - After securing the door, stay behind solid objects away from the door as much as possible.
+                    - If the assailant enters your room and leaves, lock or barricade the door behind them.
+                    - If safe to do so, allow others to seek refuge with you.
+                    
+                    2. Protective Actions: Take appropriate steps to reduce your vulnerability.
+                    - Close blinds.
+                    - Close windows.
+                    - Turn off radios and computer monitors.
+                    - Silence cell phones.
+                    - Place signs in exterior windows to identify your location and the location of injured persons.
+                    - Keep people calm and quiet.
+                    - After securing the room, people should be positioned out of sight and behind items that might offer additional protection - walls, desks, file cabinets, bookshelves, etc.
+                    
+                    3. Unsecured Areas:
+                    - If you find yourself in an open area, immediately seek protection.
+                    - Put something between you and the assailant.
+                    - Consider trying to escape, if you know where the assailant is and there appears to be an escape route immediately available to you.
+                    - If in doubt, find the safest area available and secure it the best way that you can.
+                    
+                    4. CALL 786-4357 (HELP) then 9-911. Critical incident emergency situations should be reported to law enforcement immediately or as soon as possible when it becomes safe to do so. Be prepared to give the following information:
+                    - What is happening.
+                    - Where you are located, including building name, floor and room number.
+                    - Number of people at your specific location.
+                    - Injuries, if any, number of those injured and types of injuries.
+                    - Other information as requested.
+                    - Try to provide information in a calm, clear manner so that the dispatcher can quickly relay your information to responding emergency personnel.
+                    
+                    5. What to Report: Try to note as much as possible about the assailant, including:
+                    - Specific location and direction of the assailant.
+                    - Number of assailants.
+                    - Gender, race, and approximate age of the assailant.
+                    - Clothing color and style.
+                    - Physical features – e.g., height, weight, facial hair, glasses.
+                    - Types of weapons – e.g., handgun, rifle, shotgun, explosives.
+                    - Description of any backpack or bag
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

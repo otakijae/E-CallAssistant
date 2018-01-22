@@ -266,7 +266,7 @@
                             <Button x:Name="speakBtn" Content="START" Width="100" Height="30" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Click="speakBtn_Click"/>
                             <Button x:Name="stopBtn" Content="STOP" Width="100" Height="30" Grid.Column="1" Grid.Row="0" Click="stopBtn_Click" />
                             <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Click="analyzeBtn_Click"/>
-                            <Button x:Name="word2vec"  Content="Word2Vec" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="word2vec_Click"/>
+                            <Button x:Name="textClassify"  Content="TextClassification" FontSize="8" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="TextClassify_Click"/>
 
                             <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="5"/>
                             <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="5"/>
@@ -284,11 +284,12 @@
                         </Grid>
 
                         <TextBlock Text="Standard Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
-
                         <Grid x:Name="standardManualGrid" Height="1000"/>
 
-                        <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                        <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                        <Grid x:Name="classifiedManualGrid" Height="4000" Margin="10"/>
 
+                        <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
                         <Grid x:Name="medicalManualGrid" Height="4000" Margin="10"/>
                     </StackPanel>
                 </ScrollViewer>

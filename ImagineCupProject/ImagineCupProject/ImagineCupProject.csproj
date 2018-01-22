@@ -167,6 +167,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AzureDatabase.cs" />
+    <Compile Include="EmergencyResponseManuals\ClassifiedManual.xaml.cs">
+      <DependentUpon>ClassifiedManual.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmergencyResponseManuals\MedicalManual.xaml.cs">
       <DependentUpon>MedicalManual.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="EmergencyResponseManuals\ClassifiedManual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EmergencyResponseManuals\MedicalManual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,11 +282,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Python\WordClassification.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.8.3\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.8.3\build\net45\Grpc.Core.targets')" />

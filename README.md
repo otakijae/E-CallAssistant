@@ -66,6 +66,7 @@ except KeyError:
 - Training Command Example : ```python train.py ./data/train.csv ./parameters.json```
 - Console Predict Command Example : ```python predict.py ./trained_model_1516543243/```
 - JSON file Predict Command Example : ```python predict.py ./trained_model_1516543243/ ./data/sample.json```
+- C# 프로젝트 bin-Debug-(Environment.CurrentDirectory)에 "data_helper.py", "predict.py", "text_cnn.py", "train.py", trained model 위치 시켜서 실행하기
 ```
 [
     {

@@ -288,7 +288,7 @@ namespace ImagineCupProject
             }
         }
         
-        private void word2vec_Click(object sender, RoutedEventArgs e)
+        private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
             Run(problemText.Text);
             this.loadingProcess.Visibility = Visibility.Visible;
@@ -299,42 +299,70 @@ namespace ImagineCupProject
             // 비동기로 Worker Thread에서 도는 task1
             //var word2vecTask = Task<int>.Run(() => WordClassificationAsync(keyWords));
 
-            this.codeText.Text = await WordClassificationAsync(keyWords);
-            this.word2vec.IsEnabled = true;
+            this.codeText.Text = await TextClassificationAsync(keyWords);
+            this.textClassify.IsEnabled = true;
             this.loadingProcess.Visibility = Visibility.Hidden;
-            //나중에 완료하면 Toast알림 띄우기도 좋을 듯
+
+            //나중에 완료하면 Toast알림 띄우기 및 대응 매뉴얼 띄우기
+
         }
 
-        private async Task<string> WordClassificationAsync(string keyWords)
+        private async Task<string> TextClassificationAsync(string keyWords)
         {
+            //try
+            //{
+            //    //다른 파이썬으로 실행, Using Pretrained Google Word2Vec model
+            //    string python = @"C:\Python36\python.exe";
+            //    //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
+            //    string myPythonApp = "WordClassification.py";
+            //    //string myPythonApp = Environment.CurrentDirectory + @"\Python\WordClassification.py"; // => 지금 바이너리 파일 못 찾아서 문제 되고 있음.
+
+            //    ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+            //    myProcessStartInfo.UseShellExecute = false;
+            //    myProcessStartInfo.RedirectStandardOutput = true;
+            //    myProcessStartInfo.Arguments = myPythonApp + " " + keyWords.Remove(problemText.Text.Length - 1);
+
+            //    Process myProcess = new Process();
+            //    myProcess.StartInfo = myProcessStartInfo;
+            //    myProcess.Start();
+            //    StreamReader myStreamReader = myProcess.StandardOutput;
+            //    string codeResult = await myStreamReader.ReadToEndAsync();
+            //    myProcess.WaitForExit();
+            //    myProcess.Close();
+
+            //    return codeResult;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ex.Message;
+            //}
+
             try
             {
-                //다른 파이썬으로 실행
                 string python = @"C:\Python36\python.exe";
-                //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
-                string myPythonApp = "WordClassification.py";
-                //string myPythonApp = Environment.CurrentDirectory + @"\Python\WordClassification.py"; // => 지금 바이너리 파일 못 찾아서 문제 되고 있음.
+                string myPythonApp = "predict.py";
 
                 ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords.Remove(problemText.Text.Length - 1);
+                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
 
                 Process myProcess = new Process();
                 myProcess.StartInfo = myProcessStartInfo;
                 myProcess.Start();
                 StreamReader myStreamReader = myProcess.StandardOutput;
-                string codeResult = await myStreamReader.ReadToEndAsync();
+                string classifiedResult = await myStreamReader.ReadToEndAsync();
                 myProcess.WaitForExit();
                 myProcess.Close();
 
-                return codeResult;
+                return classifiedResult;
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
         }
+
 
 
     }

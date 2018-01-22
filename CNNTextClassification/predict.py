@@ -13,7 +13,7 @@ logging.getLogger().setLevel(logging.INFO)
 def console_predict():
 	"""Step 0: load trained model and parameters"""
 	params = json.loads(open('./parameters.json').read())
-	checkpoint_dir = "./trained_model_1516543243/"
+	checkpoint_dir = sys.argv[1]
 	checkpoint_file = tf.train.latest_checkpoint(checkpoint_dir + 'checkpoints')
 	logging.critical('Loaded the trained model: {}'.format(checkpoint_file))
 
@@ -23,7 +23,10 @@ def console_predict():
 	np.fill_diagonal(one_hot, 1)
 	label_dict = dict(zip(labels, one_hot))
 
-	text = input("Input : ")
+	###For Console input
+	#text = input("Input : ")
+	###For C# inter-processing
+	text = sys.argv[2]
 	li = [text]
 
 	x_raw = li
@@ -59,6 +62,7 @@ def console_predict():
 	actual_labels = [labels[int(prediction)] for prediction in all_predictions]
 
 	logging.info('RESULT : {}'.format(actual_labels))
+	print(actual_labels[0])
 
 
 def predict_unseen_data():
@@ -72,7 +76,7 @@ def predict_unseen_data():
 
 	"""Step 1: load data for prediction"""
 	test_file = sys.argv[2]
-	test_examples = json.loads(open(test_file).read())
+	test_examples = json.loads(open(test_file))
 
 	# labels.json was saved during training, and it has to be loaded during prediction
 	labels = json.loads(open('./labels.json').read())
