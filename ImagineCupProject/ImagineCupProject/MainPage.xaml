@@ -292,8 +292,11 @@
                         <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
                         <Grid x:Name="classifiedManualGrid" Margin="10"/>
 
-                        <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
-                        <Grid x:Name="medicalManualGrid" Height="4000" Margin="10"/>
+                        <WrapPanel>
+                            <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                            <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
+                        </WrapPanel>
+                        <Grid x:Name="medicalManualGrid" Margin="10"/>
                     </StackPanel>
                 </ScrollViewer>
 

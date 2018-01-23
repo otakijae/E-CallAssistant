@@ -312,27 +312,59 @@ namespace ImagineCupProject
             this.loadingProcess.Visibility = Visibility.Hidden;
 
             //나중에 완료하면 Toast알림 띄우기 및 대응 매뉴얼 띄우기
-            switch(classifiedResult)
+            switch (classifiedResult)
             {
-                case "Disaster":
+                case "Disaster\r\n":
                     classifiedManual.earthquake.Visibility = Visibility.Visible;
                     classifiedManual.flood.Visibility = Visibility.Visible;
                     classifiedManual.severeWeather.Visibility = Visibility.Visible;
+                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
+                    classifiedManual.fire.Visibility = Visibility.Collapsed;
+                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     break;
-                case "Terror":
+                case "Terror\r\n":
+                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
+                    classifiedManual.flood.Visibility = Visibility.Collapsed;
+                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
                     classifiedManual.terrorAndGunshot.Visibility = Visibility.Visible;
+                    classifiedManual.fire.Visibility = Visibility.Collapsed;
+                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     break;
-                case "Fire":
+                case "Fire\r\n":
+                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
+                    classifiedManual.flood.Visibility = Visibility.Collapsed;
+                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
+                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
                     classifiedManual.fire.Visibility = Visibility.Visible;
+                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     break;
-                case "Violence":
+                case "Violence\r\n":
+                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
+                    classifiedManual.flood.Visibility = Visibility.Collapsed;
+                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
+                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
+                    classifiedManual.fire.Visibility = Visibility.Collapsed;
                     classifiedManual.womenViolence.Visibility = Visibility.Visible;
                     classifiedManual.teenageViolence.Visibility = Visibility.Visible;
                     classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Visible;
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
                     classifiedManual.suicide.Visibility = Visibility.Visible;
                     break;
-                case "Motor vehicle accidents":
+                case "Motor vehicle accidents\r\n":
+                    break;
+                default:
                     break;
             }
         }
@@ -399,6 +431,14 @@ namespace ImagineCupProject
                 standardManual.standardManualGrid.Visibility = Visibility.Visible;
             else
                 standardManual.standardManualGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void MedicalResponse_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as ToggleButton).IsChecked == true)
+                medicalManual.medicalManualGrid.Visibility = Visibility.Visible;
+            else
+                medicalManual.medicalManualGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

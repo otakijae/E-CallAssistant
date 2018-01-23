@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="4000" d:DesignWidth="1700">
-    
-    <Grid x:Name="medicalManualGrid">
+
+    <Grid x:Name="medicalManualGrid" ShowGridLines="True" Visibility="Collapsed">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
