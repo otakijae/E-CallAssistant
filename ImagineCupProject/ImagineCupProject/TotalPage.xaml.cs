@@ -54,6 +54,7 @@ namespace ImagineCupProject
                         totalNumber++;
                         if(reader.GetString(6).Equals("fire"))
                         {
+                            ;
                             code1++;
                         }
                         else if(reader.GetString(6).Equals("firefire"))
@@ -64,8 +65,9 @@ namespace ImagineCupProject
                     reader.Close();
                     connection.Close();
                 }
-                totalText.Text = "TotalNumber = " + totalNumber + "\nCode1 Number = " + code1 + "\nCode2 Number = " + code2;   
-
+                operatorReceiveNumText.Text = "TotalNumber = " + totalNumber + "\nCode1 Number = " + code1 + "\nCode2 Number = " + code2;
+                operatorReceiveNumText.Text = "   operator JW received " + totalNumber + " call"; 
+               // totalText.Text = "Operator JW receive " + totalNumber + " call";
 
             }
             catch (SqlException er)

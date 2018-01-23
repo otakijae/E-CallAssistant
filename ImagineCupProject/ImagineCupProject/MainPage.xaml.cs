@@ -45,18 +45,23 @@ namespace ImagineCupProject
         string text = "Yes, I am a teacher at Columbine high school. There is a student here with a gun. He just shot out a window. I believe one um.   I don't know if it's. I don't know what's in my shoulder.  I am. Yes, yes! And the school is in panic and I'm in the library. I've got students down under the tables. Kids! Heads under the tables.  Um, Kids are screaming.  We need police here.  Can you please hurry? I do not know who the student is. ... I was on hall duty, I saw a gun. I said, " +
                 "What's going on out there? And the kid that was following me said it was a film production, probably a joke And I said, well I don't think that's a good idea. And went walking outside to see what was going on.  He turned the gun straight at us and shot and, my god, the window went out. I am scared.I want to go home. ";
         string speechRecognitionResult;
-        ArrayList textArrayList = new ArrayList();
-        ArrayList textShapeArrayList = new ArrayList();
-        MainQuestion mainQuestion = new MainQuestion();
-        TotalPage totalPage = new TotalPage();
-        private int _count = 0;
+        ArrayList textArrayList;
+        ArrayList textShapeArrayList;
+        MainQuestion mainQuestion;
+        TotalPage totalPage;
+        AdditionalQuestion additionalQuestion; 
         private readonly ToastViewModel _vm;
 
         public MainPage()
         {
             InitializeComponent();
+            textArrayList = new ArrayList();
+            textShapeArrayList = new ArrayList();
             mainFrame.Content = new MainQuestion();
             DataContext = _vm = new ToastViewModel();
+            additionalQuestion = new AdditionalQuestion();
+            totalPage = new TotalPage();
+            mainQuestion = new MainQuestion();
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             summarize();
             sentimentAnalysis();
@@ -92,6 +97,7 @@ namespace ImagineCupProject
             else
             {
                 mainFrame.Content = mainQuestion;
+                nextButton.Content = "Next";
             }
 
         }
@@ -107,8 +113,9 @@ namespace ImagineCupProject
         }
 
         //음성인식버튼
-        private void nextButton2_Click(object sender, RoutedEventArgs e)
+        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
         {
+            _vm.ShowInformation("Ring the Call.");
             ConvertSpeechToText();
         }
 
@@ -268,15 +275,17 @@ namespace ImagineCupProject
         private void btnSendTo112_Click(object sender, RoutedEventArgs e)
         {
             mainQuestion.sendTo112();
-            _vm.ShowWarning(String.Format("{0} Warning", _count++));
-            _vm.ShowError(String.Format("{0} Error", _count++));
+            _vm.ShowSuccess("SendTo112 Success");
+            //_vm.ShowWarning(String.Format("{0} Warning", _count++));
+            //_vm.ShowError(String.Format("{0} Error", _count++));
         }
 
         private void btnSendTo110_Click(object sender, RoutedEventArgs e)
         {
             mainQuestion.sendTo110();
-            _vm.ShowInformation(String.Format("{0} Information", _count++));
-            _vm.ShowSuccess(String.Format("{0} Success", _count++));
+            _vm.ShowSuccess("SendTo110 Success");
+            //_vm.ShowInformation(String.Format("{0} Information", _count++));
+            //_vm.ShowSuccess(String.Format("{0} Success", _count++));
         }
 
         private void listViewItem2_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -284,9 +293,10 @@ namespace ImagineCupProject
             mainFrame.Content = new _112DataPage();
         }
 
-        private void nextButton1_Click(object sender, RoutedEventArgs e)
+        private void btnTransfer_Click(object sender, RoutedEventArgs e)
         {
-
+            mainQuestion.analyze();
+            _vm.ShowSuccess("Transfer complete");
         }
     }
 }

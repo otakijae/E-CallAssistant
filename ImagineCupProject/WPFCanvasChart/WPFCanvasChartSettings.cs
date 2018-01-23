@@ -18,7 +18,7 @@ namespace ImagineCupProject.WPFCanvasChart
         {
             CoordXSteps = 10;
             CoordYSteps = 5;
-            FontSize = 9;
+            FontSize = 12;
             Language = "en-us";
             FontName = "Verdana";
             PenForGrid = new Pen((Brush)new BrushConverter().ConvertFromString("#66000000"), 1);

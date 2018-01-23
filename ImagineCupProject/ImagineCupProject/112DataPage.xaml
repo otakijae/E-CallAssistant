@@ -5,34 +5,35 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ImagineCupProject"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="850"
+      d:DesignHeight="600" d:DesignWidth="850"
       Title="_112DataPage">
 
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        
 
-        <TextBox x:Name="sendTo112Text" Text=" Send To 112" Background="White" FontSize="30" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" VerticalContentAlignment="Center"  />
-        <TextBox x:Name="timeTo112" Text=""  Background="White" Foreground="Black" FontSize="20" Grid.Column="0" Margin="0,75,40,0.2" Grid.RowSpan="2" />
-        <TextBox x:Name="locationTo112" Text="" Background="White"  Foreground="Black" FontSize="20" Grid.ColumnSpan="3" Margin="178,75,212.6,0.2" Grid.RowSpan="2"/>
-        <TextBox x:Name="callerNumberTo112" Text="" Background="White"  Foreground="Black" FontSize="20" Grid.Column="2" Margin="0.2,75,70,0.2" Grid.RowSpan="2"/>
-        <TextBox x:Name="problemTo112" Text="" Background="White"  Foreground="Black" FontSize="20" Grid.Column="2" Grid.ColumnSpan="2" Margin="148.2,75,-0.4,0.2" Grid.RowSpan="2"/>
+        <TextBox x:Name="sendTo112Text" BorderBrush="Black" BorderThickness="1" Text=" Send To 112                          " Background="White" FontSize="30"  VerticalContentAlignment="Center" Margin="0,0,0,550"  />
+        <TextBox  Text=" Time" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="0,50,680,520"  />
+        <TextBox  Text=" Location" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="170,50,425,520"  />
+        <TextBox  Text=" Caller Number" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="425,50,276,520"  />
+        <TextBox  Text=" Problem" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="574,50,0,520"  />
 
-        <TextBox x:Name="sendTo110Text" Text=" Send To 110" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"  FontSize="30" VerticalContentAlignment="Center"  />
-        <TextBox x:Name="timeTo110" Text=""  Background="White" Foreground="Black" FontSize="20" Grid.Row="2" Grid.Column="0" Margin="0,74.8,40,0.4" Grid.RowSpan="2" />
-        <TextBox x:Name="locationTo110" Text="" Foreground="Black" FontSize="20" Grid.Row="2" Grid.ColumnSpan="3" Margin="178,74.8,212.6,0.4" Grid.RowSpan="2"/>
-        <TextBox x:Name="callerNumberTo110" Text="" Foreground="Black" FontSize="20" Grid.Row="2" Grid.Column="2" Margin="0.2,74.8,70,0.4" Grid.RowSpan="2"/>
-        <TextBox x:Name="problemTo110" Text="" Foreground="Black" FontSize="20" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="148.2,74.8,-0.4,0.4" Grid.RowSpan="2"/>
 
+        <TextBox x:Name="timeTo112" BorderBrush="Black" BorderThickness="1" Text=""  Background="White" Foreground="Black" FontSize="20" Margin="0,85,680,300" />
+        <TextBox x:Name="locationTo112" BorderBrush="Black" BorderThickness="1" Text="" Background="White"  Foreground="Black" FontSize="20" Margin="170,85,424.6,300" />
+        <TextBox x:Name="callerNumberTo112" BorderBrush="Black" BorderThickness="1" Text="" Background="White"  Foreground="Black" FontSize="20"  Margin="425,85,276,300" TextAlignment="Center" />
+        <TextBox x:Name="problemTo112" BorderBrush="Black" BorderThickness="1" Text="" Background="White"  Foreground="Black" FontSize="20"  Margin="574,85,0,300"/>
+
+        <TextBox x:Name="sendTo110Text" BorderBrush="Black" BorderThickness="1" Text=" Send To 110                          " Background="White" FontSize="30"  VerticalContentAlignment="Center" Margin="0,300,0,250"  />
+        <TextBox  Text=" Time" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="0,350,680,220"  />
+        <TextBox  Text=" Location" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="170,350,425,220"  />
+        <TextBox  Text=" Caller Number" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="425,350,276,220"  />
+        <TextBox  Text=" Problem" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="574,350,0,220"  />
+
+        <TextBox x:Name="timeTo110" BorderBrush="Black" BorderThickness="1" Text="" TextAlignment="Justify"  Background="White" Foreground="Black" FontSize="20" Margin="0,385,680,0" />
+        <TextBox x:Name="locationTo110" BorderBrush="Black" BorderThickness="1" Text="" TextAlignment="Justify" Background="White"  Foreground="Black" FontSize="20" Margin="170,385,425,0" />
+        <TextBox x:Name="callerNumberTo110" BorderBrush="Black" BorderThickness="1" Text="" TextAlignment="Center" Background="White"  Foreground="Black" FontSize="20"  Margin="425,385,276,0"  />
+        <TextBox x:Name="problemTo110" BorderBrush="Black" BorderThickness="1" Text="" TextAlignment="Justify" Background="White"  Foreground="Black" FontSize="20"  Margin="574,385,0,0"/>
+
+        
     </Grid>
 </Page>

@@ -6,23 +6,18 @@
       xmlns:chart="clr-namespace:ImagineCupProject.WPFChartControl;assembly=WPFChartControl"
       xmlns:local="clr-namespace:ImagineCupProject"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="850"
+      d:DesignHeight="600" d:DesignWidth="850"
       Title="TotalPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="4*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Text=" Numerical analysis" Foreground="Black" FontSize="20" FontWeight="Bold" Margin="5" Grid.Row="0"/>
-        <TextBox x:Name="totalText"   Grid.Column="0" Grid.ColumnSpan="2"  FontSize="20" VerticalContentAlignment="Center" Margin="0,83,-0.4,183.8" Grid.RowSpan="2"  />
-        <chart:ChartControl Drawer="{Binding Path=LineSeriesChartDrawer}" Grid.Row="1"   Grid.Column="1" Grid.ColumnSpan="1" Margin="0.2,149.8,-0.4,133.4" Grid.RowSpan="2"  />
-        <chart:ChartControl Drawer="{Binding Path=BarChartDrawer}" Grid.Row="1"   Grid.Column="0" Grid.ColumnSpan="2" Margin="0,154.8,424.6,133.4" Grid.RowSpan="2"   />
+    <Grid  Background="White">
+
+        <TextBlock Text="- Numerical analysis" Foreground="Black" FontSize="25" FontWeight="Bold" Margin="0,0,0,555" />
+        <TextBlock x:Name="operatorReceiveNumText"  Text="operator JW received 30 call"  VerticalAlignment="Center"  FontSize="20"  Margin="0,44,0,476"  />
+        <chart:ChartControl Drawer="{Binding Path=BarChartDrawer}" Margin="0,125,425,60"   HorizontalAlignment="Right" Width="425"     />
+        <chart:ChartControl Drawer="{Binding Path=LineSeriesChartDrawer}" Margin="426,125,9.6,60"   Width="425"   />
+
+        <TextBlock x:Name="nameText"  Text="Code Number"  FontSize="20" FontWeight="Bold"   Margin="0,540,425,0" TextAlignment="Center"  />
+        <TextBlock x:Name="nameText2"  Text="Time Number"  FontSize="20" FontWeight="Bold"  Margin="425,540,0,0" TextAlignment="Center" />
 
 
     </Grid>

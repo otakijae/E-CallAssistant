@@ -34,7 +34,6 @@
         <TextBlock Text="Problem" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="6"/>
         <TextBlock Text="Code" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="7"/>
 
-        <Button x:Name="analyzeBtn"  Content="Analyze" Width="100" Height="30" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" />
         
         <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
         <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>

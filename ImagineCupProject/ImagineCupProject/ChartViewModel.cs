@@ -17,7 +17,7 @@ namespace ImagineCupProject
             public override string Format(double value)
             {
                 var months = new string[] {
-                    "January", "February", "March", "April", "Maj", "June"
+                    "Code1", "Code2", "Code3", "Code4", "Code5", "Code6"
                 };
                 int v = (int)value;
                 return v >= 0 && v < months.Length ? months[v] : string.Empty;
@@ -25,7 +25,7 @@ namespace ImagineCupProject
 
             public override string FormatLongestValue()
             {
-                return "February";
+                return "Code1";
             }
         }
 
@@ -47,16 +47,16 @@ namespace ImagineCupProject
                 VertScrollVisibility = Visibility.Collapsed,
                 Legend = new LegendItem[]
                 {
-                    new LegendItem(Colors.Blue, "Programmers"),
+                    new LegendItem(Colors.Navy, "Programmers"),
                     new LegendItem(Colors.Blue, "Designers"),
-                    new LegendItem(Colors.Blue, "Admins"),
-                    new LegendItem(Colors.Brown, "Management"),
-                    new LegendItem(Colors.Blue, "Man1231agement"),
-                    new LegendItem(Colors.Red, "Mana12333gement"),
+                    new LegendItem(Colors.Brown, "Admins"),
+                    new LegendItem(Colors.Chocolate, "Management"),
+                    new LegendItem(Colors.Gray, "Man1231agement"),
+                    new LegendItem(Colors.Tomato, "Mana12333gement"),
                 }
                 ,
-                YAxisText = "Power",
-                XAxisText = "Month",
+                YAxisText = "",
+                XAxisText = "",
                 Settings = new WPFCanvasChartSettings(),
                 YAxisInterpolator = new WPFCanvasChartFloatInterpolator(),
                 XAxisInterpolator = new CustomInterpolator(),
@@ -65,10 +65,18 @@ namespace ImagineCupProject
             };
 
             var serie1 = new List<Point>();
-            for (int i = 1; i < 12; ++i)
-            {
-                serie1.Add(new Point(i, rnd.NextDouble() * 100));
-            }
+
+            serie1.Add(new Point(0, 0));
+            serie1.Add(new Point(1, 10));
+            serie1.Add(new Point(2, 15));
+            serie1.Add(new Point(3, 13));
+            serie1.Add(new Point(4, 15));
+            serie1.Add(new Point(5, 18));
+            serie1.Add(new Point(6, 18));
+            serie1.Add(new Point(7, 20));
+            serie1.Add(new Point(8, 13));
+            serie1.Add(new Point(9, 10));
+
 
             LineSeriesChartDrawer = new LineSeriesChartDrawer(new List<IList<Point>>{
                 serie1
