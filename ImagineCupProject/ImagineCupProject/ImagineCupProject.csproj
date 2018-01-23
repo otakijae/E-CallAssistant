@@ -188,9 +188,6 @@
     <Compile Include="EmergencyResponseManuals\StandardManual.xaml.cs">
       <DependentUpon>StandardManual.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartPage.xaml.cs">
-      <DependentUpon>StartPage.xaml</DependentUpon>
-    </Compile>
     <Page Include="EmergencyResponseManuals\ClassifiedManual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,10 +225,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmergencyResponseManuals\StandardManual.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

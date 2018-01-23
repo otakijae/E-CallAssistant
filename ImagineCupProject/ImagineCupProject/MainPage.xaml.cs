@@ -44,12 +44,11 @@ namespace ImagineCupProject
             timeText.Text = time;
             azureDatabase = new AzureDatabase();
 
-            //Manual xaml 들어갈 곳
+            //Manual xaml 매뉴얼
             this.simpleManualGrid.Children.Add(simpleManual);
             this.standardManualGrid.Children.Add(standardManual);
             this.classifiedManualGrid.Children.Add(classifiedManual);
             this.medicalManualGrid.Children.Add(medicalManual);
-
         }
 
         //Azure SpeechToText
@@ -304,15 +303,17 @@ namespace ImagineCupProject
 
         private async void Run(string keyWords)
         {
-            // 비동기로 Worker Thread에서 도는 task1
-            //var word2vecTask = Task<int>.Run(() => WordClassificationAsync(keyWords));
-
             this.codeText.Text = await TextClassificationAsync(keyWords);
             this.textClassify.IsEnabled = true;
             this.loadingProcess.Visibility = Visibility.Hidden;
 
-            //나중에 완료하면 Toast알림 띄우기 및 대응 매뉴얼 띄우기
-            switch (classifiedResult)
+            //분류된 카테고리에 대한 매뉴얼 출력, 나중에 완료하면 Toast알림 띄우기
+            ShowClassifiedManuals(classifiedResult);
+        }
+
+        private void ShowClassifiedManuals(string category)
+        {
+            switch (category)
             {
                 case "Disaster\r\n":
                     classifiedManual.earthquake.Visibility = Visibility.Visible;
@@ -371,34 +372,6 @@ namespace ImagineCupProject
 
         private async Task<string> TextClassificationAsync(string keyWords)
         {
-            //try
-            //{
-            //    //다른 파이썬으로 실행, Using Pretrained Google Word2Vec model
-            //    string python = @"C:\Python36\python.exe";
-            //    //string python = Environment.CurrentDirectory + @"\Python36\python.exe";
-            //    string myPythonApp = "WordClassification.py";
-            //    //string myPythonApp = Environment.CurrentDirectory + @"\Python\WordClassification.py"; // => 지금 바이너리 파일 못 찾아서 문제 되고 있음.
-
-            //    ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-            //    myProcessStartInfo.UseShellExecute = false;
-            //    myProcessStartInfo.RedirectStandardOutput = true;
-            //    myProcessStartInfo.Arguments = myPythonApp + " " + keyWords.Remove(problemText.Text.Length - 1);
-
-            //    Process myProcess = new Process();
-            //    myProcess.StartInfo = myProcessStartInfo;
-            //    myProcess.Start();
-            //    StreamReader myStreamReader = myProcess.StandardOutput;
-            //    string codeResult = await myStreamReader.ReadToEndAsync();
-            //    myProcess.WaitForExit();
-            //    myProcess.Close();
-
-            //    return codeResult;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return ex.Message;
-            //}
-
             try
             {
                 string python = @"C:\Python36\python.exe";

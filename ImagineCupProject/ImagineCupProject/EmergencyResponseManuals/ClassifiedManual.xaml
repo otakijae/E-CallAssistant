@@ -5,24 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1700">
-    
+
     <Grid x:Name="classifiedManualGrid" ShowGridLines="True">
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>-->
 
         <StackPanel>
-            <Grid x:Name="earthquake" Visibility="Collapsed">
+            <Grid x:Name="earthquake" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Disaster : Earthquake" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Disaster : Earthquake" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     1. Minor earthquake:<LineBreak/>
                     - EC and DGS will inspect the facility to determine the condition of:<LineBreak/>
@@ -69,9 +58,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="flood" Visibility="Collapsed">
+            <Grid x:Name="flood" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Disaster : Flood" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Disaster : Flood" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     1. Immediate Action:<LineBreak/>
                     - Notify EC of flooding situation or forecast.<LineBreak/>
@@ -98,9 +87,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="severeWeather" Visibility="Collapsed">
+            <Grid x:Name="severeWeather" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Disaster : Severe Weather" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Disaster : Severe Weather" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     1. Tornado Watch:<LineBreak/>
                     - Inform agency heads that a watch has been issued.<LineBreak/>
@@ -168,9 +157,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="fire" Visibility="Collapsed">
+            <Grid x:Name="fire" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Fire / Rescue" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Fire / Rescue" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     1. Immediate Action:<LineBreak/>
                     - Notify the Richmond Fire Department (9-911).<LineBreak/>
@@ -192,9 +181,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="terrorAndGunshot" Visibility="Collapsed">
+            <Grid x:Name="terrorAndGunshot" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Terror / Gunshot" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Terror / Gunshot" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     1. Immediate Action - Secure the Immediate Area.<LineBreak/>
                     - Lock or barricade the door, if able. Block the door using whatever is available - desks, tables, file cabinets, other furniture, books, etc.<LineBreak/>
@@ -270,9 +259,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="womenViolence" Visibility="Collapsed">
+            <Grid x:Name="womenViolence" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Women Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Women Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Emergency female report<LineBreak/>
                     1. Main contents of the emergency report on female violence<LineBreak/>
@@ -316,9 +305,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="teenageViolence" Visibility="Collapsed">
+            <Grid x:Name="teenageViolence" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Teenage Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Teenage Violence" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Report of Teenage Violence<LineBreak/>
                     1. Major contents of the 1388 Youth violence report<LineBreak/>
@@ -361,9 +350,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="suicide" Visibility="Collapsed">
+            <Grid x:Name="suicide" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Suicide" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Suicide" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Report of suicides<LineBreak/>
                     1. Key contents of the report on the suicide case in the mental health center<LineBreak/>
@@ -407,9 +396,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="elderlyCruelTreatment" Visibility="Collapsed">
+            <Grid x:Name="elderlyCruelTreatment" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Elderly Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Elderly Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Report of abuse by the elderly<LineBreak/>
                     1. Main contents of reports on abuse of the elderly<LineBreak/>
@@ -454,9 +443,9 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="childCruelTreatment" Visibility="Collapsed">
+            <Grid x:Name="childCruelTreatment" Visibility="Collapsed" ShowGridLines="True">
                 <StackPanel>
-                    <TextBlock Text="Child Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                    <TextBlock Text="Child Cruel Treatment" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
                     <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Report of child abuse<LineBreak/>
                     1. Main contents of reports of abuse of children from <LineBreak/>

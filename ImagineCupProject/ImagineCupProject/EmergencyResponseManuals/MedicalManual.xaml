@@ -21,7 +21,7 @@
 
         <Grid x:Name="alteredLevelOfConsciousness" Grid.Row="0" Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="ALTERED LEVEL OF CONSCIOUSNESS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="ALTERED LEVEL OF CONSCIOUSNESS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     The patient's level of consciousness is assessed by how well they respond to questions. <LineBreak/>
                     The ALOC Nature Code is used for patients that are not responding in a manner that is normal for them. <LineBreak/>
@@ -57,7 +57,7 @@
 
         <Grid x:Name="chestPain" Grid.Row="0" Grid.Column="1">
             <StackPanel>
-                <TextBlock Text="CHEST PAIN" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="CHEST PAIN" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Chest pain is the most common specific medical complaint for which EMS services are routinely called. <LineBreak/>
                     Chest pain as the chief complaint may indicate a heart attack, pulmonary embolism, and other serious conditions; <LineBreak/>
@@ -91,7 +91,7 @@
 
         <Grid x:Name="fallInjury" Grid.Row="1" Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="FALL INJURY" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="FALL INJURY" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Reporting of fall victims is common. The FED will dispatch a BLS response unless <LineBreak/>
                     there are reports of ALS signs/symptoms or that the fall was from greater than ten feet. <LineBreak/>
@@ -132,7 +132,7 @@
 
         <Grid x:Name="gunshotWound" Grid.Row="1" Grid.Column="1">
             <StackPanel>
-                <TextBlock Text="GUNSHOT WOUND" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="GUNSHOT WOUND" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Each gunshot wound incident involves violence with police priorities. It is important to <LineBreak/>
                     gather information regarding scene security and the assailant in addition to patient <LineBreak/>
@@ -170,7 +170,7 @@
 
         <Grid x:Name="illPerson" Grid.Row="2" Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="ILL PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="ILL PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Approximately 25% of all EMS calls originate as unknown medical problems. A sick <LineBreak/>
                     person is a patient who has an indefinable chief complaint, unclear symptoms, or when <LineBreak/>
@@ -213,7 +213,7 @@
 
         <Grid x:Name="internalBleeding" Grid.Row="2" Grid.Column="1">
             <StackPanel>
-                <TextBlock Text="INTERNAL BLEEDING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="INTERNAL BLEEDING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Internal bleeding is difficult to determine but can also be life threatening. The most <LineBreak/>
                     significant signs and symptoms are vomiting or passing blood. Patients may also have <LineBreak/>
@@ -247,7 +247,7 @@
 
         <Grid x:Name="motorVehicleAccidents" Grid.Row="3" Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="MOTOR VEHICLE ACCIDENTS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="MOTOR VEHICLE ACCIDENTS" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     About 14% of the EMS calls dispatched are for traffic injuries of some kind. This <LineBreak/>
                     category includes auto-versus-auto, auto-versus-motorcycle, and auto-versuspedestrian <LineBreak/>
@@ -284,7 +284,7 @@
 
         <Grid x:Name="overdose" Grid.Row="3" Grid.Column="1">
             <StackPanel>
-                <TextBlock Text="OVERDOSE" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="OVERDOSE" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Overdoses are typically thought of as over consumption of a drug or medication. The <LineBreak/>
                     product can be ingested, inhaled, absorbed or injected and have toxic effects on the <LineBreak/>
@@ -326,7 +326,7 @@
 
         <Grid x:Name="poisoning" Grid.Row="4" Grid.Column="0">
             <StackPanel>
-                <TextBlock Text="POISONING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="POISONING" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     Poisonings are typically a person consuming a product that is not meant to be <LineBreak/>
                     consumed such as a child ingesting bleach or an insecticide. The product can be <LineBreak/>
@@ -368,7 +368,7 @@
 
         <Grid x:Name="unconsciousPerson" Grid.Row="4" Grid.Column="1">
             <StackPanel>
-                <TextBlock Text="UNCONSCIOUS PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Center"/>
+                <TextBlock Text="UNCONSCIOUS PERSON" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="5"/>
                 <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
                     This Nature Code is reserved for patients who are confirmed to be unconscious. <LineBreak/>
                     The caller should be able to verify this by attempting to wake the patient. <LineBreak/>
