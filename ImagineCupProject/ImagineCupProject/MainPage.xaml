@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toast="clr-namespace:ToastNotifications;assembly=ToastNotifications"
              xmlns:local="clr-namespace:ImagineCupProject"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1700">
+             d:DesignHeight="900" d:DesignWidth="1000">
 
     <FrameworkElement.Resources>
         <Storyboard x:Key="OpenMenu">
@@ -42,11 +43,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-250"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="listViewItem4">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
+           
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
@@ -85,7 +82,11 @@
   
 
     <Grid Background="#FF3580BF">
-        <StackPanel x:Name="StackPanelMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0" RenderTransformOrigin="0.5,0.5">
+
+        <toast:NotificationTray NotificationsSource="{Binding NotificationSource}"
+                                PopupFlowDirection="RightUp"  VerticalAlignment="Top" HorizontalAlignment="Right" />
+
+        <StackPanel x:Name="StackPanelMenu" Width="215" HorizontalAlignment="Left" Margin="-220,0,0,0.4" RenderTransformOrigin="0.5,0.5">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -109,7 +110,7 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                     <Button.Background>
-                        <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Assets/operatorJW.jpg" Stretch="UniformToFill"/>
                     </Button.Background>
                 </Button>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
@@ -118,7 +119,7 @@
             </StackPanel>
           
             <ListView>
-                <ListViewItem x:Name="listViewItem" Height="60" RenderTransformOrigin="0.5,0.5">
+                <ListViewItem x:Name="listViewItem" Height="60" RenderTransformOrigin="0.5,0.5" PreviewMouseLeftButtonDown="listViewItem_PreviewMouseLeftButtonDown">
                     <ListViewItem.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -132,7 +133,7 @@
                         <TextBlock Text="Home" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem x:Name="listViewItem1" Height="60" RenderTransformOrigin="0.5,0.5">
+                <ListViewItem x:Name="listViewItem1" Height="60" RenderTransformOrigin="0.5,0.5" PreviewMouseLeftButtonDown="listViewItem1_PreviewMouseLeftButtonDown">
                     <ListViewItem.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -141,12 +142,13 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </ListViewItem.RenderTransform>
+
                     <StackPanel Orientation="Horizontal" Margin="10 0">
-                        <materialDesign:PackIcon Kind="AccountSearch" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Search" Margin="10" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="PhoneInTalk" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Total" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem x:Name="listViewItem2" Height="60" RenderTransformOrigin="0.5,0.5">
+                <ListViewItem x:Name="listViewItem2" Height="60" RenderTransformOrigin="0.5,0.5" PreviewMouseLeftButtonDown="listViewItem2_PreviewMouseLeftButtonDown">
                     <ListViewItem.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -156,8 +158,8 @@
                         </TransformGroup>
                     </ListViewItem.RenderTransform>
                     <StackPanel Orientation="Horizontal" Margin="10 0">
-                        <materialDesign:PackIcon Kind="Facebook" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Facebook" Margin="10" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="EmailOutline" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Send to Other" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="listViewItem3" Height="60" RenderTransformOrigin="0.5,0.5">
@@ -170,28 +172,15 @@
                         </TransformGroup>
                     </ListViewItem.RenderTransform>
                     <StackPanel Orientation="Horizontal" Margin="10 0">
-                        <materialDesign:PackIcon Kind="Twitter" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Twitter" Margin="10" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem x:Name="listViewItem4" Height="60" RenderTransformOrigin="0.5,0.5">
-                    <ListViewItem.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </ListViewItem.RenderTransform>
-                    <StackPanel Orientation="Horizontal" Margin="10 0">
-                        <materialDesign:PackIcon Kind="Skype" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Skype" Margin="10" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="Email" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Sended by Other" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListViewItem>
             </ListView>
         </StackPanel>
       
         <Grid x:Name="GridMain" Background="#FFFBFBFB" RenderTransformOrigin="0.5,0.5">
+
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -209,16 +198,31 @@
                 <Image Height="150" VerticalAlignment="Top" Source="Assets/back.jpg" Stretch="UniformToFill"/>
                 <Ellipse Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20 100" Stroke="White">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="/Assets/ROYSHOUSE_1_Thread_Des.jpg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="/Assets/operatorJW.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock Text="Jangwon" Foreground="White" FontSize="20" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
+                <!--
                 <StackPanel Margin="0 150" Height="700">
                     <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Margin="10" Foreground="#FFFBFBFB" FontSize="14">ddd</TextBlock>
                     <Grid x:Name="simpleManualGrid"/>
                 </StackPanel>
+--> 
+                <StackPanel Margin="0 150">
+                    <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14" Height="150"/>
+                    <TextBlock x:Name="speechRecognition" Text=" " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14" Height="145"/>
+                    <TextBlock x:Name="phoneNumber" Text=" " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14" Height="145"/>
+                    <TextBlock x:Name="speechResult" Text=" " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14" Height="148"/>
+                </StackPanel>
 
                 <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                
+                <Button x:Name="nextButton" Content="Next" HorizontalAlignment="Left" Margin="10,655,0,0" VerticalAlignment="Top" Width="70" Height="50" Click="nextButton_Click"/>
+                <Button x:Name="btnTransfer" Content="출동" HorizontalAlignment="Left" Margin="104,604,0,0" VerticalAlignment="Top" Width="100" Height="100" Click="btnTransfer_Click"/>
+                <Button x:Name="btnStartRecord" Content="전화" HorizontalAlignment="Left" Margin="10,605,0,0" VerticalAlignment="Top" Width="70" Height="50" Click="btnStartRecord_Click"/>
+                <Button x:Name="btnSendTo112" Content="112" HorizontalAlignment="Left" Margin="204,603,0,0" VerticalAlignment="Top" Width="60" Height="50" RenderTransformOrigin="0.024,0.08" Click="btnSendTo112_Click"/>
+                <Button x:Name="btnSendTo110" Content="110" HorizontalAlignment="Left" Margin="204,654,0,0" VerticalAlignment="Top" Width="60" Height="50" RenderTransformOrigin="0.45,0.92" Click="btnSendTo110_Click"/>
+
             </Grid>
 
             <Grid>
@@ -228,6 +232,7 @@
                     <RowDefinition Height="8.5*" />
                 </Grid.RowDefinitions>
 
+
                 <Button x:Name="ButtonCloseMenu" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Click="ButtonCloseMenu_Click" Visibility="Collapsed" Grid.Row="0">
                     <materialDesign:PackIcon Kind="Menu" Foreground="#FF3580BF"/>
                 </Button>
@@ -236,6 +241,7 @@
                 </Button>
                 <TextBlock Text="Emergency call response" Foreground="#FF3580BF" FontSize="30" FontWeight="Bold" Margin="50,0" Grid.Row="1"/>
 
+<!--
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible">
                     <StackPanel VerticalAlignment="Top">
                         <Grid x:Name="classification">
@@ -282,24 +288,12 @@
                             <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" AcceptsReturn="True" Margin="5"/>
   
                         </Grid>
+-->
+                <Grid x:Name="classification" Grid.Row="2">
 
-                        <WrapPanel>
-                            <TextBlock Text="Standard Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
-                            <ToggleButton HorizontalAlignment="Left" Click="StandardResponse_Click"/>
-                        </WrapPanel>
-                        <Grid x:Name="standardManualGrid"/>
+                    <Frame x:Name="mainFrame" Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  NavigationUIVisibility="Hidden" />
 
-                        <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
-                        <Grid x:Name="classifiedManualGrid" Margin="10"/>
-
-                        <WrapPanel>
-                            <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
-                            <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
-                        </WrapPanel>
-                        <Grid x:Name="medicalManualGrid" Margin="10"/>
-                    </StackPanel>
-                </ScrollViewer>
-
+                        </Grid>
             </Grid>
         </Grid>
 

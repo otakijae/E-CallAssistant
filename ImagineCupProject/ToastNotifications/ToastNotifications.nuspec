@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <description>Toast notifications for Wpf with MVVM support.</description>
+    <summary>Toast notifications for Wpf with MVVM support.</summary>
+    <releaseNotes>
+    </releaseNotes>
+    <language>en-US</language>
+    <licenseUrl>https://github.com/raflop/ToastNotifications/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/raflop/ToastNotifications</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright Rafał Łopatka 2016</copyright>
+    <references></references>
+    <tags>Wpf notifications, Toast notifications, XAML notifications, c# notifications, UI notifications</tags>
+  </metadata>
+</package>

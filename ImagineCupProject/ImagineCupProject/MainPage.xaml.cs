@@ -13,6 +13,15 @@ using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.Threading.Tasks;
 using ImagineCupProject.EmergencyResponseManuals;
 using System.Windows.Controls.Primitives;
+using System.Net.Http;
+using System.Web;
+using System.Net.Http.Headers;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Storage.V1;
+using Google.Cloud.Speech.V1;
+using System.Data.SqlClient;
+using Aylien.TextApi;
+using System.Windows.Input;
 
 namespace ImagineCupProject
 {
@@ -21,13 +30,12 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainPage : UserControl
     {
+        MicrophoneRecognitionClient _microphoneRecognitionClient;
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
+
         AutoResetEvent _FinalResponceEvent;
-        MicrophoneRecognitionClient _microphoneRecognitionClient;
         String temp;
-        ArrayList textArrayList = new ArrayList(); 
-        ArrayList textShapeArrayList = new ArrayList();
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
 
         SimpleManual simpleManual = new SimpleManual();
@@ -36,64 +44,38 @@ namespace ImagineCupProject
         MedicalManual medicalManual = new MedicalManual();
 
         string classifiedResult;
+        Client client = new Client("3b49bfce", "d5788d26c944e091562527416046febb");
+        string text = "Yes, I am a teacher at Columbine high school. There is a student here with a gun. He just shot out a window. I believe one um.   I don't know if it's. I don't know what's in my shoulder.  I am. Yes, yes! And the school is in panic and I'm in the library. I've got students down under the tables. Kids! Heads under the tables.  Um, Kids are screaming.  We need police here.  Can you please hurry? I do not know who the student is. ... I was on hall duty, I saw a gun. I said, " +
+                "What's going on out there? And the kid that was following me said it was a film production, probably a joke And I said, well I don't think that's a good idea. And went walking outside to see what was going on.  He turned the gun straight at us and shot and, my god, the window went out. I am scared.I want to go home. ";
+        string speechRecognitionResult;
+        ArrayList textArrayList;
+        ArrayList textShapeArrayList;
+        MainQuestion mainQuestion;
+        TotalPage totalPage;
+        AdditionalQuestion additionalQuestion; 
+        private readonly ToastViewModel _vm;
 
         public MainPage()
         {
             InitializeComponent();
-            _FinalResponceEvent = new AutoResetEvent(false);
-            timeText.Text = time;
-            azureDatabase = new AzureDatabase();
-
-            //Manual xaml 매뉴얼
-            this.simpleManualGrid.Children.Add(simpleManual);
-            this.standardManualGrid.Children.Add(standardManual);
-            this.classifiedManualGrid.Children.Add(classifiedManual);
-            this.medicalManualGrid.Children.Add(medicalManual);
+            textArrayList = new ArrayList();
+            textShapeArrayList = new ArrayList();
+            mainFrame.Content = new MainQuestion();
+            DataContext = _vm = new ToastViewModel();
+            additionalQuestion = new AdditionalQuestion();
+            totalPage = new TotalPage();
+            mainQuestion = new MainQuestion();
+            //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
+            summarize();
+            sentimentAnalysis();
         }
 
-        //Azure SpeechToText
-        private void ConvertSpeechToText()
-        {
-            var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;  //LongDictation 대신 ShortPhrase 선택
-            string language = "en-us";
-            string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
-            //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
-            _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
-                speechRecognitionMode,
-                language,
-                subscriptionKey
-                );
-
-            //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
-            _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
-            _microphoneRecognitionClient.StartMicAndRecognition();
-        }
-
-        //Textbox에 text입력
-        private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
-        {
-            string result = e.PartialResult;
-            //locationText.Text += result;
-            Dispatcher.Invoke(() =>
-            {
-                /*
-                if(e.PartialResult.Contains("am"))
-                {
-                    temp = e.PartialResult;
-                    Responsetxt.Text = temp.Replace("am", "is"); ;
-                    Responsetxt.Text += ("\n");
-                }
-                */
-                responseText.Text = (e.PartialResult);
-                responseText.Text += ("\n");
-            });
-        }
-
+        
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
+        
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
@@ -105,171 +87,171 @@ namespace ImagineCupProject
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
+        
+        
 
-        //START버튼 누른후 음성인식 시작
-        private void speakBtn_Click(object sender, RoutedEventArgs e)
+        private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-            speakBtn.IsEnabled = false;
+            if(nextButton.Content.Equals("Next"))
+            { 
+                mainFrame.Content = new AdditionalQuestion();
+                nextButton.Content = "Before";
+            }
+            else
+            {
+                mainFrame.Content = mainQuestion;
+                nextButton.Content = "Next";
+            }
+
+        }
+
+        private void listViewItem1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainFrame.Content = totalPage;
+        }
+
+        private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mainFrame.Content = mainQuestion;
+        }
+        /*
+            //Manual xaml 매뉴얼
+            this.simpleManualGrid.Children.Add(simpleManual);
+            this.standardManualGrid.Children.Add(standardManual);
+            this.classifiedManualGrid.Children.Add(classifiedManual);
+            this.medicalManualGrid.Children.Add(medicalManual);
+         */
+        //음성인식버튼
+        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.ShowInformation("Ring the Call.");
             ConvertSpeechToText();
         }
 
-        //STOP버튼과 함께 음성인식 종료
-        private void stopBtn_Click(object sender, RoutedEventArgs e)
+        //  Summarize -  AYLIEN Text Analysis API 
+        public void summarize()
+        {
+            string title = "emergency";
+            var summary2 = client.Summarize(text: text, title: title, sentencesNumber: 3).Sentences;
+
+            foreach (var sentence in summary2)
+            {
+                summary.Text += sentence;
+            }
+        }
+
+        //  SentimentAnalyze -  AYLIEN Text Analysis API 
+        public void sentimentAnalysis()
+        {
+            Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
+            summary.Text += "\nsentiment : ";
+            summary.Text += sentiment2.Polarity + " " + sentiment2.PolarityConfidence;
+            summary.Text += "\n";
+            summary.Text += sentiment2.Subjectivity + " " + sentiment2.SubjectivityConfidence;
+
+        }
+
+        //Azure SpeechToText
+        private void ConvertSpeechToText()
+        {
+            var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
+            string language = "en-us";
+            string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
+            //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
+            _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
+                speechRecognitionMode,
+                language,
+                subscriptionKey
+                );
+
+            //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
+            _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
+            //_microphoneRecognitionClient.OnResponseReceived += OnMicShortPhraseResponseReceivedHandler;
+            _microphoneRecognitionClient.OnResponseReceived += OnMicDictationResponseReceivedHandler;
+            _microphoneRecognitionClient.StartMicAndRecognition();
+        }
+
+        //Textbox에 text입력
+        private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
+        {
+            speechRecognitionResult = e.PartialResult;
+            //locationText.Text += result;
+            Dispatcher.Invoke(() =>
+            {
+                /*
+                if(e.PartialResult.Contains("am"))
+                {
+                    temp = e.PartialResult;
+                    Responsetxt.Text = temp.Replace("am", "is"); ;
+                    Responsetxt.Text += ("\n");
+                }
+                */
+                speechRecognition.Text = (e.PartialResult);
+                //mainQuestion.
+            });
+        }
+
+        //LongDictation으로 설정했을때 receiveHandlear (문장 초기화 되기 전)
+        private void OnMicDictationResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
+        {
+            //if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout)
+            //{
+            Dispatcher.Invoke(
+                (Action)(() =>
+                {
+                    //_microphoneRecognitionClient.EndMicAndRecognition();
+
+                    //mainQuestion.locationText.Text += "HI";
+                    WriteResponseResult(e);
+                }));
+            //}
+
+        }
+
+        //ShortPhrase으로 설정했을때 receiveHandlear
+        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
             {
-                _FinalResponceEvent.Set();
-                _microphoneRecognitionClient.EndMicAndRecognition();
-                _microphoneRecognitionClient.Dispose();
-                _microphoneRecognitionClient = null;
-                speakBtn.Content = "Start Recording";
-                speakBtn.IsEnabled = true;
+                //codeText.Text += e;
+
+                WriteResponseResult(e);
             }));
-
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response4 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            CorrectSentences(response4.Sentences, response4.Tokens);
         }
 
-        //텍스트 분석 클릭버튼
-        private void analyzeBtn_Click(object sender, RoutedEventArgs e)
+
+        //receiveHandlear 내용 출력 메소드
+        private void WriteResponseResult(SpeechResponseEventArgs e)
         {
-
-            if (entityRecognition.Text != "")
+            if (e.PhraseResponse.Results.Length == 0)
             {
-                entityRecognition.Text = null;
-                sentimentRecognition.Text = null;
-                syntaxRecognition.Text = null;
-                problemText.Text = null;
-                locationText.Text = null;
+                //codeText.Text += "No phrase response is available.";
             }
-
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response = client.AnalyzeSentiment(new Document()
+            else
             {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteSentiment(response.DocumentSentiment, response.Sentences);
-
-            var response2 = client.AnalyzeEntities(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteEntities(response2.Entities);
-
-            var response3 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            WriteSentences(response3.Sentences, response3.Tokens);
-
-            azureDatabase.insertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
-        }
-
-        //긍정 부정 분석 google api
-        private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
-        {
-            sentimentRecognition.Text += $"Score: {sentiment.Score}";
-            sentimentRecognition.Text += $"\tMagnitude: {sentiment.Magnitude}\n";
-            //stt.Text += "Sentence level sentiment:";
-            foreach (var sentence in sentences)
-            {
-                sentimentRecognition.Text += $"{sentence.Text.Content}:" + $" ({sentence.Sentiment.Score * 100}%)\n";   //"\t{sentence.Text.Content}: "+ $
-            }
-        }
-
-        //entity분석 google api
-        private async void WriteEntities(IEnumerable<Entity> entities)
-        {
-            if (summary.Text.Contains("kill"))
-            {
-                entityRecognition.Text += $"Name: kill";
-                entityRecognition.Text += $" /Event\n";
-                codeText.Text += "kill";
-            }
-            if (summary.Text.Contains("shot"))
-            {
-                entityRecognition.Text += $"Name: shot";
-                entityRecognition.Text += $" /Event\n";
-                codeText.Text += "shot";
-            }
-            foreach (var entity in entities)
-            {
-                if (entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
+                //codeText.Text += "********* Final n-BEST Results *********";
+                for (int i = 0; i < e.PhraseResponse.Results.Length; i++)
                 {
-                    locationText.Text += entity.Name;
-                    locationText.Text += " ";
+                    //아래내용 다른 textbox에 +=하면 된다. 
+                    //speechResult.Text += e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
+                    string text = e.PhraseResponse.Results[i].DisplayText;
+                    var client = LanguageServiceClient.Create();
+                    var response = client.AnnotateText(new Document()
+                    {
+                        Content = text,
+                        Type = Document.Types.Type.PlainText
+                    },
+                    new Features() { ExtractSyntax = true });
+                    CorrectSentences(response.Sentences, response.Tokens);
                 }
-                if (entity.Type.ToString().Equals("Event"))
-                {
-                    codeText.Text += entity.Name;
-                }
-                entityRecognition.Text += $"Name: {entity.Name}";
-                entityRecognition.Text += $" /{entity.Type}\n";
+
+
+                //codeText.Text += "\n";
             }
         }
 
-        //형태소 분석 google api
-        private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
-        {
-            syntaxRecognition.Text += "\n";
-            foreach (var token in tokens)
-            {
-                syntaxRecognition.Text += $"{token.PartOfSpeech.Tag} " + $"{token.Text.Content}\n";
-            }
-        }
-
-        // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
-        /*
-        public object AsyncRecognizeGcs(string storageUri)
-        {
-            var speech = SpeechClient.Create();
-            var longOperation = speech.LongRunningRecognize(new RecognitionConfig()
-            {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-                SampleRateHertz = 44100,
-                LanguageCode = "en",
-            }, RecognitionAudio.FromStorageUri(storageUri));
-            longOperation = longOperation.PollUntilCompleted();
-            var response = longOperation.Result;
-            foreach (var result in response.Results)
-            {
-                foreach (var alternative in result.Alternatives)
-                {
-                    responsetxt.Text = (alternative.Transcript);
-                }
-            }
-            return 0;
-        }*/
-
-        /*
-        private void Correct_Click(object sender, RoutedEventArgs e)
-        {
-            //AsyncRecognizeGcs("gs://emergencycall/test2.flac");
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response4 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            CorrectSentences(response4.Sentences, response4.Tokens);
-        }*/
-
-        //음성 stop버튼 누르면 문장을 . 표시로 구별해주기
-        private async void CorrectSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
+        //음성 끊길때마다 문장을 . 표시로 구별해주기
+        private async void CorrectSentences(IEnumerable<Google.Cloud.Language.V1.Sentence> sentences, RepeatedField<Token> tokens)
         {
             foreach (var token in tokens)
             {
@@ -288,130 +270,45 @@ namespace ImagineCupProject
                 textArrayList.Add(token.Text.Content + " ");
                 textShapeArrayList.Add(token.PartOfSpeech.Tag);
             }
-            responseText.Text = null;
             for (int i = 0; i < textArrayList.Count; i++)
             {
-                responseText.Text += textArrayList[i];
+                speechResult.Text += textArrayList[i];
+                //mainQuestion.responseText.Text += textArrayList[i];
+
             }
+            //mainQuestion.analyze();
+            //MessageBox.Show(mainQuestion.responseText.Text); 
+            textArrayList.Clear();
+
         }
         
-        private void TextClassify_Click(object sender, RoutedEventArgs e)
+
+        private void btnSendTo112_Click(object sender, RoutedEventArgs e)
         {
-            Run(problemText.Text);
-            this.loadingProcess.Visibility = Visibility.Visible;
+            //mainQuestion.sendTo112();
+            _vm.ShowSuccess("SendTo112 Success");
+            //_vm.ShowWarning(String.Format("{0} Warning", _count++));
+            //_vm.ShowError(String.Format("{0} Error", _count++));
         }
 
-        private async void Run(string keyWords)
+        private void btnSendTo110_Click(object sender, RoutedEventArgs e)
         {
-            this.codeText.Text = await TextClassificationAsync(keyWords);
-            this.textClassify.IsEnabled = true;
-            this.loadingProcess.Visibility = Visibility.Hidden;
-
-            //분류된 카테고리에 대한 매뉴얼 출력, 나중에 완료하면 Toast알림 띄우기
-            ShowClassifiedManuals(classifiedResult);
+            //mainQuestion.sendTo110();
+            _vm.ShowSuccess("SendTo110 Success");
+            //_vm.ShowInformation(String.Format("{0} Information", _count++));
+            //_vm.ShowSuccess(String.Format("{0} Success", _count++));
         }
 
-        private void ShowClassifiedManuals(string category)
+        private void listViewItem2_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            switch (category)
-            {
-                case "Disaster\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Visible;
-                    classifiedManual.flood.Visibility = Visibility.Visible;
-                    classifiedManual.severeWeather.Visibility = Visibility.Visible;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Terror\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Visible;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Fire\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Visible;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Violence\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Visible;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Visible;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Visible;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
-                    classifiedManual.suicide.Visibility = Visibility.Visible;
-                    break;
-                case "Motor vehicle accidents\r\n":
-                    break;
-                default:
-                    break;
-            }
+            mainFrame.Content = new _112DataPage();
         }
 
-        private async Task<string> TextClassificationAsync(string keyWords)
+        private void btnTransfer_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string python = @"C:\Python36\python.exe";
-                string myPythonApp = "predict.py";
-
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-                myProcessStartInfo.UseShellExecute = false;
-                myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
-
-                Process myProcess = new Process();
-                myProcess.StartInfo = myProcessStartInfo;
-                myProcess.Start();
-                StreamReader myStreamReader = myProcess.StandardOutput;
-                classifiedResult = await myStreamReader.ReadToEndAsync();
-                myProcess.WaitForExit();
-                myProcess.Close();
-
-                return classifiedResult;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            //mainQuestion.analyze();
+            _vm.ShowSuccess("Transfer complete");
         }
-
-        private void StandardResponse_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as ToggleButton).IsChecked == true)
-                standardManual.standardManualGrid.Visibility = Visibility.Visible;
-            else
-                standardManual.standardManualGrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void MedicalResponse_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as ToggleButton).IsChecked == true)
-                medicalManual.medicalManualGrid.Visibility = Visibility.Visible;
-            else
-                medicalManual.medicalManualGrid.Visibility = Visibility.Collapsed;
-        }
+     
     }
 }

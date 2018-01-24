@@ -71,6 +71,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aylien.TextApi, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aylien.TextApi.1.12.0.0\lib\net45\Aylien.TextApi.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Api.CommonProtos, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Api.CommonProtos.1.1.0\lib\net45\Google.Api.CommonProtos.dll</HintPath>
     </Reference>
@@ -166,6 +169,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="112DataPage.xaml.cs">
+      <DependentUpon>112DataPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdditionalQuestion.xaml.cs">
+      <DependentUpon>AdditionalQuestion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AzureDatabase.cs" />
     <Compile Include="EmergencyResponseManuals\ClassifiedManual.xaml.cs">
       <DependentUpon>ClassifiedManual.xaml</DependentUpon>
@@ -178,6 +187,9 @@
     </Compile>
     <Compile Include="LoadingControl\LoadingBlockShape.xaml.cs">
       <DependentUpon>LoadingBlockShape.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainQuestion.xaml.cs">
+      <DependentUpon>MainQuestion.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -201,6 +213,21 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoadingControl\LoadingBlockShape.xaml">
+    </Page>
+    <Compile Include="ChartViewModel.cs" />
+    <Compile Include="ToastViewModel.cs" />
+    <Compile Include="TotalPage.xaml.cs">
+      <DependentUpon>TotalPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="112DataPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdditionalQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainQuestion.xaml"> 
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,12 +246,14 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
+    </Compile> 
     <Page Include="EmergencyResponseManuals\SimpleManual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmergencyResponseManuals\StandardManual.xaml">
+    </Page>
+    <Page Include="TotalPage.xaml"> 
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +304,23 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\operatorJW.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ToastNotifications\ToastNotifications.csproj">
+      <Project>{60c456a0-fe6c-4c00-9e6d-b51a47e5a4f3}</Project>
+      <Name>ToastNotifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFCanvasChart\WPFCanvasChart.csproj">
+      <Project>{b0c5d614-8f9e-4c31-b47d-eb8cfe7679c1}</Project>
+      <Name>WPFCanvasChart</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFChartControl\WPFChartControl.csproj">
+      <Project>{463766c2-c063-4970-96c8-72a39b2a3474}</Project>
+      <Name>WPFChartControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.8.3\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.8.3\build\net45\Grpc.Core.targets')" />

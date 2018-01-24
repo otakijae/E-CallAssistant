@@ -42,6 +42,70 @@ namespace ImagineCupProject
             }
         }
 
+        public void sendDataTo112(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
+        {
+            try
+            {
+                var cb = new SqlConnectionStringBuilder();
+                cb.DataSource = "jangwonserver.database.windows.net";
+                cb.UserID = "jangwon";
+                cb.Password = "wkddnjs2!!";
+                cb.InitialCatalog = "emergencycallDatabase";
+
+                string sql;
+                using (var connection = new SqlConnection(cb.ConnectionString))
+                {
+                    connection.Open();
+                    sql = "insert into sendTo112 values('" + operatorName + "', '" + time + "', '" + location + "', '" + phoneNumber + "', '" + callerName + "', '" + problem + "', '" + code + "');";
+                    SqlCommand cmd = new SqlCommand(sql, connection);
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        //MessageBox.Show("Enroll!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Database Error!");
+                    }
+                }
+            }
+            catch (SqlException er)
+            {
+                MessageBox.Show(er.ToString());
+            }
+        }
+
+        public void sendDataTo110(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
+        {
+            try
+            {
+                var cb = new SqlConnectionStringBuilder();
+                cb.DataSource = "jangwonserver.database.windows.net";
+                cb.UserID = "jangwon";
+                cb.Password = "wkddnjs2!!";
+                cb.InitialCatalog = "emergencycallDatabase";
+
+                string sql;
+                using (var connection = new SqlConnection(cb.ConnectionString))
+                {
+                    connection.Open();
+                    sql = "insert into sendTo110 values('" + operatorName + "', '" + time + "', '" + location + "', '" + phoneNumber + "', '" + callerName + "', '" + problem + "', '" + code + "');";
+                    SqlCommand cmd = new SqlCommand(sql, connection);
+                    if (cmd.ExecuteNonQuery() == 1)
+                    {
+                        //MessageBox.Show("Enroll!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Database Error!");
+                    }
+                }
+            }
+            catch (SqlException er)
+            {
+                MessageBox.Show(er.ToString());
+            }
+        }
+
         public void printData()
         {
             try

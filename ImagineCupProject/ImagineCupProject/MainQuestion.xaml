@@ -1,0 +1,79 @@
+﻿<Page x:Class="ImagineCupProject.MainQuestion"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ImagineCupProject"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="850"
+      Title="MainQuestion">
+    <Grid  >
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <StackPanel VerticalAlignment="Top" Height="781">
+                <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>
+
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="textClassify"  Content="TextClassification" FontSize="8" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="TextClassify_Click"/>
+
+
+                <TextBlock Text="Operator" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="1"/>
+                <TextBlock Text="Time" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="2"/>
+                <TextBlock Text="Location" Foreground="Black" FontSize="23" TextAlignment="Center" Padding="25" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="3"/>
+                <TextBlock Text="Phone Number" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="21" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="4"/>
+                <TextBlock Text="Caller Name" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="5"/>
+                <TextBlock Text="Problem" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="6"/>
+                <TextBlock Text="Code" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="7"/>
+
+
+                <TextBox x:Name="operatorText" Text="Son Jangwon" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="timeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="locationText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="phoneNumberText" Text="01033836782" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="callerNameText" Text="Shin Jaehyuk" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="problemText" Text="" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBox x:Name="codeText" Text="" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="7" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1"/>
+
+                <TextBox x:Name="responseText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Row="1" Grid.Column="2" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Grid.RowSpan="2"/>
+                <TextBox x:Name="entityRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Grid.RowSpan="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.2,0.4,0"/>
+                <TextBox x:Name="summarizeText" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="3" Grid.RowSpan="1" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.2,0.4,0"/>
+                <TextBox x:Name="sentimentRecognition" Text="" TextWrapping="Wrap"  FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0.4,0.4,0" Grid.RowSpan="2"/>
+                <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0,0.4,-0.4"/>
+
+
+            </Grid>
+            <WrapPanel>
+                <TextBlock Text="Standard Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                <ToggleButton HorizontalAlignment="Left" Click="StandardResponse_Click"/>
+            </WrapPanel>
+            <Grid x:Name="standardManualGrid"/>
+
+            <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+            <Grid x:Name="classifiedManualGrid" Margin="10"/>
+
+            <WrapPanel>
+                <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
+            </WrapPanel>
+            <Grid x:Name="medicalManualGrid" Margin="10"/>
+             </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
