@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImagineCupProject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Icon="/Assets/icon.png"
         mc:Ignorable="d"
         Title="E-Call" Height="800" Width="1400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
 
