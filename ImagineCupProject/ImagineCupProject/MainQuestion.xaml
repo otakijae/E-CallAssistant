@@ -10,7 +10,7 @@
     <Grid  >
         <ScrollViewer VerticalScrollBarVisibility="Visible">
             <StackPanel VerticalAlignment="Top" Height="781">
-                <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                <!--<local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>-->
 
                 <Grid  >
                     <Grid.ColumnDefinitions>
