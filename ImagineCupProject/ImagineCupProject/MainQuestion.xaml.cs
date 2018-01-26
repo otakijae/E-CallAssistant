@@ -291,6 +291,7 @@ namespace ImagineCupProject
                     classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
+                    classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
                     break;
                 case "Terror\r\n":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
@@ -303,6 +304,7 @@ namespace ImagineCupProject
                     classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
+                    classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
                     break;
                 case "Fire\r\n":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
@@ -315,6 +317,7 @@ namespace ImagineCupProject
                     classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
+                    classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
                     break;
                 case "Violence\r\n":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
@@ -327,8 +330,20 @@ namespace ImagineCupProject
                     classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Visible;
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
                     classifiedManual.suicide.Visibility = Visibility.Visible;
+                    classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
                     break;
                 case "Motor vehicle accidents\r\n":
+                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
+                    classifiedManual.flood.Visibility = Visibility.Collapsed;
+                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
+                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
+                    classifiedManual.fire.Visibility = Visibility.Collapsed;
+                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
+                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
+                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
+                    classifiedManual.motorVehicleAccidents.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
