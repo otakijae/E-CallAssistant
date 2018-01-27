@@ -9,46 +9,61 @@
       Title="AdditionalQuestion">
 
     <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.15*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0.3*"/>
+        <ScrollViewer>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Text="Classified as&#10;[Fire]" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="15" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox Text="Starbucks building at New York subway station" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="1" Grid.Row="0"/>
+                    <TextBox Text="Dispatched" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="2" Grid.Row="0"/>
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBox Text="Code&#xD;&#xA;6" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="0" Grid.Row="0"/>
-        <TextBox Text="WashingtonDC Starbucks Building" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="1" Grid.Row="0"/>
-        <TextBox Text="Fire" VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="OrangeRed" Grid.Column="2" Grid.Row="0"/>
+                    <TextBox Text="1." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="1"/>
+                    <TextBox Text="2." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="2"/>
+                    <TextBox Text="3." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="3"/>
+                    <TextBox Text="4." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="4"/>
+                    <TextBox Text="5." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="5"/>
+                    <TextBox Text="6." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="6"/>
 
+                    <TextBox x:Name="operatorText" Text="Are you in the location right now?" TextAlignment="Center" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="timeText" Text="When did this happen?" TextAlignment="Center" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="locationText" Text="Does anybody injured in the accident scene?" TextAlignment="Center" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="phoneNumberText" Text="If the internal fire alarm system has not activated, or fails to operate, immediately activate the system" TextAlignment="Center" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="callerNameText" Text="Follow the building's Building Emergency Evacuation Plan and report to your designated staging area. " TextAlignment="Center" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="problemText" Text="Stay low to the ground to avoid rising smoke." TextAlignment="Center" TextWrapping="Wrap" FontSize="12" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
 
-        <TextBox Text="1." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="1"/>
-        <TextBox Text="2." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="2"/>
-        <TextBox Text="3." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="3"/>
-        <TextBox Text="4." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="4"/>
-        <TextBox Text="5." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="5"/>
-        <TextBox Text="6." VerticalContentAlignment="Center" Foreground="Black" TextAlignment="Center" Padding="0" FontSize="23" FontFamily="Nirmala UI Semilight" BorderBrush="#FF3580BF" Background="AliceBlue" Grid.Column="0" Grid.Row="6"/>
+                    <TextBox x:Name="firstAnswer" Text="Yes" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="sirstAnswer" Text="-" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="thirdAnswer" Text="Yes" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="fourthAnswer" Text="-" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="fifthAnswer" Text="-" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                    <TextBox x:Name="sixthAnswer" Text="-" TextAlignment="Center" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
 
-        <TextBox x:Name="operatorText" Text="현재 상황발생 지역에 있나요?" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="timeText" Text="어제 일어난 상황인가요?" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="locationText" Text="용의자가 흉기를 소지하고 있나요?" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="phoneNumberText" Text="범인은 어떻게 사건현장을 벗어났나요?" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="callerNameText" Text="본인 포함 다른 사람들이 다치거나 위급한 상황이 있나요?" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="problemText" Text="" TextAlignment="Center" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="1" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                </Grid>
 
-        <TextBox x:Name="firstAnswer" Text="Yes" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="1" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="sirstAnswer" Text="No" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="2" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="thirdAnswer" Text="" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="3" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="fourthAnswer" Text="No" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="4" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="fifthAnswer" Text="Yes" TextAlignment="Center" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="5" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
-        <TextBox x:Name="sixthAnswer" Text="" TextAlignment="Center" TextWrapping="Wrap" FontSize="20" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="6" Background="AliceBlue" VerticalContentAlignment="Center" BorderBrush="#FF3580BF" BorderThickness="1"/>
+                <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                <Grid x:Name="classifiedManualGrid" Margin="10"/>
 
+                <WrapPanel>
+                    <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
+                    <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
+                </WrapPanel>
+                <Grid x:Name="medicalManualGrid" Margin="10"/>
+
+            </StackPanel>
+        </ScrollViewer>
+        
     </Grid>
 </Page>

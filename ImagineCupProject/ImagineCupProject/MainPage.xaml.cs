@@ -45,8 +45,8 @@ namespace ImagineCupProject
 
         string classifiedResult;
         Client client = new Client("3b49bfce", "d5788d26c944e091562527416046febb");
-        string text = "Yes, I am a teacher at Columbine high school. There is a student here with a gun. He just shot out a window. I believe one um.   I don't know if it's. I don't know what's in my shoulder.  I am. Yes, yes! And the school is in panic and I'm in the library. I've got students down under the tables. Kids! Heads under the tables.  Um, Kids are screaming.  We need police here.  Can you please hurry? I do not know who the student is. ... I was on hall duty, I saw a gun. I said, " +
-                "What's going on out there? And the kid that was following me said it was a film production, probably a joke And I said, well I don't think that's a good idea. And went walking outside to see what was going on.  He turned the gun straight at us and shot and, my god, the window went out. I am scared.I want to go home. ";
+        string text = "I am the passenger and I see the Starbucks building at New York subway station is on fire. I think 911 need to check this out quickly" +
+                "At least 37 people have been killed and dozens injured in a fire at a hospital and nursing home in New York, in the country's deadliest blaze for a decade";
         string speechRecognitionResult;
         ArrayList textArrayList;
         ArrayList textShapeArrayList;
@@ -70,7 +70,6 @@ namespace ImagineCupProject
             sentimentAnalysis();
         }
 
-        
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -87,14 +86,13 @@ namespace ImagineCupProject
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
-        
-        
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
             if(nextButton.Content.Equals("Next"))
-            { 
-                mainFrame.Content = new AdditionalQuestion();
+            {
+                //mainFrame.Content = new AdditionalQuestion();
+                mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Before";
             }
             else
