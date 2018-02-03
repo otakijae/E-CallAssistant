@@ -182,6 +182,7 @@
     <Compile Include="EmergencyResponseManuals\MedicalManual.xaml.cs">
       <DependentUpon>MedicalManual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventVO.cs" />
     <Compile Include="LoadingControl\LoadingAnimation.xaml.cs">
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>

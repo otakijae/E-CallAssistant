@@ -51,13 +51,13 @@ namespace ImagineCupProject
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
         string result;
         //MainPage mainPage;
-        string classifiedResult;
+        public string classifiedResult;
 
         SimpleManual simpleManual = new SimpleManual();
         StandardManual standardManual = new StandardManual();
-        AdditionalQuestion additionalQuestion = new AdditionalQuestion();
+        AdditionalQuestion additionalQuestion;
 
-        public MainQuestion()
+        public MainQuestion(AdditionalQuestion additionalQuestion)
         {
             //mainPage = new MainPage();
             InitializeComponent();
@@ -66,7 +66,9 @@ namespace ImagineCupProject
 
             //Manual xaml 매뉴얼 
             this.simpleManualGrid.Children.Add(simpleManual);
-            //this.standardManualGrid.Children.Add(standardManual);
+            this.standardManualGrid.Children.Add(standardManual);
+
+            this.additionalQuestion = additionalQuestion;
         }
 
         public string TextBoxText
@@ -82,15 +84,14 @@ namespace ImagineCupProject
         //텍스트 분석 클릭버튼            
         public void analyze()
         {
-            
             if (entityRecognition.Text != "")
             {
-                entityRecognition.Text = null;
-                sentimentRecognition.Text = null;
-                syntaxRecognition.Text = null;
-                problemText.Text = null;
-                locationText.Text = null;
-                codeText.Text = null;
+                //entityRecognition.Text = null;
+                //sentimentRecognition.Text = null;
+                //syntaxRecognition.Text = null;
+                //problemText.Text = null;
+                //locationText.Text = null;
+                //codeText.Text = null;
             }
             
             string text = responseText.Text;
@@ -258,6 +259,10 @@ namespace ImagineCupProject
         {
             azureDatabase.sendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
+
+
+
+
 
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {

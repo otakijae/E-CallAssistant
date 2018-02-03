@@ -43,7 +43,6 @@ namespace ImagineCupProject
         ClassifiedManual classifiedManual = new ClassifiedManual();
         MedicalManual medicalManual = new MedicalManual();
 
-        string classifiedResult;
         Client client = new Client("3b49bfce", "d5788d26c944e091562527416046febb");
         string text = "I am the passenger and I see the Starbucks building at New York subway station is on fire. I think 911 need to check this out quickly" +
                 "At least 37 people have been killed and dozens injured in a fire at a hospital and nursing home in New York, in the country's deadliest blaze for a decade";
@@ -52,19 +51,21 @@ namespace ImagineCupProject
         ArrayList textShapeArrayList;
         MainQuestion mainQuestion;
         TotalPage totalPage;
-        AdditionalQuestion additionalQuestion; 
+        AdditionalQuestion additionalQuestion;
         private readonly ToastViewModel _vm;
+
+        EventVO CurrentEvent = new EventVO();
 
         public MainPage()
         {
             InitializeComponent();
             textArrayList = new ArrayList();
             textShapeArrayList = new ArrayList();
-            mainFrame.Content = new MainQuestion();
             DataContext = _vm = new ToastViewModel();
             additionalQuestion = new AdditionalQuestion();
             totalPage = new TotalPage();
-            mainQuestion = new MainQuestion();
+            mainQuestion = new MainQuestion(additionalQuestion);
+            mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             summarize();
             sentimentAnalysis();
@@ -89,14 +90,34 @@ namespace ImagineCupProject
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-            if(nextButton.Content.Equals("Next"))
+            if (nextButton.Content.Equals("Next"))
             {
-                //mainFrame.Content = new AdditionalQuestion();
+                CurrentEvent.EventNUMBER = null;
+                CurrentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
+                CurrentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
+                CurrentEvent.EventENDTIME = null;
+                CurrentEvent.EventLOCATION = mainQuestion.locationText.Text;
+                CurrentEvent.EventPHONENUMBER = mainQuestion.phoneNumberText.Text;
+                CurrentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
+                CurrentEvent.EventPROBLEM = mainQuestion.problemText.Text;
+                CurrentEvent.EventCODE = mainQuestion.codeText.Text;
+                
                 mainFrame.Content = additionalQuestion;
-                nextButton.Content = "Before";
+                nextButton.Content = "Previous";
             }
             else
             {
+                mainQuestion.operatorText.Text = CurrentEvent.EventOPERATOR;
+                mainQuestion.timeText.Text = CurrentEvent.EventSTARTTIME;
+                mainQuestion.locationText.Text = CurrentEvent.EventLOCATION;
+                mainQuestion.phoneNumberText.Text = CurrentEvent.EventPHONENUMBER;
+                mainQuestion.callerNameText.Text = CurrentEvent.EventCALLERNAME;
+                mainQuestion.problemText.Text = CurrentEvent.EventPROBLEM;
+
+                //카테고리가 나오기 전에 다음 화면으로 넘어갔을 경우 현재사건VO 객체에 코드 정보가 저장이 안 되어있기 때문에 다음 화면에서 카테고리 결과가 출력되면 VO 객체에 값을 넣어줌
+                CurrentEvent.EventCODE = mainQuestion.classifiedResult;
+                mainQuestion.codeText.Text = CurrentEvent.EventCODE;
+
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";
             }
@@ -203,7 +224,6 @@ namespace ImagineCupProject
                     WriteResponseResult(e);
                 }));
             //}
-
         }
 
         //ShortPhrase으로 설정했을때 receiveHandlear
@@ -216,7 +236,6 @@ namespace ImagineCupProject
                 WriteResponseResult(e);
             }));
         }
-
 
         //receiveHandlear 내용 출력 메소드
         private void WriteResponseResult(SpeechResponseEventArgs e)
@@ -242,8 +261,6 @@ namespace ImagineCupProject
                     new Features() { ExtractSyntax = true });
                     CorrectSentences(response.Sentences, response.Tokens);
                 }
-
-
                 //codeText.Text += "\n";
             }
         }

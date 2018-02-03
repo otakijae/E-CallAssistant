@@ -227,20 +227,24 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*" />
-                    <RowDefinition Height="0.5*" />
-                    <RowDefinition Height="8.5*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="9*" />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="ButtonCloseMenu" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Click="ButtonCloseMenu_Click" Visibility="Collapsed" Grid.Row="0">
-                    <materialDesign:PackIcon Kind="Menu" Foreground="#FF3580BF"/>
-                </Button>
-                <Button x:Name="ButtonOpenMenu" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Click="ButtonOpenMenu_Click" Grid.Row="0">
-                    <materialDesign:PackIcon Kind="Menu" Foreground="#FF3580BF"/>
-                </Button>
-                <TextBlock Text="Emergency call response" Foreground="#FF3580BF" FontSize="30" FontWeight="Bold" Margin="20 0" Grid.Row="1"/>
+                <Border BorderBrush="#FF4F96D2" BorderThickness="0 0 0 0.5" >
+                    <Grid Grid.Row="0" >
+                        <Button x:Name="ButtonCloseMenu" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Click="ButtonCloseMenu_Click" Visibility="Collapsed" Grid.Row="0">
+                            <materialDesign:PackIcon Kind="Menu" Foreground="#FF4F96D2"/>
+                        </Button>
+                        <Button x:Name="ButtonOpenMenu" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Click="ButtonOpenMenu_Click" Grid.Row="0">
+                            <materialDesign:PackIcon Kind="Menu" Foreground="#FF4F96D2"/>
+                        </Button>
+                        <TextBlock Text="menu" Foreground="#FF4F96D2" FontSize="15" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Emergency Call Assistant" Foreground="#FF4F96D2" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    </Grid>
+                </Border>
 
-                <Grid x:Name="classification" Grid.Row="2">
+                <Grid x:Name="classification" Grid.Row="1">
                     <Frame x:Name="mainFrame" Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  NavigationUIVisibility="Hidden" />
                 </Grid>
 
