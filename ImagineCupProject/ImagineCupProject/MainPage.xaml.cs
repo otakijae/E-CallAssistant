@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Threading;
@@ -10,16 +8,7 @@ using System.Collections;
 using Google.Cloud.Language.V1;
 using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
-using System.Threading.Tasks;
 using ImagineCupProject.EmergencyResponseManuals;
-using System.Windows.Controls.Primitives;
-using System.Net.Http;
-using System.Web;
-using System.Net.Http.Headers;
-using Google.Apis.Auth.OAuth2;
-using Google.Cloud.Storage.V1;
-using Google.Cloud.Speech.V1;
-using System.Data.SqlClient;
 using Aylien.TextApi;
 using System.Windows.Input;
 
@@ -30,12 +19,11 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainPage : UserControl
     {
-        MicrophoneRecognitionClient _microphoneRecognitionClient;
+        MicrophoneRecognitionClient microphoneRecognitionClient;
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
 
-        AutoResetEvent _FinalResponceEvent;
-        String temp;
+        AutoResetEvent finalResponceEvent;
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
 
         SimpleManual simpleManual = new SimpleManual();
@@ -47,28 +35,24 @@ namespace ImagineCupProject
         string text = "I am the passenger and I see the Starbucks building at New York subway station is on fire. I think 911 need to check this out quickly" +
                 "At least 37 people have been killed and dozens injured in a fire at a hospital and nursing home in New York, in the country's deadliest blaze for a decade";
         string speechRecognitionResult;
-        ArrayList textArrayList;
-        ArrayList textShapeArrayList;
+        ArrayList textArrayList = new ArrayList();
+        ArrayList textShapeArrayList = new ArrayList();
+        AdditionalQuestion additionalQuestion = new AdditionalQuestion();
+        TotalPage totalPage = new TotalPage();
         MainQuestion mainQuestion;
-        TotalPage totalPage;
-        AdditionalQuestion additionalQuestion;
-        private readonly ToastViewModel _vm;
+        private readonly ToastViewModel toastViewModel;
 
-        EventVO CurrentEvent = new EventVO();
+        EventVO currentEvent = new EventVO();
 
         public MainPage()
         {
             InitializeComponent();
-            textArrayList = new ArrayList();
-            textShapeArrayList = new ArrayList();
-            DataContext = _vm = new ToastViewModel();
-            additionalQuestion = new AdditionalQuestion();
-            totalPage = new TotalPage();
-            mainQuestion = new MainQuestion(additionalQuestion);
+            DataContext = toastViewModel = new ToastViewModel();
+            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel);
             mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
-            summarize();
-            sentimentAnalysis();
+            Summarize();
+            SentimentAnalysis();
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -92,31 +76,31 @@ namespace ImagineCupProject
         {
             if (nextButton.Content.Equals("Next"))
             {
-                CurrentEvent.EventNUMBER = null;
-                CurrentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
-                CurrentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
-                CurrentEvent.EventENDTIME = null;
-                CurrentEvent.EventLOCATION = mainQuestion.locationText.Text;
-                CurrentEvent.EventPHONENUMBER = mainQuestion.phoneNumberText.Text;
-                CurrentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
-                CurrentEvent.EventPROBLEM = mainQuestion.problemText.Text;
-                CurrentEvent.EventCODE = mainQuestion.codeText.Text;
+                currentEvent.EventNUMBER = null;
+                currentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
+                currentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
+                currentEvent.EventENDTIME = null;
+                currentEvent.EventLOCATION = mainQuestion.locationText.Text;
+                currentEvent.EventPHONENUMBER = mainQuestion.phoneNumberText.Text;
+                currentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
+                currentEvent.EventPROBLEM = mainQuestion.problemText.Text;
+                currentEvent.EventCODE = mainQuestion.codeText.Text;
                 
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
             }
             else
             {
-                mainQuestion.operatorText.Text = CurrentEvent.EventOPERATOR;
-                mainQuestion.timeText.Text = CurrentEvent.EventSTARTTIME;
-                mainQuestion.locationText.Text = CurrentEvent.EventLOCATION;
-                mainQuestion.phoneNumberText.Text = CurrentEvent.EventPHONENUMBER;
-                mainQuestion.callerNameText.Text = CurrentEvent.EventCALLERNAME;
-                mainQuestion.problemText.Text = CurrentEvent.EventPROBLEM;
+                mainQuestion.operatorText.Text = currentEvent.EventOPERATOR;
+                mainQuestion.timeText.Text = currentEvent.EventSTARTTIME;
+                mainQuestion.locationText.Text = currentEvent.EventLOCATION;
+                mainQuestion.phoneNumberText.Text = currentEvent.EventPHONENUMBER;
+                mainQuestion.callerNameText.Text = currentEvent.EventCALLERNAME;
+                mainQuestion.problemText.Text = currentEvent.EventPROBLEM;
 
                 //카테고리가 나오기 전에 다음 화면으로 넘어갔을 경우 현재사건VO 객체에 코드 정보가 저장이 안 되어있기 때문에 다음 화면에서 카테고리 결과가 출력되면 VO 객체에 값을 넣어줌
-                CurrentEvent.EventCODE = mainQuestion.classifiedResult;
-                mainQuestion.codeText.Text = CurrentEvent.EventCODE;
+                currentEvent.EventCODE = mainQuestion.classifiedResult;
+                mainQuestion.codeText.Text = currentEvent.EventCODE;
 
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";
@@ -133,22 +117,16 @@ namespace ImagineCupProject
         {
             mainFrame.Content = mainQuestion;
         }
-        /*
-            //Manual xaml 매뉴얼
-            this.simpleManualGrid.Children.Add(simpleManual);
-            this.standardManualGrid.Children.Add(standardManual);
-            this.classifiedManualGrid.Children.Add(classifiedManual);
-            this.medicalManualGrid.Children.Add(medicalManual);
-         */
+
         //음성인식버튼
         private void btnStartRecord_Click(object sender, RoutedEventArgs e)
         {
-            _vm.ShowInformation("Ring the Call.");
+            toastViewModel.ShowInformation("Ring the Call.");
             ConvertSpeechToText();
         }
 
         //  Summarize -  AYLIEN Text Analysis API 
-        public void summarize()
+        public void Summarize()
         {
             string title = "emergency";
             var summary2 = client.Summarize(text: text, title: title, sentencesNumber: 3).Sentences;
@@ -160,7 +138,7 @@ namespace ImagineCupProject
         }
 
         //  SentimentAnalyze -  AYLIEN Text Analysis API 
-        public void sentimentAnalysis()
+        public void SentimentAnalysis()
         {
             Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
             summary.Text += "\nsentiment : ";
@@ -177,17 +155,17 @@ namespace ImagineCupProject
             string language = "en-us";
             string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
             //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
-            _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
+            microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
                 speechRecognitionMode,
                 language,
                 subscriptionKey
                 );
 
             //_microphoneRecognitionClient.OnResponseReceived += ResponseReceived;
-            _microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
+            microphoneRecognitionClient.OnPartialResponseReceived += ResponseReceived;
             //_microphoneRecognitionClient.OnResponseReceived += OnMicShortPhraseResponseReceivedHandler;
-            _microphoneRecognitionClient.OnResponseReceived += OnMicDictationResponseReceivedHandler;
-            _microphoneRecognitionClient.StartMicAndRecognition();
+            microphoneRecognitionClient.OnResponseReceived += OnMicDictationResponseReceivedHandler;
+            microphoneRecognitionClient.StartMicAndRecognition();
         }
 
         //Textbox에 text입력
@@ -297,11 +275,10 @@ namespace ImagineCupProject
 
         }
         
-
         private void btnSendTo112_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.sendTo112();
-            _vm.ShowSuccess("SendTo112 Success");
+            toastViewModel.ShowSuccess("SendTo112 Success");
             //_vm.ShowWarning(String.Format("{0} Warning", _count++));
             //_vm.ShowError(String.Format("{0} Error", _count++));
         }
@@ -309,7 +286,7 @@ namespace ImagineCupProject
         private void btnSendTo110_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.sendTo110();
-            _vm.ShowSuccess("SendTo110 Success");
+            toastViewModel.ShowSuccess("SendTo110 Success");
             //_vm.ShowInformation(String.Format("{0} Information", _count++));
             //_vm.ShowSuccess(String.Format("{0} Success", _count++));
         }
@@ -322,8 +299,7 @@ namespace ImagineCupProject
         private void btnTransfer_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.analyze();
-            _vm.ShowSuccess("Transfer complete");
+            toastViewModel.ShowSuccess("Transfer complete");
         }
-     
     }
 }
