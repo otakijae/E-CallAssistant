@@ -48,7 +48,7 @@ namespace ImagineCupProject
         {
             InitializeComponent();
             DataContext = toastViewModel = new ToastViewModel();
-            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel);
+            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess);
             mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             Summarize();
@@ -267,18 +267,16 @@ namespace ImagineCupProject
             {
                 speechResult.Text += textArrayList[i];
                 //mainQuestion.responseText.Text += textArrayList[i];
-
             }
             //mainQuestion.analyze();
             //MessageBox.Show(mainQuestion.responseText.Text); 
             textArrayList.Clear();
-
         }
         
         private void btnSendTo112_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.sendTo112();
-            toastViewModel.ShowSuccess("SendTo112 Success");
+            toastViewModel.ShowSuccess("Send To 112 Success");
             //_vm.ShowWarning(String.Format("{0} Warning", _count++));
             //_vm.ShowError(String.Format("{0} Error", _count++));
         }
@@ -286,7 +284,7 @@ namespace ImagineCupProject
         private void btnSendTo110_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.sendTo110();
-            toastViewModel.ShowSuccess("SendTo110 Success");
+            toastViewModel.ShowSuccess("Send To 110 Success");
             //_vm.ShowInformation(String.Format("{0} Information", _count++));
             //_vm.ShowSuccess(String.Format("{0} Success", _count++));
         }
@@ -299,7 +297,7 @@ namespace ImagineCupProject
         private void btnTransfer_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.analyze();
-            toastViewModel.ShowSuccess("Transfer complete");
+            toastViewModel.ShowSuccess("Dispatch completed");
         }
     }
 }

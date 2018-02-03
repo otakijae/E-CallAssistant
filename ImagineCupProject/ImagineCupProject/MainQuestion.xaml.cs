@@ -34,8 +34,9 @@ namespace ImagineCupProject
         AdditionalQuestion additionalQuestion;
 
         private readonly ToastViewModel toastViewModel;
+        LoadingAnimation loadingAnimation;
 
-        public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel)
+        public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation)
         {
             InitializeComponent();
             timeText.Text = time;
@@ -48,6 +49,7 @@ namespace ImagineCupProject
             this.additionalQuestion = additionalQuestion;
 
             this.toastViewModel = toastViewModel;
+            this.loadingAnimation = loadingAnimation;
         }
 
         public string TextBoxText
@@ -238,18 +240,18 @@ namespace ImagineCupProject
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
             Run(problemText.Text);
-            //this.loadingProcess.Visibility = Visibility.Visible;
+            loadingAnimation.Visibility = Visibility.Visible;
         }
 
         private async void Run(string keyWords)
         {
             this.codeText.Text = await TextClassificationAsync(keyWords);
             //this.textClassify.IsEnabled = true;
-            //this.loadingProcess.Visibility = Visibility.Hidden;
+            loadingAnimation.Visibility = Visibility.Hidden;
 
-            //분류된 카테고리에 대한 매뉴얼 출력, 나중에 완료하면 Toast알림 띄우기
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기
             additionalQuestion.ShowClassifiedManuals(classifiedResult);
-            toastViewModel.ShowWarning("Code analysis : " + classifiedResult);
+            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
         }
         
         private async Task<string> TextClassificationAsync(string keyWords)

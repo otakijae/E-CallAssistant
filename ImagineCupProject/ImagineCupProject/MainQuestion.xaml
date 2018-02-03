@@ -9,8 +9,7 @@
       Title="MainQuestion">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Visible">
-            <StackPanel VerticalAlignment="Top" Height="781">
-                <!--<local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden"/>-->
+            <StackPanel VerticalAlignment="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
@@ -54,7 +53,6 @@
                     <TextBox x:Name="syntaxRecognition" Text="" TextWrapping="Wrap" FontSize="15" FontFamily="Nirmala UI Semilight" Grid.Column="2" Grid.Row="8" Background="AliceBlue" VerticalContentAlignment="Top" BorderBrush="#FF3580BF" BorderThickness="1" Margin="0.4,0,0.4,-0.4" Visibility="Hidden"/>
 
                     <Grid x:Name="simpleManualGrid" Grid.Column="2" Grid.Row="1" Grid.RowSpan="7"/>
-
                 </Grid>
 
                 <WrapPanel>
@@ -62,9 +60,7 @@
                     <ToggleButton HorizontalAlignment="Left" Click="StandardResponse_Click"/>
                 </WrapPanel>
                 <Grid x:Name="standardManualGrid"/>
-
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
 </Page>
