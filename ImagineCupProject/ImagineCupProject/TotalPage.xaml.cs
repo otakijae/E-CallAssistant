@@ -28,10 +28,10 @@ namespace ImagineCupProject
         {
             InitializeComponent();
             this.DataContext = new ChartViewModel();
-            printData();
+            PrintData();
         }
 
-        public void printData()
+        public void PrintData()
         {
             try
             {

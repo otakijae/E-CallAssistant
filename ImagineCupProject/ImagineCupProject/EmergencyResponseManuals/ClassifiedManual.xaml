@@ -490,6 +490,61 @@
                 </StackPanel>
             </Grid>
 
+            <Grid x:Name="motorVehicleAccidents" Visibility="Collapsed" ShowGridLines="True">
+                <StackPanel>
+                    <TextBlock Text="Motor Vehicle Accidents" FontFamily="Nirmala UI Semilight" FontWeight="Bold" FontSize="20" TextAlignment="Left" Margin="10"/>
+                    <TextBlock Foreground="Black" VerticalAlignment="Center" TextAlignment="Left" FontSize="12" FontFamily="Nirmala UI Semilight" TextWrapping="Wrap" Margin="10">
+                    Immediately following a car accident, consider taking the following actions:<LineBreak/>
+                    <LineBreak/>
+                    STEP 1: CHECK YOURSELF FOR INJURIES.<LineBreak/>
+                    If you're injured, call 911 or ask someone else to do so. If you're seriously injured, try not to move, and wait for emergency personnel.<LineBreak/>
+                    <LineBreak/>
+                    STEP 2: CHECK ON THE WELL-BEING OF YOUR PASSENGERS.<LineBreak/>
+                    If you're not too hurt to move, check on the other passengers in your car.<LineBreak/>
+                    If anyone's injured, get on the phone with emergency services or ask a bystander to call for help.<LineBreak/>
+                    <LineBreak/>
+                    STEP 3: GET TO SAFETY.<LineBreak/>
+                    If you're able to, move to the side of the road or a sidewalk.<LineBreak/>
+                    If your car is safe to drive and is causing a hazard where it is, pull it to the side of the road.<LineBreak/>
+                    Otherwise, leave it where it is and get yourself to safety.<LineBreak/>
+                    <LineBreak/>
+                    STEP 4: Wait until the police officers come<LineBreak/>
+                    Whether an accident is considered a minor fender-bender or a major collision, calling the police is important â€” and in some states, it's legally required.<LineBreak/>
+                    The responding officers will fill out an accident report and document the scene.<LineBreak/>
+                    If the police can't come to the scene of the accident, you can go to the nearest police station and complete a report yourself, according to the III.<LineBreak/>
+                    <LineBreak/>
+                    STEP 5: WAIT FOR HELP.<LineBreak/>
+                    Turn off your engine, turn on your hazard lights and use road flares to warn other vehicles to slow down.<LineBreak/>
+                    <LineBreak/>
+                    STEP 6: EXCHANGE INFORMATION.<LineBreak/>
+                    After making sure you and any passengers are uninjured, exchange contact and insurance information with the other driver.<LineBreak/>
+                    According to the III, the most important information includes:<LineBreak/>
+                        - Full name and contact information<LineBreak/>
+                        - Insurance company and policy number<LineBreak/>
+                        - Driver's license and license plate number<LineBreak/>
+                        - Type, color and model of vehicle<LineBreak/>
+                        - Location of accident<LineBreak/>
+                    The III recommends that you avoid discussing fault when going over the facts with the other driver.<LineBreak/>
+                    <LineBreak/>
+                    STEP 7: DOCUMENT THE ACCIDENT.<LineBreak/>
+                    In order to help protect yourself, the III recommends taking the following steps:<LineBreak/>
+                        - Identify the officers. Once the police arrive, get the name and badge number of all responding officers.<LineBreak/>
+                        - Get a copy. Ask the police officers present where you can obtain a copy of the accident report.<LineBreak/>
+                        - Take pictures. Document the accident thoroughly by taking pictures of your vehicle from different angles, showing the damage done to both cars.
+                        It might also be a good idea to take pictures of the other car's license plate.<LineBreak/>
+                        - Take down names. Write down the names and addresses of all parties involved, including any passengers in the other vehicle.<LineBreak/>
+                        - Talk to witnesses. If there were any witnesses to the accident, take down their names and their contact information, as well.<LineBreak/>
+                    To help keep all of this documentation in order, you can keep this accident information page in your vehicle.<LineBreak/>
+                    <LineBreak/>
+                    STEP 8: NOTIFY YOUR INSURER AND START THE CLAIMS PROCESS.<LineBreak/>
+                    You may want to call your insurance agent while you're at the scene.<LineBreak/>
+                    That way, they can tell you exactly what they will need to in order to process your claim and what to expect during the claims process.<LineBreak/>
+                    An accident can leave even the most seasoned driver frazzled, but following these steps may help protect you from unnecessary worries.<LineBreak/>
+                    That way, you can work with your insurance company to get your vehicle repaired as smoothly and as quickly as possible.<LineBreak/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
         </StackPanel>
 
     </Grid>

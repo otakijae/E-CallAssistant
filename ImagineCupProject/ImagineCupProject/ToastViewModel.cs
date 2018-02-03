@@ -5,14 +5,14 @@ namespace ImagineCupProject
 {
     public class ToastViewModel : INotifyPropertyChanged
     {
-        private NotificationsSource _notificationSource;
+        private NotificationsSource notificationSource;
 
         public NotificationsSource NotificationSource
         {
-            get { return _notificationSource; }
+            get { return notificationSource; }
             set
             {
-                _notificationSource = value;
+                notificationSource = value;
                 OnPropertyChanged("NotificationSource");
             }
         }

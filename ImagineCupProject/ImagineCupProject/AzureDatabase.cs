@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -10,7 +6,7 @@ namespace ImagineCupProject
 {
     class AzureDatabase
     {
-        public void insertData(string operatorName,string time, string location, string phoneNumber, string callerName, string problem, string code)
+        public void InsertData(string operatorName,string time, string location, string phoneNumber, string callerName, string problem, string code)
         {
             try
             {
@@ -42,7 +38,7 @@ namespace ImagineCupProject
             }
         }
 
-        public void sendDataTo112(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
+        public void SendDataTo112(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
         {
             try
             {
@@ -74,7 +70,7 @@ namespace ImagineCupProject
             }
         }
 
-        public void sendDataTo110(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
+        public void SendDataTo110(string operatorName, string time, string location, string phoneNumber, string callerName, string problem, string code)
         {
             try
             {
@@ -106,7 +102,7 @@ namespace ImagineCupProject
             }
         }
 
-        public void printData()
+        public void PrintData()
         {
             try
             {
@@ -136,6 +132,5 @@ namespace ImagineCupProject
                 MessageBox.Show(er.ToString());
             }
         }
-        
     }
 }

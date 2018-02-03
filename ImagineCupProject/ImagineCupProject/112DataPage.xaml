@@ -10,7 +10,6 @@
 
     <Grid Background="White">
         
-
         <TextBox x:Name="sendTo112Text" BorderBrush="Black" BorderThickness="1" Text=" Send To 112                          " Background="White" FontSize="30"  VerticalContentAlignment="Center" Margin="0,0,0,550"  />
         <TextBox  Text=" Time" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="0,50,680,520"  />
         <TextBox  Text=" Location" BorderBrush="Black" BorderThickness="1" Background="White" FontSize="20"  TextAlignment="Center" Margin="170,50,425,520"  />

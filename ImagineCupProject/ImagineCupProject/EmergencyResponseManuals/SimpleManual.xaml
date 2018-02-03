@@ -8,30 +8,30 @@
     
     <Grid x:Name="simpleManualGrid">
         <StackPanel>
-            <Label Content="# Routine Questioning Pattern" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top"/>
-            <Label Content="The components of caller interviewing are : " />
-            <Label Content="    1. Determine location of emergency, including address details"/>
-            <Label Content="     - This is 911, what is the location of your emergency?"/>
-            <Label Content="     - This is 911, what is the address we need to go to?"/>
-            <Label Content="         - What city?"/>
-            <Label Content="         - House, apartment or business?"/>
-            <Label Content="         - Name of the apartment complex/business?"/>
-            <Label Content="         - Building number?"/>
-            <Label Content="         - Directional? (North of, South of, East of, West of)"/>
-            <Label Content="         - Area of the building/complex/warehouse?"/>
-            <Label Content="         - Major cross streets?"/>
-            <Label Content="    2. Determine source/callback information"/>
-            <Label Content="    3. Initial triage to determine nature of emergency"/>
-            <Label Content="    4. Secondary questioning and information gathering"/>
-            <Label Content="    5. Pre-Arrival instructions"/>
-            <Label Content="# Patient or Medical Information questions" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top"/>
-            <Label Content="    1) Determine patients CHIEF COMPLAINT" />
-            <Label Content="    2) Are you with the patient?" />
-            <Label Content="    3) Is the patient AWAKE/ABLE TO TALK to you?" />
-            <Label Content="    4) Is the patient BREATHING normal?" />
-            <Label Content="    5) Is the patient BLEEDING?" />
-            <Label Content="    6) Patient's AGE and SEX?" />
-            <Label Content="    7) Reassure caller, HELP IS ON THE WAY" />
+            <Label Content="# Routine Questioning Pattern" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top" Foreground="Black"/>
+            <Label Content="The components of caller interviewing are : " Foreground="Black"/>
+            <Label Content="    1. Determine location of emergency, including address details" Foreground="Black"/>
+            <Label Content="     - This is 911, what is the location of your emergency?" Foreground="Black"/>
+            <Label Content="     - This is 911, what is the address we need to go to?" Foreground="Black"/>
+            <Label Content="         - What city?" Foreground="Black"/>
+            <Label Content="         - House, apartment or business?" Foreground="Black"/>
+            <Label Content="         - Name of the apartment complex/business?" Foreground="Black"/>
+            <Label Content="         - Building number?" Foreground="Black"/>
+            <Label Content="         - Directional? (North of, South of, East of, West of)" Foreground="Black"/>
+            <Label Content="         - Area of the building/complex/warehouse?" Foreground="Black"/>
+            <Label Content="         - Major cross streets?" Foreground="Black"/>
+            <Label Content="    2. Determine source/callback information" Foreground="Black"/>
+            <Label Content="    3. Initial triage to determine nature of emergency" Foreground="Black"/>
+            <Label Content="    4. Secondary questioning and information gathering" Foreground="Black"/>
+            <Label Content="    5. Pre-Arrival instructions" Foreground="Black"/>
+            <Label Content="# Patient or Medical Information questions" FontSize="15" FontFamily="Nirmala UI Semilight" FontWeight="Bold" VerticalAlignment="Top" Foreground="Black"/>
+            <Label Content="    1) Determine patients CHIEF COMPLAINT" Foreground="Black"/>
+            <Label Content="    2) Are you with the patient?" Foreground="Black"/>
+            <Label Content="    3) Is the patient AWAKE/ABLE TO TALK to you?" Foreground="Black"/>
+            <Label Content="    4) Is the patient BREATHING normal?" Foreground="Black"/>
+            <Label Content="    5) Is the patient BLEEDING?" Foreground="Black"/>
+            <Label Content="    6) Patient's AGE and SEX?" Foreground="Black"/>
+            <Label Content="    7) Reassure caller, HELP IS ON THE WAY" Foreground="Black"/>
         </StackPanel>
     </Grid>
     

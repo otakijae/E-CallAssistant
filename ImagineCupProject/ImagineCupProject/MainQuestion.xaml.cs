@@ -1,36 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Threading;
-using System.Configuration;
-using Microsoft.CognitiveServices.SpeechRecognition;
 using System.Collections;
-using System.Net.Http;
-using System.Web;
-using System.Net.Http.Headers;
-using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Language.V1;
-using Google.Cloud.Storage.V1;
 using Google.Protobuf.Collections;
 using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.IO;
-using Google.Cloud.Speech.V1;
-using System.Data.SqlClient;
 using System.Net;
 using Newtonsoft.Json;
-using ImagineCupProject.EmergencyResponseManuals;
 using System.Diagnostics;
 using System.Windows.Controls.Primitives;
 //using Aylien.TextApi;
@@ -45,29 +24,32 @@ namespace ImagineCupProject
         
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
-        String temp;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
         string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
-        string result;
-        //MainPage mainPage;
-        string classifiedResult;
-         
-        StandardManual standardManual = new StandardManual();
-        ClassifiedManual classifiedManual = new ClassifiedManual();
-        MedicalManual medicalManual = new MedicalManual();
+        public string classifiedResult;
 
-        public MainQuestion()
+        SimpleManual simpleManual = new SimpleManual();
+        StandardManual standardManual = new StandardManual();
+        AdditionalQuestion additionalQuestion;
+
+        private readonly ToastViewModel toastViewModel;
+        LoadingAnimation loadingAnimation;
+
+        public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation)
         {
-            //mainPage = new MainPage();
             InitializeComponent();
             timeText.Text = time;
             //azureDatabase = new AzureDatabase();
 
             //Manual xaml 매뉴얼 
+            this.simpleManualGrid.Children.Add(simpleManual);
             this.standardManualGrid.Children.Add(standardManual);
-            this.classifiedManualGrid.Children.Add(classifiedManual);
-            this.medicalManualGrid.Children.Add(medicalManual);
+
+            this.additionalQuestion = additionalQuestion;
+
+            this.toastViewModel = toastViewModel;
+            this.loadingAnimation = loadingAnimation;
         }
 
         public string TextBoxText
@@ -81,17 +63,16 @@ namespace ImagineCupProject
         }
 
         //텍스트 분석 클릭버튼            
-        public void analyze()
+        public void Analyze()
         {
-            
             if (entityRecognition.Text != "")
             {
-                entityRecognition.Text = null;
-                sentimentRecognition.Text = null;
-                syntaxRecognition.Text = null;
-                problemText.Text = null;
-                locationText.Text = null;
-                codeText.Text = null;
+                //entityRecognition.Text = null;
+                //sentimentRecognition.Text = null;
+                //syntaxRecognition.Text = null;
+                //problemText.Text = null;
+                //locationText.Text = null;
+                //codeText.Text = null;
             }
             
             string text = responseText.Text;
@@ -118,11 +99,9 @@ namespace ImagineCupProject
             new Features() { ExtractSyntax = true });
             WriteSentences(response3.Sentences, response3.Tokens);
 
-            azureDatabase.insertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
-            googlePlacesAPI();
+            azureDatabase.InsertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            GooglePlacesAPI();
         }
-
-
 
         //긍정 부정 분석 google api
         private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
@@ -178,36 +157,35 @@ namespace ImagineCupProject
             }
         }
 
-
-    /*
-    // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
-    public object AsyncRecognizeGcs(string storageUri)
-    {
-        var speech = SpeechClient.Create();
-        var longOperation = speech.LongRunningRecognize(new RecognitionConfig()
+        /*
+        // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
+        public object AsyncRecognizeGcs(string storageUri)
         {
-            Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-            SampleRateHertz = 44100,
-            LanguageCode = "en",
-        }, RecognitionAudio.FromStorageUri(storageUri));
-        longOperation = longOperation.PollUntilCompleted();
-        var response = longOperation.Result;
-        foreach (var result in response.Results)
-        {
-            foreach (var alternative in result.Alternatives)
+            var speech = SpeechClient.Create();
+            var longOperation = speech.LongRunningRecognize(new RecognitionConfig()
             {
-                responseText.Text = (alternative.Transcript);
+                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                SampleRateHertz = 44100,
+                LanguageCode = "en",
+            }, RecognitionAudio.FromStorageUri(storageUri));
+            longOperation = longOperation.PollUntilCompleted();
+            var response = longOperation.Result;
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    responseText.Text = (alternative.Transcript);
+                }
             }
+            return 0;
         }
-        return 0;
-    }
-    */
+        */
     
-    public void googlePlacesAPI()
+        public void GooglePlacesAPI()
         {
             //string url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationText.Text + "&language=en&key=AIzaSyB55GQJ3tv_L2aALoWxIa4vkfJRdtunMtU";
             string json = "";
-            using (WebClient wc = new WebClient())
+            using (WebClient webClient = new WebClient())
             {
                 //json = wc.DownloadString(url);
 
@@ -218,7 +196,6 @@ namespace ImagineCupProject
                     MessageBox.Show(location);
 
                 }
-
             }
         }
 
@@ -250,91 +227,33 @@ namespace ImagineCupProject
             public string status { get; set; }
         }
         
-        public void sendTo112()
+        public void SendTo112()
         {
-            azureDatabase.sendDataTo112(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            azureDatabase.SendDataTo112(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
-        public void sendTo110()
+        public void SendTo110()
         {
-            azureDatabase.sendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            azureDatabase.SendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
             Run(problemText.Text);
-            //this.loadingProcess.Visibility = Visibility.Visible;
+            loadingAnimation.Visibility = Visibility.Visible;
         }
 
         private async void Run(string keyWords)
         {
             this.codeText.Text = await TextClassificationAsync(keyWords);
             //this.textClassify.IsEnabled = true;
-            //this.loadingProcess.Visibility = Visibility.Hidden;
+            loadingAnimation.Visibility = Visibility.Hidden;
 
-            //분류된 카테고리에 대한 매뉴얼 출력, 나중에 완료하면 Toast알림 띄우기
-            ShowClassifiedManuals(classifiedResult);
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기
+            additionalQuestion.ShowClassifiedManuals(classifiedResult);
+            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
         }
-
-        private void ShowClassifiedManuals(string category)
-        {
-            switch (category)
-            {
-                case "Disaster\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Visible;
-                    classifiedManual.flood.Visibility = Visibility.Visible;
-                    classifiedManual.severeWeather.Visibility = Visibility.Visible;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Terror\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Visible;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Fire\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Visible;
-                    classifiedManual.womenViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Collapsed;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
-                    classifiedManual.suicide.Visibility = Visibility.Collapsed;
-                    break;
-                case "Violence\r\n":
-                    classifiedManual.earthquake.Visibility = Visibility.Collapsed;
-                    classifiedManual.flood.Visibility = Visibility.Collapsed;
-                    classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
-                    classifiedManual.terrorAndGunshot.Visibility = Visibility.Collapsed;
-                    classifiedManual.fire.Visibility = Visibility.Collapsed;
-                    classifiedManual.womenViolence.Visibility = Visibility.Visible;
-                    classifiedManual.teenageViolence.Visibility = Visibility.Visible;
-                    classifiedManual.elderlyCruelTreatment.Visibility = Visibility.Visible;
-                    classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
-                    classifiedManual.suicide.Visibility = Visibility.Visible;
-                    break;
-                case "Motor vehicle accidents\r\n":
-                    break;
-                default:
-                    break;
-            }
-        }
-
+        
         private async Task<string> TextClassificationAsync(string keyWords)
         {
             try
@@ -370,14 +289,5 @@ namespace ImagineCupProject
             else
                 standardManual.standardManualGrid.Visibility = Visibility.Collapsed;
         }
-
-        private void MedicalResponse_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as ToggleButton).IsChecked == true)
-                medicalManual.medicalManualGrid.Visibility = Visibility.Visible;
-            else
-                medicalManual.medicalManualGrid.Visibility = Visibility.Collapsed;
-        }
     }
- 
 }
