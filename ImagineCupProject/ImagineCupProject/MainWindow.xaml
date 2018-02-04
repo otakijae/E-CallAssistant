@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ImagineCupProject"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="E-Call" Height="800" Width="1400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title=" E-Call Assistant" Height="800" Width="1400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
 
     <Grid x:Name="MainGrid"/>
 
