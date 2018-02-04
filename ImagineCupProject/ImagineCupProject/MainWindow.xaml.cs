@@ -26,7 +26,7 @@ namespace ImagineCupProject
         public MainWindow()
         {
             InitializeComponent();
-            Uri iconUri = new Uri(Environment.CurrentDirectory + "../../../Assets/icon.ico", UriKind.Relative);
+            Uri iconUri = new Uri(Environment.CurrentDirectory + "/../../../Assets/icon.ico", UriKind.Relative);
             this.Icon = BitmapFrame.Create(iconUri);
         }
 
