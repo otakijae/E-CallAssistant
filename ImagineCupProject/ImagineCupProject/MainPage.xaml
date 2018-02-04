@@ -201,7 +201,7 @@
                         <ImageBrush ImageSource="/Assets/operatorJW.jpg" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <TextBlock Text="Jangwon" Foreground="White" FontSize="20" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
+                <TextBlock Text="Operator" Foreground="White" FontSize="20" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
 
                 <StackPanel Margin="5 200 5 0">
                     <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
