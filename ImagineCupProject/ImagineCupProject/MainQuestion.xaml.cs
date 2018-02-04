@@ -21,7 +21,6 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainQuestion : Page
     {
-        
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
         ArrayList textArrayList = new ArrayList();
