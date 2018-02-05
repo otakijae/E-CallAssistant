@@ -111,7 +111,6 @@ namespace ImagineCupProject
             foreach (var sentence in sentences)
             {
                 sentimentRecognition.Text += $"{sentence.Text.Content}:" + $" ({sentence.Sentiment.Score * 100}%)\n";   //"\t{sentence.Text.Content}: "+ $
-
             }
         }
 

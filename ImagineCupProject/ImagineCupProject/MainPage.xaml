@@ -204,12 +204,21 @@
                 <TextBlock Text="Operator" Foreground="White" FontSize="20" FontFamily="Nirmala UI Semilight" Margin="10 100" VerticalAlignment="Top"/>
 
                 <StackPanel Margin="5 200 5 0">
-                    <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
-                    <TextBlock x:Name="speechRecognition" Text=" " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14"/>
-                    <TextBlock x:Name="phoneNumber" Text=" " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14"/>
-                    <TextBlock x:Name="speechResult" Text=" " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
-
-                    <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="0 50 0 50"/>
+                    <Border BorderBrush="White" BorderThickness="0.5">
+                        <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="0.5">
+                        <TextBlock x:Name="speechRecognition" Text="speech recognition : " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14"/>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="0.5" Height="200">
+                        <ScrollViewer CanContentScroll="True">
+                            <TextBlock x:Name="callerStatement" Text="caller statement : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+                
+                <StackPanel Margin="0 500 0 0">
+                    <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="0 10 0 10"/>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
