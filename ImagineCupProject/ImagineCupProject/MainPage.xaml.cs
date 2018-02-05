@@ -228,7 +228,7 @@ namespace ImagineCupProject
                 for (int i = 0; i < e.PhraseResponse.Results.Length; i++)
                 {
                     //아래내용 다른 textbox에 +=하면 된다. 
-                    //speechResult.Text += e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
+                    //callerStatement.Text += e.PhraseResponse.Results[i].DisplayText; // e.PhraseResponse.Results[i].Confidence +
                     string text = e.PhraseResponse.Results[i].DisplayText;
                     var client = LanguageServiceClient.Create();
                     var response = client.AnnotateText(new Document()
@@ -265,9 +265,18 @@ namespace ImagineCupProject
             }
             for (int i = 0; i < textArrayList.Count; i++)
             {
-                speechResult.Text += textArrayList[i];
+                callerStatement.Text += textArrayList[i];
+                mainQuestion.problemText.Text += textArrayList[i];
                 //mainQuestion.responseText.Text += textArrayList[i];
             }
+
+            //280, 200, 250자 정도에서 주기적으로 분석
+            if (callerStatement.Text.Length > 200)
+            {
+                mainQuestion.textClassify.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                callerStatement.Text = "caller statement: ";
+            }
+
             //mainQuestion.analyze();
             //MessageBox.Show(mainQuestion.responseText.Text); 
             textArrayList.Clear();
