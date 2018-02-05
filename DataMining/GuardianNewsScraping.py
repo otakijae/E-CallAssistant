@@ -10,8 +10,8 @@ from bs4 import BeautifulSoup, SoupStrainer
 section_dict = {}
 g=Goose()
 
-OUTPUTFILE="motor_vehicle_accidents.txt"
-OUTPUT_URLS="motor_vehicle_accidents.txt"
+OUTPUTFILE="emergency.txt"
+OUTPUT_URLS="emergency.txt"
 
 def get_urls(main_url):
 
@@ -33,7 +33,7 @@ def get_main_text(main_url):
         ut.write(article.cleaned_text)
 
 def main():
-    for x in range(45):
+    for x in range(50):
         page_number = (x*10)
         #url = 'https://www.google.co.uk/search?q=disaster+site:www.theguardian.com&lr=&as_qdr=all&ei=sGpbWpbPH4Sb8QWb4KigDw&start=' + str(page_number) + '&sa=N&biw=760&bih=703'
         #url = 'https://www.google.co.uk/search?q=earthquake+site:www.theguardian.com&lr=&as_qdr=all&ei=_wBhWsC6BMWb0gTdh5WwAQ&start=' + str(page_number) + '&sa=N&biw=1280&bih=703&dpr=2'
@@ -49,7 +49,8 @@ def main():
         #url = 'https://www.google.co.uk/search?q=rescue+site:www.theguardian.com&lr=&as_qdr=all&ei=JO1hWqGLG8Kx0gTc4p-ICw&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
         #url = 'https://www.google.co.uk/search?q=suicide+site:www.theguardian.com&lr=&as_qdr=all&ei=eBFhWp7WEsi50ASy2YuoAQ&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
         #url = 'https://www.google.co.uk/search?q=cruel+treatment+site:www.theguardian.com&lr=&as_qdr=all&ei=lAxhWrjyNoOs0ATMxbH4Ag&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
-        url = 'https://www.google.co.uk/search?q=motor+vehicle+accidents+site:www.theguardian.com&lr=&as_qdr=all&ei=qBFhWtqqI8Gp0ATg7I_IDA&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
+        #url = 'https://www.google.co.uk/search?q=motor+vehicle+accidents+site:www.theguardian.com&lr=&as_qdr=all&ei=qBFhWtqqI8Gp0ATg7I_IDA&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
+        url = 'https://www.google.co.kr/search?q=emergency+site:www.theguardian.com&ei=-9R2WprJMYXs0gSRvI_QCw&start=' + str(page_number) + '&sa=N&biw=1280&bih=703'
 
         hdr = {'User-Agent': 'Mozilla/5.0', 'referer' : url}
         req = urllib2.Request(url, headers=hdr)
