@@ -59,6 +59,8 @@
                 <WrapPanel>
                     <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
                     <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
+                    <Button x:Name="textPositiveNegativeClassify"  Content="PositiveNegative" FontSize="8" Width="100" Height="30" HorizontalAlignment="Center" Visibility="Visible" Click="textPositiveNegativeClassify_Click"/>
+                    <TextBox x:Name="testBox" Text="test" Width="200" FontSize="12" FontFamily="Nirmala UI Semilight" Background="AliceBlue" VerticalContentAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap"/>
                 </WrapPanel>
                 <Grid x:Name="medicalManualGrid" Margin="10"/>
 

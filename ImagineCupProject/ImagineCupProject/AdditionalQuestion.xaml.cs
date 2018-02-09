@@ -1,6 +1,8 @@
 ﻿using ImagineCupProject.EmergencyResponseManuals;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +27,21 @@ namespace ImagineCupProject
         ClassifiedManual classifiedManual = new ClassifiedManual();
         MedicalManual medicalManual = new MedicalManual();
 
-        public AdditionalQuestion()
+        MainQuestion mainQuestion;
+        private readonly ToastViewModel toastViewModel;
+        LoadingAnimation loadingAnimation;
+        string classifiedResult;
+
+        public AdditionalQuestion(MainQuestion mainQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation)
         {
             InitializeComponent();
 
             this.classifiedManualGrid.Children.Add(classifiedManual);
             this.medicalManualGrid.Children.Add(medicalManual);
+
+            this.mainQuestion = mainQuestion;
+            this.toastViewModel = toastViewModel;
+            this.loadingAnimation = loadingAnimation;
         }
 
         public void ShowClassifiedManuals(string category)
@@ -115,5 +126,47 @@ namespace ImagineCupProject
                 medicalManual.medicalManualGrid.Visibility = Visibility.Collapsed;
         }
 
+        private void textPositiveNegativeClassify_Click(object sender, RoutedEventArgs e)
+        {
+            Run(testBox.Text);
+            loadingAnimation.Visibility = Visibility.Visible;
+        }
+
+        private async void Run(string keyWords)
+        {
+            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            loadingAnimation.Visibility = Visibility.Hidden;
+
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기
+            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
+        }
+
+        private async Task<string> TextIsPositiveClassificationAsync(string keyWords)
+        {
+            try
+            {
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "eval_posneg.py";
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";
+
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
+
+                return classifiedResult;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

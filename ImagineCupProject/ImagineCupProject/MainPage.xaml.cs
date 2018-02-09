@@ -37,7 +37,7 @@ namespace ImagineCupProject
         string speechRecognitionResult;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
-        AdditionalQuestion additionalQuestion = new AdditionalQuestion();
+        AdditionalQuestion additionalQuestion;
         TotalPage totalPage = new TotalPage();
         MainQuestion mainQuestion;
         private readonly ToastViewModel toastViewModel;
@@ -49,6 +49,7 @@ namespace ImagineCupProject
             InitializeComponent();
             DataContext = toastViewModel = new ToastViewModel();
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess);
+            additionalQuestion = new AdditionalQuestion(mainQuestion, toastViewModel, loadingProcess);
             mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             Summarize();
@@ -76,6 +77,7 @@ namespace ImagineCupProject
         {
             if (nextButton.Content.Equals("Next"))
             {
+                //EventNUMBER는 AUTO INCREMENT로 설정, PRIMARY KEY로 설정
                 currentEvent.EventNUMBER = null;
                 currentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
                 currentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
@@ -85,7 +87,18 @@ namespace ImagineCupProject
                 currentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
                 currentEvent.EventPROBLEM = mainQuestion.problemText.Text;
                 currentEvent.EventCODE = mainQuestion.codeText.Text;
-                
+
+                if (currentEvent.EventLOCATION == null)
+                {
+                    toastViewModel.ShowError("Location data is missing. Ask where is the accident scene.");
+                    return;
+                }
+                else if(currentEvent.EventPROBLEM == null)
+                {
+                    toastViewModel.ShowError("Problem data is missing. Ask what is the problem.");
+                    return;
+                }
+
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
             }
@@ -121,7 +134,7 @@ namespace ImagineCupProject
         //음성인식버튼
         private void btnStartRecord_Click(object sender, RoutedEventArgs e)
         {
-            toastViewModel.ShowInformation("Ring the Call.");
+            toastViewModel.ShowInformation("Receiving the call.");
             ConvertSpeechToText();
         }
 
@@ -137,7 +150,7 @@ namespace ImagineCupProject
             }
         }
 
-        //  SentimentAnalyze -  AYLIEN Text Analysis API 
+        //  SentimentAnalyze - AYLIEN Text Analysis API 
         public void SentimentAnalysis()
         {
             Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
@@ -153,7 +166,7 @@ namespace ImagineCupProject
         {
             var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
-            string subscriptionKey = "5e3c0f17ea3f40b39cfb6ec28c77bf3e";
+            string subscriptionKey = "39f4a264949c435fba61ff86acc47043";
             //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
             microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
                 speechRecognitionMode,

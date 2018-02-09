@@ -112,9 +112,10 @@ except KeyError:
 ## CNN Text Positive Negative Classification
 - [참고 문헌 / Implementing a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) 
 - 현재 97% 정확도
-- Training Command Example : ```python train.py```
-- Console Predict Command Example : ```python eval.py --eval_train --checkpoint_dir="./runs/1516169064/checkpoints/"```
-- C# 프로젝트 bin-Debug-(Environment.CurrentDirectory)에 "data_helper.py", "eval.py", "text_cnn.py", "train.py", trained model 위치 시켜서 실행하기
+- Training Command Example : ```python train_posneg.py```
+- Console Predict Command Example : ```python eval_posneg.py --eval_train --checkpoint_dir="./runs/1516169064/checkpoints/"```
+- C# 프로젝트 bin-Debug-(Environment.CurrentDirectory)에 "data_helpers_posneg.py", "eval_posneg.py", "text_cnn_posneg.py", "train_posneg.py", trained model 위치 시켜서 실행하기
+- 윈도우에서 Data 파일 불러올 때, "UnicodeDecodeError: 'cp949' codec can't decode byte 0xe2 in position ---: illegal multibyte sequence" 오류 시, ```open('파일경로.txt', 'rt', encoding='UTF8')``` 이렇게 파일 Open하면 된다.
 - 정확도
 ![PositiveNegativeAccuracy](http://cfile22.uf.tistory.com/image/990DCA345A7DA83E3C986C)
 

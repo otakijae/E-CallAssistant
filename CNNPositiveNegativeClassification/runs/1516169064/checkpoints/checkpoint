@@ -1,6 +1,0 @@
-model_checkpoint_path: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2700"
-all_model_checkpoint_paths: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2300"
-all_model_checkpoint_paths: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2400"
-all_model_checkpoint_paths: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2500"
-all_model_checkpoint_paths: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2600"
-all_model_checkpoint_paths: "/Users/jaehyukshin/Desktop/cnn-text-classification-tf-master/runs/1516169064/checkpoints/model-2700"

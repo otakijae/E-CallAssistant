@@ -1,0 +1,6 @@
+model_checkpoint_path: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3500"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3100"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3200"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3300"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3400"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNPositiveNegativeClassification\\runs\\1518189792\\checkpoints\\model-3500"
