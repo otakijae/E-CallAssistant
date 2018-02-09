@@ -30,9 +30,10 @@ namespace ImagineCupProject
         MainQuestion mainQuestion;
         private readonly ToastViewModel toastViewModel;
         LoadingAnimation loadingAnimation;
+        EventVO currentEvent;
         string classifiedResult;
 
-        public AdditionalQuestion(MainQuestion mainQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation)
+        public AdditionalQuestion(MainQuestion mainQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
             InitializeComponent();
 
@@ -42,6 +43,16 @@ namespace ImagineCupProject
             this.mainQuestion = mainQuestion;
             this.toastViewModel = toastViewModel;
             this.loadingAnimation = loadingAnimation;
+            this.currentEvent = currentEvent;
+
+            firstQuestion.Text = currentEvent.EventFirstQUESTION;
+            secondQuestion.Text = currentEvent.EventSecondQUESTION;
+            thirdQuestion.Text = currentEvent.EventThirdQUESTION;
+            fourthQuestion.Text = currentEvent.EventFourthUESTION;
+            fifthQuestion.Text = currentEvent.EventFifthQUESTION;
+            sixthQuestion.Text = currentEvent.EventSixthQUESTION;
+            seventhQuestion.Text = currentEvent.EventSeventhQUESTION;
+            eighthQuestion.Text = currentEvent.EventEighthQUESTION;
         }
 
         public void ShowClassifiedManuals(string category)

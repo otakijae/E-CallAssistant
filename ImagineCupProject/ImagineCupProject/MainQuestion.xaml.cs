@@ -34,8 +34,9 @@ namespace ImagineCupProject
 
         private readonly ToastViewModel toastViewModel;
         LoadingAnimation loadingAnimation;
+        EventVO currentEvent;
 
-        public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation)
+        public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
             InitializeComponent();
             timeText.Text = time;
@@ -49,6 +50,7 @@ namespace ImagineCupProject
 
             this.toastViewModel = toastViewModel;
             this.loadingAnimation = loadingAnimation;
+            this.currentEvent = currentEvent;
         }
 
         public string TextBoxText

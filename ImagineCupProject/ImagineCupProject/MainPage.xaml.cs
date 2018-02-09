@@ -48,8 +48,8 @@ namespace ImagineCupProject
         {
             InitializeComponent();
             DataContext = toastViewModel = new ToastViewModel();
-            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess);
-            additionalQuestion = new AdditionalQuestion(mainQuestion, toastViewModel, loadingProcess);
+            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
+            additionalQuestion = new AdditionalQuestion(mainQuestion, toastViewModel, loadingProcess, currentEvent);
             mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             Summarize();
@@ -88,17 +88,18 @@ namespace ImagineCupProject
                 currentEvent.EventPROBLEM = mainQuestion.problemText.Text;
                 currentEvent.EventCODE = mainQuestion.codeText.Text;
 
-                if (currentEvent.EventLOCATION == null)
+                if (currentEvent.EventLOCATION == "")
                 {
                     toastViewModel.ShowError("Location data is missing. Ask where is the accident scene.");
                     return;
                 }
-                else if(currentEvent.EventPROBLEM == null)
+                else if(currentEvent.EventPROBLEM == "")
                 {
                     toastViewModel.ShowError("Problem data is missing. Ask what is the problem.");
                     return;
                 }
 
+                additionalQuestion.location.Text = currentEvent.EventLOCATION;
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
             }
