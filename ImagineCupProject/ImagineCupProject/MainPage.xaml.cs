@@ -119,7 +119,6 @@ namespace ImagineCupProject
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";
             }
-
         }
 
         private void listViewItem1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
