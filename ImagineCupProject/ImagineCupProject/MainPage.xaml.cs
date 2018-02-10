@@ -100,6 +100,19 @@ namespace ImagineCupProject
                 }
 
                 additionalQuestion.location.Text = currentEvent.EventLOCATION;
+
+                //MainPage, MainQuestion, AdditionalQuestion CurrentEvent VO 동기화 작업
+                mainQuestion.CurrentEventVO = currentEvent;
+                additionalQuestion.CurrentEventVO = currentEvent;
+
+                //VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
+                MessageBox.Show(currentEvent.EventCODE + "\n" + currentEvent.EventOPERATOR + "\n" + currentEvent.EventSTARTTIME + "\n" +
+                    currentEvent.EventENDTIME + "\n" + currentEvent.EventLOCATION+ "\n" + currentEvent.EventPHONENUMBER + "\n" +
+                    currentEvent.EventCALLERNAME + "\n" + currentEvent.EventPROBLEM + "\n" + currentEvent.EventCODE + "\n" +
+                    currentEvent.EventFirstANSWER + "\n" + currentEvent.EventSecondANSWER + "\n" + currentEvent.EventThirdANSWER + "\n" +
+                    currentEvent.EventFourthANSWER + "\n" + currentEvent.EventFifthANSWER + "\n" + currentEvent.EventSixthANSWER + "\n" +
+                    currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
+
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
             }
@@ -112,9 +125,22 @@ namespace ImagineCupProject
                 mainQuestion.callerNameText.Text = currentEvent.EventCALLERNAME;
                 mainQuestion.problemText.Text = currentEvent.EventPROBLEM;
 
-                //카테고리가 나오기 전에 다음 화면으로 넘어갔을 경우 현재사건VO 객체에 코드 정보가 저장이 안 되어있기 때문에 다음 화면에서 카테고리 결과가 출력되면 VO 객체에 값을 넣어줌
+                //MainPage, MainQuestion, AdditionalQuestion CurrentEvent VO 동기화 작업
+                currentEvent = additionalQuestion.CurrentEventVO;
+                mainQuestion.CurrentEventVO = currentEvent;
+
+                //카테고리가 나오기 전에 다음 화면으로 넘어갔을 경우 현재사건VO 객체에 코드 정보가 저장이 안 되어있기 때문에,
+                //다음 화면(AdditionalQuestion 화면)에서 카테고리 결과가 출력되면 VO 객체에 값을 넣어줌
                 currentEvent.EventCODE = mainQuestion.classifiedResult;
                 mainQuestion.codeText.Text = currentEvent.EventCODE;
+
+                //VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
+                MessageBox.Show(currentEvent.EventCODE + "\n" + currentEvent.EventOPERATOR + "\n" + currentEvent.EventSTARTTIME + "\n" +
+                    currentEvent.EventENDTIME + "\n" + currentEvent.EventLOCATION + "\n" + currentEvent.EventPHONENUMBER + "\n" +
+                    currentEvent.EventCALLERNAME + "\n" + currentEvent.EventPROBLEM + "\n" + currentEvent.EventCODE + "\n" +
+                    currentEvent.EventFirstANSWER + "\n" + currentEvent.EventSecondANSWER + "\n" + currentEvent.EventThirdANSWER + "\n" +
+                    currentEvent.EventFourthANSWER + "\n" + currentEvent.EventFifthANSWER + "\n" + currentEvent.EventSixthANSWER + "\n" +
+                    currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
 
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";

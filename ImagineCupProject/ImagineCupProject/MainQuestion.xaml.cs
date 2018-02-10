@@ -194,7 +194,6 @@ namespace ImagineCupProject
                 {
                     var location = singleResult.description;
                     MessageBox.Show(location);
-
                 }
             }
         }
@@ -249,9 +248,10 @@ namespace ImagineCupProject
             //this.textClassify.IsEnabled = true;
             loadingAnimation.Visibility = Visibility.Hidden;
 
-            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기, 현재 EventVO에 분류 결과 저장
             additionalQuestion.ShowClassifiedManuals(classifiedResult);
             toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
+            currentEvent.EventCODE = classifiedResult;
         }
         
         private async Task<string> TextClassificationAsync(string keyWords)
@@ -288,6 +288,12 @@ namespace ImagineCupProject
                 standardManual.standardManualGrid.Visibility = Visibility.Visible;
             else
                 standardManual.standardManualGrid.Visibility = Visibility.Collapsed;
+        }
+
+        public EventVO CurrentEventVO
+        {
+            get { return currentEvent; }
+            set { currentEvent = value; }
         }
     }
 }
