@@ -48,8 +48,8 @@ namespace ImagineCupProject
         {
             InitializeComponent();
             DataContext = toastViewModel = new ToastViewModel();
+            additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
-            additionalQuestion = new AdditionalQuestion(mainQuestion, toastViewModel, loadingProcess, currentEvent);
             mainFrame.Content = mainQuestion;
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             Summarize();

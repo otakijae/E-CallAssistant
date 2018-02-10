@@ -18,7 +18,6 @@ namespace ImagineCupProject
         ClassifiedManual classifiedManual = new ClassifiedManual();
         MedicalManual medicalManual = new MedicalManual();
 
-        MainQuestion mainQuestion;
         private readonly ToastViewModel toastViewModel;
         LoadingAnimation loadingAnimation;
         EventVO currentEvent;
@@ -27,14 +26,13 @@ namespace ImagineCupProject
         SolidColorBrush mainColorSolidColorBrush = new SolidColorBrush();
         SolidColorBrush pointColorSolidColorBrush = new SolidColorBrush();
 
-        public AdditionalQuestion(MainQuestion mainQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
+        public AdditionalQuestion(ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
             InitializeComponent();
 
             this.classifiedManualGrid.Children.Add(classifiedManual);
             this.medicalManualGrid.Children.Add(medicalManual);
 
-            this.mainQuestion = mainQuestion;
             this.toastViewModel = toastViewModel;
             this.loadingAnimation = loadingAnimation;
             this.currentEvent = currentEvent;
@@ -142,6 +140,8 @@ namespace ImagineCupProject
                 string myPythonApp = "eval_posneg.py";
 
                 ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
                 myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";

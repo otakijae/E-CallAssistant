@@ -45,9 +45,7 @@ namespace ImagineCupProject
             //Manual xaml 매뉴얼 
             this.simpleManualGrid.Children.Add(simpleManual);
             this.standardManualGrid.Children.Add(standardManual);
-
             this.additionalQuestion = additionalQuestion;
-
             this.toastViewModel = toastViewModel;
             this.loadingAnimation = loadingAnimation;
             this.currentEvent = currentEvent;
@@ -262,6 +260,8 @@ namespace ImagineCupProject
                 string myPythonApp = "predict.py";
 
                 ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
                 myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
