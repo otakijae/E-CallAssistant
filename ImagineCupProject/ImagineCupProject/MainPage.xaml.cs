@@ -54,6 +54,7 @@ namespace ImagineCupProject
             //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
             Summarize();
             SentimentAnalysis();
+            phoneLoadingProcess.loadingText.Visibility = Visibility.Hidden;
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -160,8 +161,13 @@ namespace ImagineCupProject
         //음성인식버튼
         private void btnStartRecord_Click(object sender, RoutedEventArgs e)
         {
-            toastViewModel.ShowInformation("Receiving the call.");
-            ConvertSpeechToText();
+            if(microphoneRecognitionClient != null)
+            {
+                microphoneRecognitionClient.EndMicAndRecognition();
+                microphoneRecognitionClient.Dispose();
+                microphoneRecognitionClient = null;
+                toastViewModel.ShowInformation("Hang up the call.");
+            }
         }
 
         //  Summarize -  AYLIEN Text Analysis API 
@@ -305,9 +311,13 @@ namespace ImagineCupProject
             for (int i = 0; i < textArrayList.Count; i++)
             {
                 callerStatement.Text += textArrayList[i];
-                mainQuestion.problemText.Text += textArrayList[i];
-                //mainQuestion.responseText.Text += textArrayList[i];
+                
             }
+            //음성인식 기능은 전화받으면 계속 실행됨
+            //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
+            //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
+            mainQuestion.problemText.Text = callerStatement.Text;
+            additionalQuestion.testBox.Text = callerStatement.Text;
 
             //280, 200, 250자 정도에서 주기적으로 분석
             if (callerStatement.Text.Length > 200)
@@ -346,6 +356,19 @@ namespace ImagineCupProject
         {
             //mainQuestion.analyze();
             toastViewModel.ShowSuccess("Dispatch completed");
+        }
+
+        private void PhoneReceiveButton_Click(object sender, RoutedEventArgs e)
+        {
+            toastViewModel.ShowInformation("Answering the call.");
+            ConvertSpeechToText();
+            this.phoneAnswerGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void PackIcon_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (microphoneRecognitionClient == null)
+                phoneAnswerGrid.Visibility = Visibility.Visible;
         }
     }
 }

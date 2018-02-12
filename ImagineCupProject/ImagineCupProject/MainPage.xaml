@@ -78,11 +78,9 @@
             <BeginStoryboard x:Name="CloseMenu_BeginStoryboard" Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </FrameworkElement.Triggers>
-  
-  
 
     <Grid Background="#FF3580BF">
-
+        
         <toast:NotificationTray NotificationsSource="{Binding NotificationSource}"
                                 PopupFlowDirection="RightUp"  VerticalAlignment="Top" HorizontalAlignment="Right" />
 
@@ -225,7 +223,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="btnStartRecord" Height="40" Grid.Column="0" Content="Phone" FontSize="15" Click="btnStartRecord_Click"/>
+                        <Button x:Name="btnStartRecord" Height="40" Grid.Column="0" Content="Quit" FontSize="15" Click="btnStartRecord_Click"/>
                         <Button x:Name="nextButton" Height="40" Grid.Column="1" Content="Next" FontSize="15" Click="nextButton_Click"/>
                     </Grid>
 
@@ -269,12 +267,17 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="10">
             <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Bell"/>
+                <materialDesign:PackIcon Kind="Bell" PreviewMouseLeftButtonDown="PackIcon_PreviewMouseLeftButtonDown"/>
             </Button>
             <Button x:Name="ButtonClose" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonClose_Click">
                 <materialDesign:PackIcon Kind="Power"/>
             </Button>
         </StackPanel>
+
+        <Grid x:Name="phoneAnswerGrid" Background="Black" Opacity="0.6" IsHitTestVisible="True" Visibility="Hidden">
+            <Button x:Name="phoneAnswerButton" Content="Click to answer" Width="1400" Height="900" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" Opacity="0.5" Foreground="White" FontSize="50" FontWeight="Bold" BorderThickness="0" Click="PhoneReceiveButton_Click"/>
+            <local:LoadingAnimation x:Name="phoneLoadingProcess" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 150"/>
+        </Grid>
     </Grid>
 
 </UserControl>
