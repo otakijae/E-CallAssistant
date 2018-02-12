@@ -22,9 +22,7 @@ namespace ImagineCupProject
         MicrophoneRecognitionClient microphoneRecognitionClient;
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
-
         AutoResetEvent finalResponceEvent;
-        string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
 
         SimpleManual simpleManual = new SimpleManual();
         StandardManual standardManual = new StandardManual();
@@ -43,6 +41,7 @@ namespace ImagineCupProject
         private readonly ToastViewModel toastViewModel;
 
         EventVO currentEvent = new EventVO();
+        List<EventVO> savedEventList = new List<EventVO>();
 
         public MainPage()
         {
@@ -78,16 +77,7 @@ namespace ImagineCupProject
         {
             if (nextButton.Content.Equals("Next"))
             {
-                //EventNUMBER는 AUTO INCREMENT로 설정, PRIMARY KEY로 설정
-                currentEvent.EventNUMBER = null;
-                currentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
-                currentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
-                currentEvent.EventENDTIME = null;
-                currentEvent.EventLOCATION = mainQuestion.locationText.Text;
-                currentEvent.EventPHONENUMBER = mainQuestion.phoneNumberText.Text;
-                currentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
-                currentEvent.EventPROBLEM = mainQuestion.problemText.Text;
-                currentEvent.EventCODE = mainQuestion.codeText.Text;
+                SaveCurrentEventVO();
 
                 if (currentEvent.EventLOCATION == "")
                 {
@@ -106,25 +96,14 @@ namespace ImagineCupProject
                 mainQuestion.CurrentEventVO = currentEvent;
                 additionalQuestion.CurrentEventVO = currentEvent;
 
-                //VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
-                MessageBox.Show(currentEvent.EventCODE + "\n" + currentEvent.EventOPERATOR + "\n" + currentEvent.EventSTARTTIME + "\n" +
-                    currentEvent.EventENDTIME + "\n" + currentEvent.EventLOCATION+ "\n" + currentEvent.EventPHONENUMBER + "\n" +
-                    currentEvent.EventCALLERNAME + "\n" + currentEvent.EventPROBLEM + "\n" + currentEvent.EventCODE + "\n" +
-                    currentEvent.EventFirstANSWER + "\n" + currentEvent.EventSecondANSWER + "\n" + currentEvent.EventThirdANSWER + "\n" +
-                    currentEvent.EventFourthANSWER + "\n" + currentEvent.EventFifthANSWER + "\n" + currentEvent.EventSixthANSWER + "\n" +
-                    currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
+                PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
 
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
             }
             else
             {
-                mainQuestion.operatorText.Text = currentEvent.EventOPERATOR;
-                mainQuestion.timeText.Text = currentEvent.EventSTARTTIME;
-                mainQuestion.locationText.Text = currentEvent.EventLOCATION;
-                mainQuestion.phoneNumberText.Text = currentEvent.EventPHONENUMBER;
-                mainQuestion.callerNameText.Text = currentEvent.EventCALLERNAME;
-                mainQuestion.problemText.Text = currentEvent.EventPROBLEM;
+                SynchronizeEventData();
 
                 //MainPage, MainQuestion, AdditionalQuestion CurrentEvent VO 동기화 작업
                 currentEvent = additionalQuestion.CurrentEventVO;
@@ -135,13 +114,7 @@ namespace ImagineCupProject
                 currentEvent.EventCODE = mainQuestion.classifiedResult;
                 mainQuestion.codeText.Text = currentEvent.EventCODE;
 
-                //VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
-                MessageBox.Show(currentEvent.EventCODE + "\n" + currentEvent.EventOPERATOR + "\n" + currentEvent.EventSTARTTIME + "\n" +
-                    currentEvent.EventENDTIME + "\n" + currentEvent.EventLOCATION + "\n" + currentEvent.EventPHONENUMBER + "\n" +
-                    currentEvent.EventCALLERNAME + "\n" + currentEvent.EventPROBLEM + "\n" + currentEvent.EventCODE + "\n" +
-                    currentEvent.EventFirstANSWER + "\n" + currentEvent.EventSecondANSWER + "\n" + currentEvent.EventThirdANSWER + "\n" +
-                    currentEvent.EventFourthANSWER + "\n" + currentEvent.EventFifthANSWER + "\n" + currentEvent.EventSixthANSWER + "\n" +
-                    currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
+                PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
 
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";
@@ -156,18 +129,6 @@ namespace ImagineCupProject
         private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             mainFrame.Content = mainQuestion;
-        }
-
-        //음성인식버튼
-        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
-        {
-            if(microphoneRecognitionClient != null)
-            {
-                microphoneRecognitionClient.EndMicAndRecognition();
-                microphoneRecognitionClient.Dispose();
-                microphoneRecognitionClient = null;
-                toastViewModel.ShowInformation("Hang up the call.");
-            }
         }
 
         //  Summarize -  AYLIEN Text Analysis API 
@@ -316,16 +277,15 @@ namespace ImagineCupProject
             //음성인식 기능은 전화받으면 계속 실행됨
             //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
             //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
-            mainQuestion.problemText.Text = callerStatement.Text;
-            additionalQuestion.testBox.Text = callerStatement.Text;
+            mainQuestion.problemText.Text += callerStatement.Text;
+            additionalQuestion.testBox.Text = speechRecognition.Text;
 
             //280, 200, 250자 정도에서 주기적으로 분석
             if (callerStatement.Text.Length > 200)
             {
                 mainQuestion.textClassify.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                callerStatement.Text = "caller statement: ";
+                callerStatement.Text = "";
             }
-
             //mainQuestion.analyze();
             //MessageBox.Show(mainQuestion.responseText.Text); 
             textArrayList.Clear();
@@ -358,17 +318,88 @@ namespace ImagineCupProject
             toastViewModel.ShowSuccess("Dispatch completed");
         }
 
+        //통화 수신 및 시작 버튼
         private void PhoneReceiveButton_Click(object sender, RoutedEventArgs e)
         {
             toastViewModel.ShowInformation("Answering the call.");
+            mainQuestion.timeText.Text = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
             ConvertSpeechToText();
             this.phoneAnswerGrid.Visibility = Visibility.Collapsed;
         }
 
+        //통화 왔을 때 알림
         private void PackIcon_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (microphoneRecognitionClient == null)
+            {
+                ResetEvent();
                 phoneAnswerGrid.Visibility = Visibility.Visible;
+            }
+        }
+
+        //통화 종료 버튼
+        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
+        {
+            if (microphoneRecognitionClient != null)
+            {
+                currentEvent.EventENDTIME = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
+                savedEventList.Add(currentEvent);
+                microphoneRecognitionClient.EndMicAndRecognition();
+                microphoneRecognitionClient.Dispose();
+                microphoneRecognitionClient = null;
+                toastViewModel.ShowInformation("Hang up the call.");
+
+                PrintCurrentEvent(currentEvent);
+                //현재 처리 중이었던 사건 저장 및 UI 초기화
+                ResetEvent();
+            }
+        }
+
+        //UI 초기화
+        private void ResetEvent()
+        {
+            currentEvent = new EventVO();
+            additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
+            mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
+            nextButton.Content = "Next";
+            mainFrame.Content = mainQuestion;
+        }
+
+        //MessageBox로 currentEvent 값 확인
+        private void PrintCurrentEvent(EventVO currentEvent)
+        {
+            //VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
+            MessageBox.Show(currentEvent.EventCODE + "\n" + currentEvent.EventOPERATOR + "\n" + currentEvent.EventSTARTTIME + "\n" +
+                currentEvent.EventENDTIME + "\n" + currentEvent.EventLOCATION + "\n" + currentEvent.EventPHONENUMBER + "\n" +
+                currentEvent.EventCALLERNAME + "\n" + currentEvent.EventPROBLEM + "\n" + currentEvent.EventCODE + "\n" +
+                currentEvent.EventFirstANSWER + "\n" + currentEvent.EventSecondANSWER + "\n" + currentEvent.EventThirdANSWER + "\n" +
+                currentEvent.EventFourthANSWER + "\n" + currentEvent.EventFifthANSWER + "\n" + currentEvent.EventSixthANSWER + "\n" +
+                currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
+        }
+
+        private void SaveCurrentEventVO()
+        {
+            //EventNUMBER는 AUTO INCREMENT로 설정, PRIMARY KEY로 설정
+            //currentEvent.EventNUMBER = null;
+            currentEvent.EventOPERATOR = mainQuestion.operatorText.Text;
+            currentEvent.EventSTARTTIME = mainQuestion.timeText.Text;
+            //currentEvent.EventENDTIME = null;
+            currentEvent.EventLOCATION = mainQuestion.locationText.Text;
+            currentEvent.EventPHONENUMBER = mainQuestion.phoneNumberText.Text;
+            currentEvent.EventCALLERNAME = mainQuestion.callerNameText.Text;
+            currentEvent.EventPROBLEM = mainQuestion.problemText.Text;
+            currentEvent.EventCODE = mainQuestion.codeText.Text;
+        }
+
+        private void SynchronizeEventData()
+        {
+            mainQuestion.operatorText.Text = currentEvent.EventOPERATOR;
+            mainQuestion.timeText.Text = currentEvent.EventSTARTTIME;
+            mainQuestion.locationText.Text = currentEvent.EventLOCATION;
+            mainQuestion.phoneNumberText.Text = currentEvent.EventPHONENUMBER;
+            mainQuestion.callerNameText.Text = currentEvent.EventCALLERNAME;
+            mainQuestion.problemText.Text = currentEvent.EventPROBLEM;
+            mainQuestion.codeText.Text = currentEvent.EventCODE;
         }
     }
 }

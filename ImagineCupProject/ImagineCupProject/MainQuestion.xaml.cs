@@ -25,7 +25,6 @@ namespace ImagineCupProject
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
-        string time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm");
         public string classifiedResult;
 
         SimpleManual simpleManual = new SimpleManual();
@@ -39,7 +38,6 @@ namespace ImagineCupProject
         public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
             InitializeComponent();
-            timeText.Text = time;
             //azureDatabase = new AzureDatabase();
 
             //Manual xaml 매뉴얼 

@@ -191,7 +191,7 @@ namespace ImagineCupProject
         }
         private async void FirstQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventFirstANSWER = CheckClassifiedResultTrueOrFalse(firstAnswer, firstToggle);
@@ -202,6 +202,7 @@ namespace ImagineCupProject
         private void SecondQuestion_Click(object sender, RoutedEventArgs e)
         {
             //음성 인식한 것 그대로 항목에 채우기
+            secondAnswer.Text = testBox.Text;
         }
 
 
@@ -228,7 +229,7 @@ namespace ImagineCupProject
         }
         private async void ThirdQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventThirdANSWER = CheckClassifiedResultTrueOrFalse(thirdAnswer, thirdToggle);
@@ -258,7 +259,7 @@ namespace ImagineCupProject
         }
         private async void FourthQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventFourthANSWER = CheckClassifiedResultTrueOrFalse(fourthAnswer, fourthToggle);
@@ -288,7 +289,7 @@ namespace ImagineCupProject
         }
         private async void FifthQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventFifthANSWER = CheckClassifiedResultTrueOrFalse(fifthAnswer, fifthToggle);
@@ -318,7 +319,7 @@ namespace ImagineCupProject
         }
         private async void SixthQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventSixthANSWER = CheckClassifiedResultTrueOrFalse(sixthAnswer, sixthToggle);
@@ -348,7 +349,7 @@ namespace ImagineCupProject
         }
         private async void SeventhQuestionRun(string keyWords)
         {
-            this.testBox.Text = await TextIsPositiveClassificationAsync(keyWords);
+            await TextIsPositiveClassificationAsync(keyWords);
             loadingAnimation.Visibility = Visibility.Hidden;
 
             currentEvent.EventSeventhANSWER = CheckClassifiedResultTrueOrFalse(seventhAnswer, seventhToggle);
@@ -359,6 +360,7 @@ namespace ImagineCupProject
         private void EighthQuestion_Click(object sender, RoutedEventArgs e)
         {
             //음성 인식한 것 그대로 항목에 채우기
+            eighthAnswer.Text = testBox.Text;
         }
 
 

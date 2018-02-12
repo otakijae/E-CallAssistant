@@ -206,11 +206,11 @@
                         <TextBlock x:Name="summary" Text="summary : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="0.5">
-                        <TextBlock x:Name="speechRecognition" Text="speech recognition : " TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14"/>
+                        <TextBlock x:Name="speechRecognition" Text="" TextWrapping="Wrap"  Foreground="#FFFBFBFB" FontSize="14"/>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="0.5" Height="200">
                         <ScrollViewer CanContentScroll="True">
-                            <TextBlock x:Name="callerStatement" Text="caller statement : " TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
+                            <TextBlock x:Name="callerStatement" Text="" TextWrapping="Wrap" Foreground="#FFFBFBFB" FontSize="14"/>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
