@@ -119,24 +119,14 @@ namespace ImagineCupProject
         //entity분석 google api
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
-            if (responseText.Text.Contains("kill"))
-            {
-                entityRecognition.Text += $"Name: kill";
-                entityRecognition.Text += $" /Event\n";
-                codeText.Text += "kill";
-            }
-            if (responseText.Text.Contains("shot"))
-            {
-                entityRecognition.Text += $"Name: shot";
-                entityRecognition.Text += $" /Event\n";
-                codeText.Text += "shot";
-            }
             foreach (var entity in entities)
             {
                 if (entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
                 {
                     locationText.Text += entity.Name;
+                    locationText.Text +=
                     locationText.Text += " ";
+                    
                 }
                 if (entity.Type.ToString().Equals("Event"))
                 {
@@ -240,14 +230,16 @@ namespace ImagineCupProject
         public void TextModify()
         {
             changeSentence = problemText.Text;
+
             var client = LanguageServiceClient.Create();
+
+            //형태소 분석
             var response = client.AnnotateText(new Document()
             {
                 Content = problemText.Text,
                 Type = Document.Types.Type.PlainText
             },
             new Features() { ExtractSyntax = true });
-            //WriteSentences(response.Sentences, response.Tokens);
             foreach (var token in response.Tokens)
             {
                 if(token.PartOfSpeech.Tag.ToString().Equals("Noun")  || token.PartOfSpeech.Tag.ToString().Equals("Verb") || token.PartOfSpeech.Tag.ToString().Equals("Adj"))
@@ -255,6 +247,16 @@ namespace ImagineCupProject
                     keyWords += token.Text.Content.ToString() + " ";
                 }
             }
+
+            //Location 추출
+            var responseEntites = client.AnalyzeEntities(new Document()
+            {
+                Content = problemText.Text,
+                Type = Document.Types.Type.PlainText
+            });
+            WriteEntities(responseEntites.Entities);
+
+
             RunSentenceModify(keyWords);
             loadingAnimation.Visibility = Visibility.Visible;
         }
@@ -294,28 +296,6 @@ namespace ImagineCupProject
                 myProcess.WaitForExit();
                 myProcess.Close();
                 return classifiedResult;
-
-                /*
-                string python = @"C:\Python36\python.exe";
-                string myPythonApp = "predict.py";
-
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-                myProcessStartInfo.CreateNoWindow = true;
-                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                myProcessStartInfo.UseShellExecute = false;
-                myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
-
-                Process myProcess = new Process();
-                myProcess.StartInfo = myProcessStartInfo;
-                myProcess.Start();
-                StreamReader myStreamReader = myProcess.StandardOutput;
-                classifiedResult = await myStreamReader.ReadToEndAsync();
-                myProcess.WaitForExit();
-                myProcess.Close();
-
-                return classifiedResult;
-                */
             }
             catch (Exception ex)
             {
@@ -365,27 +345,6 @@ namespace ImagineCupProject
                 myProcess.Close();
 
                 return classifiedResult;
-                /*
-                string python = @"C:\Python36\python.exe";
-                string myPythonApp = "predict.py";
-
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-                myProcessStartInfo.CreateNoWindow = true;
-                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                myProcessStartInfo.UseShellExecute = false;
-                myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
-
-                Process myProcess = new Process();
-                myProcess.StartInfo = myProcessStartInfo;
-                myProcess.Start();
-                StreamReader myStreamReader = myProcess.StandardOutput;
-                classifiedResult = await myStreamReader.ReadToEndAsync();
-                myProcess.WaitForExit();
-                myProcess.Close();
-
-                return classifiedResult;
-                */
             }
             catch (Exception ex)
             {
