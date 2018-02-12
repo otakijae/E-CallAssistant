@@ -35,6 +35,8 @@ namespace ImagineCupProject
         private readonly ToastViewModel toastViewModel;
         LoadingAnimation loadingAnimation;
         EventVO currentEvent;
+        string keyWords;
+        string changeSentence;
 
         public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
@@ -182,6 +184,7 @@ namespace ImagineCupProject
         public void GooglePlacesAPI()
         {
             //string url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationText.Text + "&language=en&key=AIzaSyB55GQJ3tv_L2aALoWxIa4vkfJRdtunMtU";
+
             string json = "";
             using (WebClient webClient = new WebClient())
             {
@@ -234,10 +237,97 @@ namespace ImagineCupProject
             azureDatabase.SendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
+        public void TextModify()
+        {
+            changeSentence = problemText.Text;
+            var client = LanguageServiceClient.Create();
+            var response = client.AnnotateText(new Document()
+            {
+                Content = problemText.Text,
+                Type = Document.Types.Type.PlainText
+            },
+            new Features() { ExtractSyntax = true });
+            //WriteSentences(response.Sentences, response.Tokens);
+            foreach (var token in response.Tokens)
+            {
+                if(token.PartOfSpeech.Tag.ToString().Equals("Noun")  || token.PartOfSpeech.Tag.ToString().Equals("Verb") || token.PartOfSpeech.Tag.ToString().Equals("Adj"))
+                {
+                    keyWords += token.Text.Content.ToString() + " ";
+                }
+            }
+            RunSentenceModify(keyWords);
+            loadingAnimation.Visibility = Visibility.Visible;
+        }
+
+        public async void RunSentenceModify(string keyWords)
+        {
+            string changeWords = await SentenceModify(keyWords);
+            MessageBox.Show(changeWords);
+            changeSentence = changeSentence.Replace(changeWords.ToString().Split(' ')[0],changeWords.ToString().Split(' ')[1].Replace("\r\n","")); //.Substring(0, changeWords.ToString().Split(' ')[1].Length - 1)
+            codeText.Text = changeSentence;
+            MessageBox.Show(changeSentence);
+            //this.textClassify.IsEnabled = true;
+            loadingAnimation.Visibility = Visibility.Hidden;
+
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기, 현재 EventVO에 분류 결과 저장
+            additionalQuestion.ShowClassifiedManuals(classifiedResult);
+            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
+            currentEvent.EventCODE = classifiedResult;
+        }
+
+        public async Task<string> SentenceModify(string keyWords)
+        {
+            try
+            {
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "sentenceModify.py";
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
+                return classifiedResult;
+
+                /*
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "predict.py";
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
+
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
+
+                return classifiedResult;
+                */
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
-            Run(problemText.Text);
-            loadingAnimation.Visibility = Visibility.Visible;
+            TextModify();
+            //Run(problemText.Text);
+            //loadingAnimation.Visibility = Visibility.Visible;
         }
 
         private async void Run(string keyWords)
@@ -275,6 +365,27 @@ namespace ImagineCupProject
                 myProcess.Close();
 
                 return classifiedResult;
+                /*
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "predict.py";
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
+
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
+
+                return classifiedResult;
+                */
             }
             catch (Exception ex)
             {
