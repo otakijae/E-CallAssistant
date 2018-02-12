@@ -362,6 +362,8 @@ namespace ImagineCupProject
             additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
             nextButton.Content = "Next";
+            speechRecognition.Text = "";
+            callerStatement.Text = "";
             mainFrame.Content = mainQuestion;
         }
 

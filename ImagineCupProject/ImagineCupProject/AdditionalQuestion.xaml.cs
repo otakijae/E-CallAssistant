@@ -202,7 +202,8 @@ namespace ImagineCupProject
         private void SecondQuestion_Click(object sender, RoutedEventArgs e)
         {
             //음성 인식한 것 그대로 항목에 채우기
-            secondAnswer.Text = testBox.Text;
+            secondAnswer.Text += testBox.Text;
+            currentEvent.EventSecondANSWER = secondAnswer.Text;
         }
 
 
@@ -361,6 +362,7 @@ namespace ImagineCupProject
         {
             //음성 인식한 것 그대로 항목에 채우기
             eighthAnswer.Text = testBox.Text;
+            currentEvent.EventEighthANSWER += eighthAnswer.Text;
         }
 
 
