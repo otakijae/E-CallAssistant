@@ -78,13 +78,18 @@
                     <TextBox x:Name="eighthAnswer" Grid.Column="2" Grid.Row="8" Background="AliceBlue" Foreground="#FFFF5E00" FontSize="15" FontWeight="Bold" BorderThickness="2"/>
                 </Grid>
 
+                <TextBlock Text="Details" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20 5"/>
+                <Grid>
+                    <TextBox x:Name="detail" Margin="10" Height="100" FontSize="15" FontFamily="Nirmala UI Semilight" Background="AliceBlue" VerticalContentAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" BorderBrush="#FFFF5E00 " BorderThickness="2"/>
+                </Grid>
+
                 <TextBlock Text="Classified Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
                 <Grid x:Name="classifiedManualGrid" Margin="10"/>
 
                 <WrapPanel>
                     <TextBlock Text="Medical Response Manual" Foreground="#FFFF5E00" FontSize="20" FontWeight="Bold" Margin="20"/>
                     <ToggleButton HorizontalAlignment="Left" Click="MedicalResponse_Click"/>
-                    <TextBox x:Name="testBox" Text="test" Width="400" FontSize="15" FontFamily="Nirmala UI Semilight" Background="AliceBlue" VerticalContentAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" BorderThickness="2"/>
+                    <TextBox x:Name="testBox" Text="test" Width="400" FontSize="15" FontFamily="Nirmala UI Semilight" Background="AliceBlue" VerticalContentAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" BorderThickness="2" Visibility="Hidden"/>
                 </WrapPanel>
                 <Grid x:Name="medicalManualGrid" Margin="10"/>
 

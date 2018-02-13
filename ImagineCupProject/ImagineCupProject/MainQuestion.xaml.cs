@@ -61,7 +61,6 @@ namespace ImagineCupProject
             }
         }
         
-
         //entity분석 google api
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
@@ -72,14 +71,7 @@ namespace ImagineCupProject
                 {
                     location += entity.Name;
                     location += " ";
-                    
                 }
-                if (entity.Type.ToString().Equals("Event"))
-                {
-                    codeText.Text += entity.Name;
-                }
-                entityRecognition.Text += $"Name: {entity.Name}";
-                entityRecognition.Text += $" /{entity.Type}\n";
             }
             locationText.Text = location;
         }
@@ -147,7 +139,6 @@ namespace ImagineCupProject
             changeSentence = problemText.Text;
 
             var client = LanguageServiceClient.Create();
-
             //형태소 분석 ( 명사, 형용사, 동사 추출)
             var response = client.AnnotateText(new Document()
             {
@@ -157,21 +148,11 @@ namespace ImagineCupProject
             new Features() { ExtractSyntax = true });
             foreach (var token in response.Tokens)
             {
-                if(token.PartOfSpeech.Tag.ToString().Equals("Noun")  || token.PartOfSpeech.Tag.ToString().Equals("Verb") || token.PartOfSpeech.Tag.ToString().Equals("Adj"))
+                if (token.PartOfSpeech.Tag.ToString().Equals("Noun") || token.PartOfSpeech.Tag.ToString().Equals("Verb") || token.PartOfSpeech.Tag.ToString().Equals("Adj"))
                 {
                     keyWords += token.Text.Content.ToString() + " ";
                 }
             }
-            
-            //장소 추출
-            var responseEntites = client.AnalyzeEntities(new Document()
-            {
-                Content = problemText.Text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteEntities(responseEntites.Entities);
-
-
             RunSentenceModify(keyWords);
             loadingAnimation.Visibility = Visibility.Visible;
         }
@@ -222,9 +203,18 @@ namespace ImagineCupProject
 
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
-            AnalyzeText();
-            //Run(problemText.Text);
-            //loadingAnimation.Visibility = Visibility.Visible;
+            //AnalyzeText();
+            Run(problemText.Text);
+            loadingAnimation.Visibility = Visibility.Visible;
+
+            var client = LanguageServiceClient.Create();
+            //장소 추출
+            var responseEntites = client.AnalyzeEntities(new Document()
+            {
+                Content = problemText.Text,
+                Type = Document.Types.Type.PlainText
+            });
+            WriteEntities(responseEntites.Entities);
         }
 
         private async void Run(string keyWords)
