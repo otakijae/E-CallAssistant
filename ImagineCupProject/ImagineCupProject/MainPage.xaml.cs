@@ -60,7 +60,7 @@ namespace ImagineCupProject
         {
             Application.Current.Shutdown();
         }
-        
+
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
@@ -84,7 +84,7 @@ namespace ImagineCupProject
                     toastViewModel.ShowError("Location data is missing. Ask where is the accident scene.");
                     return;
                 }
-                else if(currentEvent.EventPROBLEM == "")
+                else if (currentEvent.EventPROBLEM == "")
                 {
                     toastViewModel.ShowError("Problem data is missing. Ask what is the problem.");
                     return;
@@ -272,7 +272,7 @@ namespace ImagineCupProject
             for (int i = 0; i < textArrayList.Count; i++)
             {
                 callerStatement.Text += textArrayList[i];
-                
+
             }
             //음성인식 기능은 전화받으면 계속 실행됨
             //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
@@ -290,7 +290,7 @@ namespace ImagineCupProject
             //MessageBox.Show(mainQuestion.responseText.Text); 
             textArrayList.Clear();
         }
-        
+
         private void btnSendTo112_Click(object sender, RoutedEventArgs e)
         {
             //mainQuestion.sendTo112();

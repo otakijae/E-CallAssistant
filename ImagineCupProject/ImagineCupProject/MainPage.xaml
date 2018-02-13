@@ -43,7 +43,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-250"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-           
+
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
@@ -80,7 +80,7 @@
     </FrameworkElement.Triggers>
 
     <Grid Background="#FF3580BF">
-        
+
         <toast:NotificationTray NotificationsSource="{Binding NotificationSource}"
                                 PopupFlowDirection="RightUp"  VerticalAlignment="Top" HorizontalAlignment="Right" />
 
@@ -93,7 +93,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </StackPanel.RenderTransform>
-            
+
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="100" HorizontalAlignment="Center">
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
                     <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"/>
@@ -115,7 +115,7 @@
                     <materialDesign:PackIcon Kind="InformationOutline" Width="40" Height="40"/>
                 </Button>
             </StackPanel>
-          
+
             <ListView>
                 <ListViewItem x:Name="listViewItem" Height="60" RenderTransformOrigin="0.5,0.5" PreviewMouseLeftButtonDown="listViewItem_PreviewMouseLeftButtonDown">
                     <ListViewItem.RenderTransform>
@@ -176,7 +176,7 @@
                 </ListViewItem>
             </ListView>
         </StackPanel>
-      
+
         <Grid x:Name="GridMain" Background="#FFFBFBFB" RenderTransformOrigin="0.5,0.5">
 
             <Grid.RenderTransform>
@@ -214,7 +214,7 @@
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
-                
+
                 <StackPanel Margin="0 500 0 0">
                     <local:LoadingAnimation x:Name="loadingProcess" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Margin="0 10 0 10"/>
 
