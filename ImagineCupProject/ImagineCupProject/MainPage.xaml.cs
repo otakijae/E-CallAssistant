@@ -51,9 +51,7 @@ namespace ImagineCupProject
             additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
             mainFrame.Content = mainQuestion;
-            //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
-            Summarize();
-            SentimentAnalysis();
+           
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -163,29 +161,7 @@ namespace ImagineCupProject
             toastViewModel.ShowInformation("Receiving the call.");
             ConvertSpeechToText();
         }
-
-        //  Summarize -  AYLIEN Text Analysis API 
-        public void Summarize()
-        {
-            string title = "emergency";
-            var summary2 = client.Summarize(text: text, title: title, sentencesNumber: 3).Sentences;
-
-            foreach (var sentence in summary2)
-            {
-                summary.Text += sentence;
-            }
-        }
-
-        //  SentimentAnalyze - AYLIEN Text Analysis API 
-        public void SentimentAnalysis()
-        {
-            Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
-            summary.Text += "\nsentiment : ";
-            summary.Text += sentiment2.Polarity + " " + sentiment2.PolarityConfidence;
-            summary.Text += "\n";
-            summary.Text += sentiment2.Subjectivity + " " + sentiment2.SubjectivityConfidence;
-
-        }
+        
 
         //Azure SpeechToText
         private void ConvertSpeechToText()
@@ -242,18 +218,6 @@ namespace ImagineCupProject
                 }));
             //}
         }
-
-        //ShortPhrase으로 설정했을때 receiveHandlear
-        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
-        {
-            Dispatcher.Invoke((Action)(() =>
-            {
-                //codeText.Text += e;
-
-                WriteResponseResult(e);
-            }));
-        }
-
         //receiveHandlear 내용 출력 메소드
         private void WriteResponseResult(SpeechResponseEventArgs e)
         {

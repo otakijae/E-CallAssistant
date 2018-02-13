@@ -16,7 +16,7 @@ using System.Windows.Controls.Primitives;
 
 namespace ImagineCupProject
 {
-    /// <summary>
+    /// <summary>   
     /// 전화가 시작된 후 우선적으로 장소, 사건 등 기본 정보를 듣는 화면
     /// </summary>
     public partial class MainQuestion : Page
@@ -62,70 +62,18 @@ namespace ImagineCupProject
                 responseText.Text += "test";
             }
         }
-
-        //텍스트 분석 클릭버튼            
-        public void Analyze()
-        {
-            if (entityRecognition.Text != "")
-            {
-                //entityRecognition.Text = null;
-                //sentimentRecognition.Text = null;
-                //syntaxRecognition.Text = null;
-                //problemText.Text = null;
-                //locationText.Text = null;
-                //codeText.Text = null;
-            }
-            
-            string text = responseText.Text;
-            var client = LanguageServiceClient.Create();
-            var response = client.AnalyzeSentiment(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteSentiment(response.DocumentSentiment, response.Sentences);
-
-            var response2 = client.AnalyzeEntities(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            });
-            WriteEntities(response2.Entities);
-
-            var response3 = client.AnnotateText(new Document()
-            {
-                Content = text,
-                Type = Document.Types.Type.PlainText
-            },
-            new Features() { ExtractSyntax = true });
-            WriteSentences(response3.Sentences, response3.Tokens);
-
-            azureDatabase.InsertData(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
-            GooglePlacesAPI();
-        }
-
-        //긍정 부정 분석 google api
-        private async void WriteSentiment(Sentiment sentiment, RepeatedField<Sentence> sentences)
-        {
-            sentimentRecognition.Text += $"Score: {sentiment.Score}";
-            sentimentRecognition.Text += $"\tMagnitude: {sentiment.Magnitude}\n";
-            //stt.Text += "Sentence level sentiment:";
-            foreach (var sentence in sentences)
-            {
-                sentimentRecognition.Text += $"{sentence.Text.Content}:" + $" ({sentence.Sentiment.Score * 100}%)\n";   //"\t{sentence.Text.Content}: "+ $
-            }
-        }
+        
 
         //entity분석 google api
         private async void WriteEntities(IEnumerable<Entity> entities)
         {
+            string location="";
             foreach (var entity in entities)
             {
                 if (entity.Type.ToString().Equals("Location") | entity.Type.ToString().Equals("Organization"))
                 {
-                    locationText.Text += entity.Name;
-                    locationText.Text +=
-                    locationText.Text += " ";
+                    location += entity.Name;
+                    location += " ";
                     
                 }
                 if (entity.Type.ToString().Equals("Event"))
@@ -135,42 +83,10 @@ namespace ImagineCupProject
                 entityRecognition.Text += $"Name: {entity.Name}";
                 entityRecognition.Text += $" /{entity.Type}\n";
             }
+            locationText.Text = location;
         }
-
-        //형태소 분석 google api
-        private async void WriteSentences(IEnumerable<Sentence> sentences, RepeatedField<Token> tokens)
-        {
-            syntaxRecognition.Text += "\n";
-            foreach (var token in tokens)
-            {
-                syntaxRecognition.Text += $"{token.PartOfSpeech.Tag} " + $"{token.Text.Content}\n";
-            }
-        }
-
-        /*
-        // Google Cloud Storage에 저장된 (1분 이상의)오디오를 인식
-        public object AsyncRecognizeGcs(string storageUri)
-        {
-            var speech = SpeechClient.Create();
-            var longOperation = speech.LongRunningRecognize(new RecognitionConfig()
-            {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-                SampleRateHertz = 44100,
-                LanguageCode = "en",
-            }, RecognitionAudio.FromStorageUri(storageUri));
-            longOperation = longOperation.PollUntilCompleted();
-            var response = longOperation.Result;
-            foreach (var result in response.Results)
-            {
-                foreach (var alternative in result.Alternatives)
-                {
-                    responseText.Text = (alternative.Transcript);
-                }
-            }
-            return 0;
-        }
-        */
-    
+        
+        //장소 검색
         public void GooglePlacesAPI()
         {
             //string url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + locationText.Text + "&language=en&key=AIzaSyB55GQJ3tv_L2aALoWxIa4vkfJRdtunMtU";
@@ -188,19 +104,19 @@ namespace ImagineCupProject
                 }
             }
         }
-
+        //구글 places api
         public class MatchedSubstring
         {
             public int length { get; set; }
             public int offset { get; set; }
         }
-
+        //구글 places api
         public class Term
         {
             public int offset { get; set; }
             public string value { get; set; }
         }
-
+        //구글 places api
         public class Prediction
         {
             public string description { get; set; }
@@ -210,7 +126,7 @@ namespace ImagineCupProject
             public List<Term> terms { get; set; }
             public List<string> types { get; set; }
         }
-
+        //구글 places api
         public class RootObject
         {
             public List<Prediction> predictions { get; set; }
@@ -227,13 +143,14 @@ namespace ImagineCupProject
             azureDatabase.SendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
-        public void TextModify()
+        //문장 분석
+        public void AnalyzeText()
         {
             changeSentence = problemText.Text;
 
             var client = LanguageServiceClient.Create();
 
-            //형태소 분석
+            //형태소 분석 ( 명사, 형용사, 동사 추출)
             var response = client.AnnotateText(new Document()
             {
                 Content = problemText.Text,
@@ -247,8 +164,8 @@ namespace ImagineCupProject
                     keyWords += token.Text.Content.ToString() + " ";
                 }
             }
-
-            //Location 추출
+            
+            //장소 추출
             var responseEntites = client.AnalyzeEntities(new Document()
             {
                 Content = problemText.Text,
@@ -261,6 +178,7 @@ namespace ImagineCupProject
             loadingAnimation.Visibility = Visibility.Visible;
         }
 
+        //문장 수정
         public async void RunSentenceModify(string keyWords)
         {
             string changeWords = await SentenceModify(keyWords);
@@ -277,6 +195,7 @@ namespace ImagineCupProject
             currentEvent.EventCODE = classifiedResult;
         }
 
+        //파이썬 연동
         public async Task<string> SentenceModify(string keyWords)
         {
             try
@@ -305,7 +224,7 @@ namespace ImagineCupProject
 
         private void TextClassify_Click(object sender, RoutedEventArgs e)
         {
-            TextModify();
+            AnalyzeText();
             //Run(problemText.Text);
             //loadingAnimation.Visibility = Visibility.Visible;
         }
