@@ -241,7 +241,7 @@ namespace ImagineCupProject
                 myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " " + keyWords;
+                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
 
                 Process myProcess = new Process();
                 myProcess.StartInfo = myProcessStartInfo;
