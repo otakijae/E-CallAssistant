@@ -1,0 +1,6 @@
+model_checkpoint_path: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-7400"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-6400"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-6600"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-6800"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-7200"
+all_model_checkpoint_paths: "C:\\Users\\jae\\Documents\\ImagineCup2018\\CNNTextClassification\\trained_model_1518622745\\checkpoints\\model-7400"

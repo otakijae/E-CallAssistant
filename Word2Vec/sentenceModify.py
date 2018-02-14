@@ -24,8 +24,8 @@ for i in word_list:
 # ------------------------------
 # -- 파일 읽기
 # ------------------------------
-file = open("fire30.txt", "r")  
-sentences = file.read() 
+file = open("fire30.txt", "r")
+sentences = file.read()
 
 # 문장별로 Split 처리
 model_data = re.split("[\n\.,?]", sentences.lower())
@@ -34,12 +34,12 @@ model_data = re.split("[\n\.,?]", sentences.lower())
 while ' ' in model_data:
     model_data.remove(' ')
     model_data.remove('')
- 
+
 
 # -- 데이터프레임에 저장
 model_dataframe = pd.DataFrame()
 model_dataframe['sentences'] = np.asarray(model_data)
- 
+
 
 # -- 데이터프레임 문장별 Split
 model_dataframe["separates"] = model_dataframe["sentences"].apply(lambda x: x.replace(" ",""))
@@ -58,7 +58,7 @@ size = 300 (300차원짜리 벡터스페이스에 embedding)
 iter (보통 딥러닝에서 말하는 epoch와 비슷한, 반복횟수
 workers : cpu의 코어수에 따라 multi-thread를 지원해서 병렬처리하는 옵션
 alpha : 초기학습률, min_alpha: alpha값이 학습과정에서 선형으로 줄어서 도달하는 최소 값
-''' 
+'''
 
 
 count=0;
@@ -73,16 +73,16 @@ Sentence = text
 for i in Sentence.split(' '):
     #print(model.similarity(i,model.doesnt_match(Sentence.split())))
     try:
-        sum += model.similarity(i,model.doesnt_match(Sentence.split())) 
+        sum += model.similarity(i,model.doesnt_match(Sentence.split()))
         count += 1
     except:
         i=i
 average = sum /count
-#print(average, sum, count) 		
+#print(average, sum, count)
 
 
 
-word_file = open("fullvoc.txt", "r")  
+word_file = open("fullvoc.txt", "r")
 words_lists = word_file.read()
 
 def edit_distance(s1, s2):
@@ -132,6 +132,3 @@ for i in words_lists.split():
 
 #Sentence = Sentence.replace(model.doesnt_match(Sentence.split()),higher_word)
 print(model.doesnt_match(Sentence.split()),higher_word)
- 
-
-
