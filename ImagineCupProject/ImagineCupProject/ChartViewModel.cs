@@ -25,7 +25,7 @@ namespace ImagineCupProject
             public override string Format(double value)
             {
                 var months = new string[] {
-                    "Code1", "Code2", "Code3", "Code4", "Code5", "Code6"
+                    "Terror", "Disaster", "Fire", "Violence", "Vehicle", "ETC"
                 };
                 int v = (int)value;
                 return v >= 0 && v < months.Length ? months[v] : string.Empty;
@@ -55,79 +55,78 @@ namespace ImagineCupProject
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
                     connection.Open();
-                    sql = "select * from emergencyCall";
+                    sql = "select * from ECALL";
                     SqlCommand cmd = new SqlCommand(sql, connection);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        //Console.WriteLine("{0},{1},{2},{3},{4},{5},{6}", reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
 
-                        if(reader.GetString(1).ToString().Substring(12, 2).Equals("00") | reader.GetString(1).ToString().Substring(12, 2).Equals("01"))
+                        if (reader.GetString(2).ToString().Substring(12, 2).Equals("00") | reader.GetString(2).ToString().Substring(12, 2).Equals("01"))
                         {
                             time1++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("02") | reader.GetString(1).ToString().Substring(12, 2).Equals("03"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("02") | reader.GetString(2).ToString().Substring(12, 2).Equals("03"))
                         {
                             time2++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("04") | reader.GetString(1).ToString().Substring(12, 2).Equals("05"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("04") | reader.GetString(2).ToString().Substring(12, 2).Equals("05"))
                         {
                             time3++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("06") | reader.GetString(1).ToString().Substring(12, 2).Equals("07"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("06") | reader.GetString(2).ToString().Substring(12, 2).Equals("07"))
                         {
                             time4++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("08") | reader.GetString(1).ToString().Substring(12, 2).Equals("09"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("08") | reader.GetString(2).ToString().Substring(12, 2).Equals("09"))
                         {
                             time5++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("10") | reader.GetString(1).ToString().Substring(12, 2).Equals("11"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("10") | reader.GetString(2).ToString().Substring(12, 2).Equals("11"))
                         {
                             time6++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("12") | reader.GetString(1).ToString().Substring(12, 2).Equals("13"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("12") | reader.GetString(2).ToString().Substring(12, 2).Equals("13"))
                         {
                             time7++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("14") | reader.GetString(1).ToString().Substring(12, 2).Equals("15"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("14") | reader.GetString(2).ToString().Substring(12, 2).Equals("15"))
                         {
                             time8++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("16") | reader.GetString(1).ToString().Substring(12, 2).Equals("17"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("16") | reader.GetString(2).ToString().Substring(12, 2).Equals("17"))
                         {
                             time9++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("18") | reader.GetString(1).ToString().Substring(12, 2).Equals("19"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("18") | reader.GetString(2).ToString().Substring(12, 2).Equals("19"))
                         {
                             time10++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("20") | reader.GetString(1).ToString().Substring(12, 2).Equals("21"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("20") | reader.GetString(2).ToString().Substring(12, 2).Equals("21"))
                         {
                             time11++;
                         }
-                        else if (reader.GetString(1).ToString().Substring(12, 2).Equals("22") | reader.GetString(1).ToString().Substring(12, 2).Equals("23"))
+                        else if (reader.GetString(2).ToString().Substring(12, 2).Equals("22") | reader.GetString(2).ToString().Substring(12, 2).Equals("23"))
                         {
                             time12++;
                         }
 
-                        if (reader.GetString(6).ToLower().Contains("terror"))
+                        if (reader.GetString(8).ToLower().Contains("terror") | reader.GetString(8).ToLower().Contains("gun"))
                         {
                             code1++;
                         }
-                        else if (reader.GetString(6).ToLower().Equals("disaster"))
+                        else if (reader.GetString(8).ToLower().Equals("disaster"))
                         {
                             code2++;
                         }
-                        else if (reader.GetString(6).ToLower().Equals("fire"))
+                        else if (reader.GetString(8).ToLower().Equals("fire"))
                         {
                             code3++;
                         }
-                        else if (reader.GetString(6).ToLower().Equals("violence"))
+                        else if (reader.GetString(8).ToLower().Equals("violence"))
                         {
                             code4++;
                         }
-                        else if (reader.GetString(6).ToLower().Equals("motor"))
+                        else if (reader.GetString(8).ToLower().Equals("motor") | reader.GetString(8).ToLower().Equals("vehicle") | reader.GetString(8).ToLower().Equals("accidents"))
                         {
                             code5++;
                         }
@@ -139,6 +138,7 @@ namespace ImagineCupProject
                     reader.Close();
                     connection.Close();
                 }
+
                 // totalText.Text = "Operator JW receive " + totalNumber + " call";
 
             }
@@ -164,11 +164,11 @@ namespace ImagineCupProject
                 VertScrollVisibility = Visibility.Collapsed,
                 Legend = new LegendItem[]
                 {
-                    new LegendItem(Colors.Navy, ""),
-                    new LegendItem(Colors.Blue, ""),
-                    new LegendItem(Colors.Brown, ""),
-                    new LegendItem(Colors.Chocolate, ""),
-                    new LegendItem(Colors.Gray, ""),
+                    new LegendItem(Color.FromRgb(255, 187, 0), ""),
+                    new LegendItem(Color.FromRgb(255, 130, 36), ""),
+                    new LegendItem(Color.FromRgb(241, 94, 95), ""),
+                    new LegendItem(Color.FromRgb(204, 60, 60), ""),
+                    new LegendItem(Color.FromRgb(255, 167, 167), ""),
                     new LegendItem(Colors.Tomato, ""),
                 }
                 ,
@@ -178,23 +178,23 @@ namespace ImagineCupProject
                 YAxisInterpolator = new WPFCanvasChartFloatInterpolator(),
                 XAxisInterpolator = new CustomInterpolator(),
                 FixedYMin = 0.0d,
-                LegendWidth = 100.0d,
+                LegendWidth = 150.0d,
             };
 
             var serie1 = new List<Point>();
 
-            serie1.Add(new Point(1, time1));
+            serie1.Add(new Point(0, time1));
             serie1.Add(new Point(2, time2));
-            serie1.Add(new Point(3, time3));
-            serie1.Add(new Point(4, time4));
-            serie1.Add(new Point(5, time5));
-            serie1.Add(new Point(6, time6));
-            serie1.Add(new Point(7, time7));
-            serie1.Add(new Point(8, time8));
-            serie1.Add(new Point(9, time9));
-            serie1.Add(new Point(10, time10));
-            serie1.Add(new Point(11, time11));
-            serie1.Add(new Point(12, time12));
+            serie1.Add(new Point(4, time3));
+            serie1.Add(new Point(6, time4));
+            serie1.Add(new Point(8, time5));
+            serie1.Add(new Point(10, time6));
+            serie1.Add(new Point(12, time7));
+            serie1.Add(new Point(14, time8));
+            serie1.Add(new Point(16, time9));
+            serie1.Add(new Point(18, time10));
+            serie1.Add(new Point(20, time11));
+            serie1.Add(new Point(22, time12));
 
             LineSeriesChartDrawer = new LineSeriesChartDrawer(new List<IList<Point>>{
                 serie1

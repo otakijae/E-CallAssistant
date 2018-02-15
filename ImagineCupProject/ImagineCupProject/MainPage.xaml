@@ -223,7 +223,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="btnStartRecord" Height="40" Grid.Column="0" Content="Quit" FontSize="15" Click="btnStartRecord_Click"/>
+                        <Button x:Name="btnQuitRecord" Height="40" Grid.Column="0" Content="Quit" FontSize="15" Click="btnQuitRecord_Click"/>
                         <Button x:Name="nextButton" Height="40" Grid.Column="1" Content="Next" FontSize="15" Click="nextButton_Click"/>
                     </Grid>
 

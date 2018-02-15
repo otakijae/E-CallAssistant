@@ -1,4 +1,5 @@
-﻿using ImagineCupProject.EmergencyResponseManuals;
+﻿using Google.Cloud.Language.V1;
+using ImagineCupProject.EmergencyResponseManuals;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using static Google.Cloud.Language.V1.AnnotateTextRequest.Types;
 using System.Windows.Media;
 
 namespace ImagineCupProject
@@ -22,6 +24,8 @@ namespace ImagineCupProject
         LoadingAnimation loadingAnimation;
         EventVO currentEvent;
         string classifiedResult;
+        string changeSentence;
+        string keyWords;
 
         SolidColorBrush mainColorSolidColorBrush = new SolidColorBrush();
         SolidColorBrush pointColorSolidColorBrush = new SolidColorBrush();
@@ -144,7 +148,11 @@ namespace ImagineCupProject
                 myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";
+                //신재혁 컴퓨터에서 실행 시
+                //myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";
+                //손장원 컴퓨터에서 실행 시
+                myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518617407/checkpoints/\"" + " \"" + keyWords + "\"";
+
 
                 Process myProcess = new Process();
                 myProcess.StartInfo = myProcessStartInfo;
@@ -162,7 +170,73 @@ namespace ImagineCupProject
             }
         }
 
+        //문장 분석
+        public void AnalyzeText()
+        {
+            changeSentence = testBox.Text;
 
+            var client = LanguageServiceClient.Create();
+
+            //형태소 분석 ( 명사, 형용사, 동사 추출)
+            var response = client.AnnotateText(new Document()
+            {
+                Content = testBox.Text,
+                Type = Document.Types.Type.PlainText
+            },
+            new Features() { ExtractSyntax = true });
+            foreach (var token in response.Tokens)
+            {
+                if (token.PartOfSpeech.Tag.ToString().Equals("Noun") || token.PartOfSpeech.Tag.ToString().Equals("Verb") || token.PartOfSpeech.Tag.ToString().Equals("Adj"))
+                {
+                    keyWords += token.Text.Content.ToString() + " ";
+                }
+            }
+
+            //파이썬 연동
+            RunSentenceModify(keyWords);
+            loadingAnimation.Visibility = Visibility.Visible;
+        }
+
+        //문장 수정
+        public async void RunSentenceModify(string keyWords)
+        {
+            string changeWords = await SentenceModify(keyWords);
+            changeSentence = changeSentence.Replace(changeWords.ToString().Split(' ')[0], changeWords.ToString().Split(' ')[1].Replace("\r\n", ""));
+            testBox.Text = changeSentence;
+            //this.textClassify.IsEnabled = true;
+            loadingAnimation.Visibility = Visibility.Hidden;
+
+            //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기, 현재 EventVO에 분류 결과 저장
+            ShowClassifiedManuals(classifiedResult);
+            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
+        }
+
+        //파이썬 연동
+        public async Task<string> SentenceModify(string keyWords)
+        {
+            try
+            {
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "sentenceModify.py";
+
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + keyWords;
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
+                return classifiedResult;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
         private void FirstQuestion_Click(object sender, RoutedEventArgs e)
         {
@@ -170,18 +244,19 @@ namespace ImagineCupProject
             // 2. 실시간 음성 인지 텍스트 나타내기
             // 3. 버튼 누르면 다른 버튼 disable
             // 4. 결과값 나오면 인지 종료
+            AnalyzeText();
 
             if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(firstAnswer, firstToggle, true);
-                currentEvent.EventFirstANSWER = true;
+                currentEvent.EventFirstANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(firstAnswer, firstToggle, false);
-                currentEvent.EventFirstANSWER = false;
+                currentEvent.EventFirstANSWER = 0;
             }
             else
             {
@@ -214,13 +289,13 @@ namespace ImagineCupProject
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(thirdAnswer, thirdToggle, true);
-                currentEvent.EventThirdANSWER = true;
+                currentEvent.EventThirdANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(thirdAnswer, thirdToggle, false);
-                currentEvent.EventThirdANSWER = false;
+                currentEvent.EventThirdANSWER = 0;
             }
             else
             {
@@ -244,13 +319,13 @@ namespace ImagineCupProject
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(fourthAnswer, fourthToggle, true);
-                currentEvent.EventFourthANSWER = true;
+                currentEvent.EventFourthANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(fourthAnswer, fourthToggle, false);
-                currentEvent.EventFourthANSWER = false;
+                currentEvent.EventFourthANSWER = 0;
             }
             else
             {
@@ -274,13 +349,13 @@ namespace ImagineCupProject
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(fifthAnswer, fifthToggle, true);
-                currentEvent.EventFifthANSWER = true;
+                currentEvent.EventFifthANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(fifthAnswer, fifthToggle, false);
-                currentEvent.EventFifthANSWER = false;
+                currentEvent.EventFifthANSWER = 0;
             }
             else
             {
@@ -304,13 +379,13 @@ namespace ImagineCupProject
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(sixthAnswer, sixthToggle, true);
-                currentEvent.EventSixthANSWER = true;
+                currentEvent.EventSixthANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(sixthAnswer, sixthToggle, false);
-                currentEvent.EventSixthANSWER = false;
+                currentEvent.EventSixthANSWER = 0;
             }
             else
             {
@@ -334,13 +409,13 @@ namespace ImagineCupProject
             {
                 classifiedResult = "1.0\r\n";
                 ChangeAnswerButtonState(seventhAnswer, seventhToggle, true);
-                currentEvent.EventSeventhANSWER = true;
+                currentEvent.EventSeventhANSWER = 1;
             }
             else if (this.testBox.Text.ToUpper().Trim() == "NO")
             {
                 classifiedResult = "0.0\r\n";
                 ChangeAnswerButtonState(seventhAnswer, seventhToggle, false);
-                currentEvent.EventSeventhANSWER = false;
+                currentEvent.EventSeventhANSWER = 0;
             }
             else
             {
@@ -367,17 +442,17 @@ namespace ImagineCupProject
 
 
 
-        private bool CheckClassifiedResultTrueOrFalse(TextBlock answerTextBlock, ToggleButton toggleButton)
+        private int CheckClassifiedResultTrueOrFalse(TextBlock answerTextBlock, ToggleButton toggleButton)
         {
             if (classifiedResult == "0.0\r\n")
             {
                 ChangeAnswerButtonState(answerTextBlock, toggleButton, false);
-                return false;
+                return 0;
             }
             else
             {
                 ChangeAnswerButtonState(answerTextBlock, toggleButton, true);
-                return true;
+                return 1;
             }
         }
 
@@ -407,29 +482,29 @@ namespace ImagineCupProject
             {
                 firstAnswer.Text = "YES";
                 firstAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventFirstANSWER = true;
+                currentEvent.EventFirstANSWER = 1;
             }
             else
             {
                 firstAnswer.Text = "NO";
                 firstAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventFirstANSWER = false;
+                currentEvent.EventFirstANSWER = 0;
             }
         }
-          
+
         private void ThirdAnswer_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as ToggleButton).IsChecked == true)
             {
                 thirdAnswer.Text = "YES";
                 thirdAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventThirdANSWER = true;
+                currentEvent.EventThirdANSWER = 1;
             }
             else
             {
                 thirdAnswer.Text = "NO";
                 thirdAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventThirdANSWER = false;
+                currentEvent.EventThirdANSWER = 0;
             }
         }
 
@@ -439,13 +514,13 @@ namespace ImagineCupProject
             {
                 fourthAnswer.Text = "YES";
                 fourthAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventFourthANSWER = true;
+                currentEvent.EventFourthANSWER = 1;
             }
             else
             {
                 fourthAnswer.Text = "NO";
                 fourthAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventFourthANSWER = false;
+                currentEvent.EventFourthANSWER = 0;
             }
         }
 
@@ -455,13 +530,13 @@ namespace ImagineCupProject
             {
                 fifthAnswer.Text = "YES";
                 fifthAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventFifthANSWER = true;
+                currentEvent.EventFifthANSWER = 1;
             }
             else
             {
                 fifthAnswer.Text = "NO";
                 fifthAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventFifthANSWER = false;
+                currentEvent.EventFifthANSWER = 0;
             }
         }
 
@@ -471,13 +546,13 @@ namespace ImagineCupProject
             {
                 sixthAnswer.Text = "YES";
                 sixthAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventSixthANSWER = true;
+                currentEvent.EventSixthANSWER = 1;
             }
             else
             {
                 sixthAnswer.Text = "NO";
                 sixthAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventSixthANSWER = false;
+                currentEvent.EventSixthANSWER = 0;
             }
         }
 
@@ -487,13 +562,13 @@ namespace ImagineCupProject
             {
                 seventhAnswer.Text = "YES";
                 seventhAnswer.Foreground = mainColorSolidColorBrush;
-                currentEvent.EventSeventhANSWER = true;
+                currentEvent.EventSeventhANSWER = 1;
             }
             else
             {
                 seventhAnswer.Text = "NO";
                 seventhAnswer.Foreground = pointColorSolidColorBrush;
-                currentEvent.EventSeventhANSWER = false;
+                currentEvent.EventSeventhANSWER = 0;
             }
         }
 

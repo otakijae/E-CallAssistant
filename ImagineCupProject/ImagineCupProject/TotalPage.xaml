@@ -10,14 +10,29 @@
       Title="TotalPage">
 
     <Grid  Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="- Numerical analysis" Foreground="Black" FontSize="25" FontWeight="Bold" Margin="0,0,0,555" />
-        <TextBlock x:Name="operatorReceiveNumText"  Text="operator JW received 30 call"  VerticalAlignment="Center"  FontSize="20"  Margin="0,44,0,476"  />
-        <chart:ChartControl Drawer="{Binding Path=BarChartDrawer}" Margin="0,125,614.6,60"   HorizontalAlignment="Right" Width="235"     />
-        <chart:ChartControl Drawer="{Binding Path=LineSeriesChartDrawer}" Margin="678,125,-1.4,60"   />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock x:Name="nameText"  Text="Code Number"  FontSize="20" FontWeight="Bold"   Margin="0,540,425,0" TextAlignment="Center"  />
-        <TextBlock x:Name="nameText2"  Text="Time Number"  FontSize="20" FontWeight="Bold"  Margin="425,540,0,0" TextAlignment="Center" />
+        <TextBlock Text=" Numerical analysis"  Foreground="#FFFF5E00"  FontSize="35" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextAlignment="Left"  />
+        <TextBlock x:Name="operatorReceiveNumText"  Text="operator JW received a total of 375 calls this month."  VerticalAlignment="Center"  FontSize="20"  Grid.Column="0" Grid.Row="1" TextAlignment="Left"  />
+        <chart:ChartControl Drawer="{Binding Path=BarChartDrawer}"   Grid.Column="0" Grid.Row="2"  Grid.RowSpan="2" />
+        <chart:ChartControl Drawer="{Binding Path=LineSeriesChartDrawer}" Grid.Column="1" Grid.Row="2"  Grid.RowSpan="2" />
+
+        <TextBlock x:Name="nameText"  Text="Code Number"  FontSize="20" FontWeight="Bold"    Grid.Column="0" Grid.Row="4"  TextAlignment="Center"  />
+        <TextBlock x:Name="nameText2"  Text="Time Number"  FontSize="20" FontWeight="Bold"   Grid.Column="1" Grid.Row="4"  TextAlignment="Center" />
+        <TextBlock x:Name="codeInformation"  Text="dd"  VerticalAlignment="Top"    FontSize="19"  Grid.Column="0" Grid.Row="5" TextAlignment="Center"  />
+        <TextBlock x:Name="timeInformation"  Text="dd"  VerticalAlignment="Top"    FontSize="19"  Grid.Column="1" Grid.Row="5" TextAlignment="Center" />
 
 
     </Grid>

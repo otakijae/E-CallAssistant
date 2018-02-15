@@ -36,7 +36,6 @@ namespace ImagineCupProject
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
         AdditionalQuestion additionalQuestion;
-        TotalPage totalPage = new TotalPage();
         MainQuestion mainQuestion;
         private readonly ToastViewModel toastViewModel;
 
@@ -46,6 +45,7 @@ namespace ImagineCupProject
         public MainPage()
         {
             InitializeComponent();
+            azureDatabase = new AzureDatabase();
             DataContext = toastViewModel = new ToastViewModel();
             additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
@@ -123,7 +123,7 @@ namespace ImagineCupProject
 
         private void listViewItem1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            mainFrame.Content = totalPage;
+            mainFrame.Content = new TotalPage();
         }
 
         private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -178,7 +178,6 @@ namespace ImagineCupProject
         private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
         {
             speechRecognitionResult = e.PartialResult;
-            //locationText.Text += result;
             Dispatcher.Invoke(() =>
             {
                 /*
@@ -204,7 +203,6 @@ namespace ImagineCupProject
                 {
                     //_microphoneRecognitionClient.EndMicAndRecognition();
 
-                    //mainQuestion.locationText.Text += "HI";
                     WriteResponseResult(e);
                 }));
             //}
@@ -272,17 +270,18 @@ namespace ImagineCupProject
             for (int i = 0; i < textArrayList.Count; i++)
             {
                 callerStatement.Text += textArrayList[i];
-
+                mainQuestion.problemText.Text += textArrayList[i];
             }
+
             //음성인식 기능은 전화받으면 계속 실행됨
             //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
             //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
-            mainQuestion.problemText.Text += callerStatement.Text;
             additionalQuestion.testBox.Text = speechRecognition.Text;
 
             //280, 200, 250자 정도에서 주기적으로 분석
             if (callerStatement.Text.Length > 200)
             {
+                mainQuestion.GooglePlacesAPI();
                 mainQuestion.textClassify.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 callerStatement.Text = "";
             }
@@ -338,7 +337,7 @@ namespace ImagineCupProject
         }
 
         //통화 종료 버튼
-        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
+        private void btnQuitRecord_Click(object sender, RoutedEventArgs e)
         {
             if (microphoneRecognitionClient != null)
             {
@@ -348,8 +347,8 @@ namespace ImagineCupProject
                 microphoneRecognitionClient.Dispose();
                 microphoneRecognitionClient = null;
                 toastViewModel.ShowInformation("Hang up the call.");
-
                 PrintCurrentEvent(currentEvent);
+                InsertCurrentEvent(currentEvent);
                 //현재 처리 중이었던 사건 저장 및 UI 초기화
                 ResetEvent();
             }
@@ -379,6 +378,11 @@ namespace ImagineCupProject
                 currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
         }
 
+        //MessageBox로 currentEvent 값 확인
+        private void InsertCurrentEvent(EventVO currentEvent)
+        {
+            azureDatabase.InsertData(currentEvent);
+        }
         private void SaveCurrentEventVO()
         {
             //EventNUMBER는 AUTO INCREMENT로 설정, PRIMARY KEY로 설정
