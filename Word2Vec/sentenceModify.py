@@ -24,8 +24,8 @@ for i in word_list:
 # ------------------------------
 # -- 파일 읽기
 # ------------------------------
-file = open("fire30.txt", "r")
-sentences = file.read()
+file = open("terror.txt", "r",encoding='UTF8')  
+sentences = file.read() 
 
 # 문장별로 Split 처리
 model_data = re.split("[\n\.,?]", sentences.lower())

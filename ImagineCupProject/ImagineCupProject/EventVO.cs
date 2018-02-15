@@ -21,21 +21,21 @@
         private string EventSeventhQuestion = "Is the patient BLEEDING";
         private string EventEighthQuestion = "Patient's AGE and SEX?";
 
-        private bool EventFirstAnswer;
+        private int EventFirstAnswer;
         private string EventSecondAnswer;
-        private bool EventThirdAnswer;
-        private bool EventFourthAnswer;
-        private bool EventFifthAnswer;
-        private bool EventSixthAnswer;
-        private bool EventSeventhAnswer;
+        private int EventThirdAnswer;
+        private int EventFourthAnswer;
+        private int EventFifthAnswer;
+        private int EventSixthAnswer;
+        private int EventSeventhAnswer;
         private string EventEighthAnswer;
 
         public EventVO() { }
 
         public EventVO(string EventNumber, string EventOperator, string EventStartTime, string EventEndTime,
-            string EventLocation, string EventPhoneNumber, string EventCallerName, string EventProblem, string EventCode, 
-            bool EventFirstAnswer, string EventSecondAnswer, bool EventThirdAnswer, bool EventFourthAnswer,
-            bool EventFifthAnswer,bool EventSixthAnswer, bool EventSeventhAnswer, string EventEighthAnswer)
+            string EventLocation, string EventPhoneNumber, string EventCallerName, string EventProblem, string EventCode,
+            int EventFirstAnswer, string EventSecondAnswer, int EventThirdAnswer, int EventFourthAnswer,
+            int EventFifthAnswer, int EventSixthAnswer, int EventSeventhAnswer, string EventEighthAnswer)
         {
             this.EventNumber = EventNumber;
             this.EventOperator = EventOperator;
@@ -136,7 +136,7 @@
             get { return EventEighthQuestion; }
         }
 
-        public bool EventFirstANSWER
+        public int EventFirstANSWER
         {
             get { return EventFirstAnswer; }
             set { EventFirstAnswer = value; }
@@ -146,27 +146,27 @@
             get { return EventSecondAnswer; }
             set { EventSecondAnswer = value; }
         }
-        public bool EventThirdANSWER
+        public int EventThirdANSWER
         {
             get { return EventThirdAnswer; }
             set { EventThirdAnswer = value; }
         }
-        public bool EventFourthANSWER
+        public int EventFourthANSWER
         {
             get { return EventFourthAnswer; }
             set { EventFourthAnswer = value; }
         }
-        public bool EventFifthANSWER
+        public int EventFifthANSWER
         {
             get { return EventFifthAnswer; }
             set { EventFifthAnswer = value; }
         }
-        public bool EventSixthANSWER
+        public int EventSixthANSWER
         {
             get { return EventSixthAnswer; }
             set { EventSixthAnswer = value; }
         }
-        public bool EventSeventhANSWER
+        public int EventSeventhANSWER
         {
             get { return EventSeventhAnswer; }
             set { EventSeventhAnswer = value; }

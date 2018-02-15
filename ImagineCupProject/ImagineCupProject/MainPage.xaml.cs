@@ -29,14 +29,13 @@ namespace ImagineCupProject
         ClassifiedManual classifiedManual = new ClassifiedManual();
         MedicalManual medicalManual = new MedicalManual();
 
-        Client client = new Client("3b49bfce", "d5788d26c944e091562527416046febb");
+        Client client = new Client("3579c5de", "e6d591839df8a0788c75564f3ae0e6fd");
         string text = "I am the passenger and I see the Starbucks building at New York subway station is on fire. I think 911 need to check this out quickly" +
                 "At least 37 people have been killed and dozens injured in a fire at a hospital and nursing home in New York, in the country's deadliest blaze for a decade";
         string speechRecognitionResult;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
         AdditionalQuestion additionalQuestion;
-        TotalPage totalPage = new TotalPage();
         MainQuestion mainQuestion;
         private readonly ToastViewModel toastViewModel;
 
@@ -46,6 +45,7 @@ namespace ImagineCupProject
         public MainPage()
         {
             InitializeComponent();
+            azureDatabase = new AzureDatabase();
             DataContext = toastViewModel = new ToastViewModel();
             additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
@@ -123,7 +123,7 @@ namespace ImagineCupProject
 
         private void listViewItem1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            mainFrame.Content = totalPage;
+            mainFrame.Content = new TotalPage();
         }
 
         private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -178,7 +178,6 @@ namespace ImagineCupProject
         private void ResponseReceived(object sender, PartialSpeechResponseEventArgs e)
         {
             speechRecognitionResult = e.PartialResult;
-            //locationText.Text += result;
             Dispatcher.Invoke(() =>
             {
                 /*
@@ -204,7 +203,6 @@ namespace ImagineCupProject
                 {
                     //_microphoneRecognitionClient.EndMicAndRecognition();
 
-                    //mainQuestion.locationText.Text += "HI";
                     WriteResponseResult(e);
                 }));
             //}
@@ -274,6 +272,7 @@ namespace ImagineCupProject
                 callerStatement.Text += textArrayList[i];
                 mainQuestion.problemText.Text += textArrayList[i];
             }
+
             //음성인식 기능은 전화받으면 계속 실행됨
             //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
             //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
@@ -337,7 +336,7 @@ namespace ImagineCupProject
         }
 
         //통화 종료 버튼
-        private void btnStartRecord_Click(object sender, RoutedEventArgs e)
+        private void btnQuitRecord_Click(object sender, RoutedEventArgs e)
         {
             if (microphoneRecognitionClient != null)
             {
@@ -347,8 +346,8 @@ namespace ImagineCupProject
                 microphoneRecognitionClient.Dispose();
                 microphoneRecognitionClient = null;
                 toastViewModel.ShowInformation("Hang up the call.");
-
                 PrintCurrentEvent(currentEvent);
+                InsertCurrentEvent(currentEvent);
                 //현재 처리 중이었던 사건 저장 및 UI 초기화
                 ResetEvent();
             }
@@ -378,6 +377,11 @@ namespace ImagineCupProject
                 currentEvent.EventSeventhANSWER + "\n" + currentEvent.EventEighthANSWER);
         }
 
+        //MessageBox로 currentEvent 값 확인
+        private void InsertCurrentEvent(EventVO currentEvent)
+        {
+            azureDatabase.InsertData(currentEvent);
+        }
         private void SaveCurrentEventVO()
         {
             //EventNUMBER는 AUTO INCREMENT로 설정, PRIMARY KEY로 설정

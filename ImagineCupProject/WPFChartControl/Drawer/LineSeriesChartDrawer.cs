@@ -103,7 +103,7 @@ namespace ImagineCupProject.WPFChartControl.Drawer
                 Legend = new List<LegendItem>();
                 for (int i = 0; i < chartPoints.Count; ++i)
                 {
-                    Legend.Add(new LegendItem(Colors.Blue, string.Empty));
+                    Legend.Add(new LegendItem(Color.FromRgb(79, 150, 210), string.Empty));
                 }
             }
 
