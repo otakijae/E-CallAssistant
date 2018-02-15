@@ -189,6 +189,7 @@ namespace ImagineCupProject
                 }
                 */
                 speechRecognition.Text = (e.PartialResult);
+                additionalQuestion.testBox.Text = speechRecognition.Text;/////////////////////////////////////////////////////////
                 //mainQuestion.
             });
         }
@@ -276,7 +277,7 @@ namespace ImagineCupProject
             //음성인식 기능은 전화받으면 계속 실행됨
             //mainFrame의 Content가 mainQuestion이면 problem 분석란에 음성인식 텍스트 추가
             //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
-            additionalQuestion.testBox.Text = speechRecognition.Text;
+            //additionalQuestion.testBox.Text = speechRecognition.Text;//////////////////////////////////////////////////////////////////////
 
             //280, 200, 250자 정도에서 주기적으로 분석
             if (callerStatement.Text.Length > 200)
