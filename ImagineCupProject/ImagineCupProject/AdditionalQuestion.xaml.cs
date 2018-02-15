@@ -244,7 +244,7 @@ namespace ImagineCupProject
             // 2. 실시간 음성 인지 텍스트 나타내기
             // 3. 버튼 누르면 다른 버튼 disable
             // 4. 결과값 나오면 인지 종료
-            AnalyzeText();
+            //AnalyzeText();
 
             if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
             {
