@@ -171,7 +171,7 @@ namespace ImagineCupProject
 
             //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기, 현재 EventVO에 분류 결과 저장
             additionalQuestion.ShowClassifiedManuals(classifiedResult);
-            toastViewModel.ShowWarning("Text Classification : " + classifiedResult);
+            toastViewModel.ShowWarning("Event Classification : " + classifiedResult);
             currentEvent.EventCODE = classifiedResult;
         }
 
