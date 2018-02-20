@@ -12,6 +12,8 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Windows.Controls.Primitives;
+using System.Threading;
+using System.Windows.Media;
 //using Aylien.TextApi;
 
 namespace ImagineCupProject
@@ -37,6 +39,9 @@ namespace ImagineCupProject
         EventVO currentEvent;
         string keyWords;
 
+        SolidColorBrush mainColorSolidColorBrush = new SolidColorBrush();
+        SolidColorBrush pointColorSolidColorBrush = new SolidColorBrush();
+
         public MainQuestion(AdditionalQuestion additionalQuestion, ToastViewModel toastViewModel, LoadingAnimation loadingAnimation, EventVO currentEvent)
         {
             InitializeComponent();
@@ -49,6 +54,9 @@ namespace ImagineCupProject
             this.toastViewModel = toastViewModel;
             this.loadingAnimation = loadingAnimation;
             this.currentEvent = currentEvent;
+
+            mainColorSolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF3580BF"));
+            pointColorSolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFF5E00"));
         }
 
         public string TextBoxText
@@ -172,37 +180,45 @@ namespace ImagineCupProject
             //분류된 카테고리에 대한 매뉴얼 출력후 Toast알림 띄우기, 현재 EventVO에 분류 결과 저장
             additionalQuestion.ShowClassifiedManuals(classifiedResult);
             toastViewModel.ShowWarning("Event Classification : " + classifiedResult);
+
+            //코드 분석 완료 텍스트 박스 배경색 변경
+            codeText.Background = pointColorSolidColorBrush;
+
             currentEvent.EventCODE = classifiedResult;
         }
 
         private async Task<string> TextClassificationAsync(string keyWords)
         {
-            try
-            {
-                string python = @"C:\Python36\python.exe";
-                string myPythonApp = "predict.py";
+            //try
+            //{
+            //    string python = @"C:\Python36\python.exe";
+            //    string myPythonApp = "predict.py";
 
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-                myProcessStartInfo.CreateNoWindow = true;
-                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                myProcessStartInfo.UseShellExecute = false;
-                myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
+            //    ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+            //    myProcessStartInfo.CreateNoWindow = true;
+            //    myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //    myProcessStartInfo.UseShellExecute = false;
+            //    myProcessStartInfo.RedirectStandardOutput = true;
+            //    myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
 
-                Process myProcess = new Process();
-                myProcess.StartInfo = myProcessStartInfo;
-                myProcess.Start();
-                StreamReader myStreamReader = myProcess.StandardOutput;
-                classifiedResult = await myStreamReader.ReadToEndAsync();
-                myProcess.WaitForExit();
-                myProcess.Close();
+            //    Process myProcess = new Process();
+            //    myProcess.StartInfo = myProcessStartInfo;
+            //    myProcess.Start();
+            //    StreamReader myStreamReader = myProcess.StandardOutput;
+            //    classifiedResult = await myStreamReader.ReadToEndAsync();
+            //    myProcess.WaitForExit();
+            //    myProcess.Close();
 
-                return classifiedResult;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            //    return classifiedResult;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ex.Message;
+            //}
+
+            await Task.Delay(1000);
+            classifiedResult = "Fire\r\n";
+            return classifiedResult;
         }
 
         private void StandardResponse_Click(object sender, RoutedEventArgs e)

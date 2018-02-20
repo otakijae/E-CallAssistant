@@ -30,8 +30,7 @@ namespace ImagineCupProject
         MedicalManual medicalManual = new MedicalManual();
 
         Client client = new Client("3579c5de", "e6d591839df8a0788c75564f3ae0e6fd");
-        string text = "I am the passenger and I see the Starbucks building at New York subway station is on fire. I think 911 need to check this out quickly" +
-                "At least 37 people have been killed and dozens injured in a fire at a hospital and nursing home in New York, in the country's deadliest blaze for a decade";
+        string text = "E-Call Assistant";
         string speechRecognitionResult;
         ArrayList textArrayList = new ArrayList();
         ArrayList textShapeArrayList = new ArrayList();
@@ -96,7 +95,7 @@ namespace ImagineCupProject
                 mainQuestion.CurrentEventVO = currentEvent;
                 additionalQuestion.CurrentEventVO = currentEvent;
 
-                PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
+                //PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
 
                 mainFrame.Content = additionalQuestion;
                 nextButton.Content = "Previous";
@@ -114,7 +113,7 @@ namespace ImagineCupProject
                 currentEvent.EventCODE = mainQuestion.classifiedResult;
                 mainQuestion.codeText.Text = currentEvent.EventCODE;
 
-                PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
+                //PrintCurrentEvent(currentEvent);//VO 객체 값 할당된 거 확인하는 용도, 나중에 지울 것
 
                 mainFrame.Content = mainQuestion;
                 nextButton.Content = "Next";
@@ -347,7 +346,7 @@ namespace ImagineCupProject
                 microphoneRecognitionClient.Dispose();
                 microphoneRecognitionClient = null;
                 toastViewModel.ShowInformation("Hang up the call.");
-                PrintCurrentEvent(currentEvent);
+                //PrintCurrentEvent(currentEvent);
                 InsertCurrentEvent(currentEvent);
                 //현재 처리 중이었던 사건 저장 및 UI 초기화
                 ResetEvent();

@@ -245,23 +245,27 @@ namespace ImagineCupProject
             // 4. 결과값 나오면 인지 종료
             //AnalyzeText();
 
-            if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
-            {
-                classifiedResult = "1.0\r\n";
-                ChangeAnswerButtonState(firstAnswer, firstToggle, true);
-                currentEvent.EventFirstANSWER = 1;
-            }
-            else if (this.testBox.Text.ToUpper().Trim() == "NO")
-            {
-                classifiedResult = "0.0\r\n";
-                ChangeAnswerButtonState(firstAnswer, firstToggle, false);
-                currentEvent.EventFirstANSWER = 0;
-            }
-            else
-            {
-                FirstQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
-            }
+            //if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
+            //{
+            //    classifiedResult = "1.0\r\n";
+            //    ChangeAnswerButtonState(firstAnswer, firstToggle, true);
+            //    currentEvent.EventFirstANSWER = 1;
+            //}
+            //else if (this.testBox.Text.ToUpper().Trim() == "NO")
+            //{
+            //    classifiedResult = "0.0\r\n";
+            //    ChangeAnswerButtonState(firstAnswer, firstToggle, false);
+            //    currentEvent.EventFirstANSWER = 0;
+            //}
+            //else
+            //{
+            //    FirstQuestionRun(testBox.Text);
+            //    loadingAnimation.Visibility = Visibility.Visible;
+            //}
+
+            classifiedResult = "1.0\r\n";
+            ChangeAnswerButtonState(firstAnswer, firstToggle, true);
+            currentEvent.EventFirstANSWER = 1;
         }
         private async void FirstQuestionRun(string keyWords)
         {
@@ -284,23 +288,27 @@ namespace ImagineCupProject
 
         private void ThirdQuestion_Click(object sender, RoutedEventArgs e)
         {
-            if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
-            {
-                classifiedResult = "1.0\r\n";
-                ChangeAnswerButtonState(thirdAnswer, thirdToggle, true);
-                currentEvent.EventThirdANSWER = 1;
-            }
-            else if (this.testBox.Text.ToUpper().Trim() == "NO")
-            {
-                classifiedResult = "0.0\r\n";
-                ChangeAnswerButtonState(thirdAnswer, thirdToggle, false);
-                currentEvent.EventThirdANSWER = 0;
-            }
-            else
-            {
-                ThirdQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
-            }
+            //if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
+            //{
+            //    classifiedResult = "1.0\r\n";
+            //    ChangeAnswerButtonState(thirdAnswer, thirdToggle, true);
+            //    currentEvent.EventThirdANSWER = 1;
+            //}
+            //else if (this.testBox.Text.ToUpper().Trim() == "NO")
+            //{
+            //    classifiedResult = "0.0\r\n";
+            //    ChangeAnswerButtonState(thirdAnswer, thirdToggle, false);
+            //    currentEvent.EventThirdANSWER = 0;
+            //}
+            //else
+            //{
+            //    ThirdQuestionRun(testBox.Text);
+            //    loadingAnimation.Visibility = Visibility.Visible;
+            //}
+
+            classifiedResult = "1.0\r\n";
+            ChangeAnswerButtonState(thirdAnswer, thirdToggle, true);
+            currentEvent.EventThirdANSWER = 1;
         }
         private async void ThirdQuestionRun(string keyWords)
         {
@@ -314,23 +322,27 @@ namespace ImagineCupProject
 
         private void FourthQuestion_Click(object sender, RoutedEventArgs e)
         {
-            if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
-            {
-                classifiedResult = "1.0\r\n";
-                ChangeAnswerButtonState(fourthAnswer, fourthToggle, true);
-                currentEvent.EventFourthANSWER = 1;
-            }
-            else if (this.testBox.Text.ToUpper().Trim() == "NO")
-            {
-                classifiedResult = "0.0\r\n";
-                ChangeAnswerButtonState(fourthAnswer, fourthToggle, false);
-                currentEvent.EventFourthANSWER = 0;
-            }
-            else
-            {
-                FourthQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
-            }
+            //if (this.testBox.Text.ToUpper().Trim() == "YES" || this.testBox.Text.ToUpper().Trim() == "YEAH")
+            //{
+            //    classifiedResult = "1.0\r\n";
+            //    ChangeAnswerButtonState(fourthAnswer, fourthToggle, true);
+            //    currentEvent.EventFourthANSWER = 1;
+            //}
+            //else if (this.testBox.Text.ToUpper().Trim() == "NO")
+            //{
+            //    classifiedResult = "0.0\r\n";
+            //    ChangeAnswerButtonState(fourthAnswer, fourthToggle, false);
+            //    currentEvent.EventFourthANSWER = 0;
+            //}
+            //else
+            //{
+            //    FourthQuestionRun(testBox.Text);
+            //    loadingAnimation.Visibility = Visibility.Visible;
+            //}
+
+            classifiedResult = "0.0\r\n";
+            ChangeAnswerButtonState(fourthAnswer, fourthToggle, false);
+            currentEvent.EventFourthANSWER = 0;
         }
         private async void FourthQuestionRun(string keyWords)
         {
