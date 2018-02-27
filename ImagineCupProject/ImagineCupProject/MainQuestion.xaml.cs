@@ -147,12 +147,12 @@ namespace ImagineCupProject
 
         public void SendTo112()
         {
-            azureDatabase.SendDataTo112(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            //azureDatabase.SendDataTo112(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
         public void SendTo110()
         {
-            azureDatabase.SendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
+            //azureDatabase.SendDataTo110(operatorText.Text, timeText.Text, locationText.Text, phoneNumberText.Text, callerNameText.Text, problemText.Text, codeText.Text);
         }
 
         private void TextClassify_Click(object sender, RoutedEventArgs e)
@@ -189,36 +189,32 @@ namespace ImagineCupProject
 
         private async Task<string> TextClassificationAsync(string keyWords)
         {
-            //try
-            //{
-            //    string python = @"C:\Python36\python.exe";
-            //    string myPythonApp = "predict.py";
+            try
+            {
+                string python = @"C:\Python36\python.exe";
+                string myPythonApp = "predict.py";
 
-            //    ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-            //    myProcessStartInfo.CreateNoWindow = true;
-            //    myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //    myProcessStartInfo.UseShellExecute = false;
-            //    myProcessStartInfo.RedirectStandardOutput = true;
-            //    myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
+                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                myProcessStartInfo.CreateNoWindow = true;
+                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                myProcessStartInfo.UseShellExecute = false;
+                myProcessStartInfo.RedirectStandardOutput = true;
+                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
 
-            //    Process myProcess = new Process();
-            //    myProcess.StartInfo = myProcessStartInfo;
-            //    myProcess.Start();
-            //    StreamReader myStreamReader = myProcess.StandardOutput;
-            //    classifiedResult = await myStreamReader.ReadToEndAsync();
-            //    myProcess.WaitForExit();
-            //    myProcess.Close();
+                Process myProcess = new Process();
+                myProcess.StartInfo = myProcessStartInfo;
+                myProcess.Start();
+                StreamReader myStreamReader = myProcess.StandardOutput;
+                classifiedResult = await myStreamReader.ReadToEndAsync();
+                myProcess.WaitForExit();
+                myProcess.Close();
 
-            //    return classifiedResult;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return ex.Message;
-            //}
-
-            await Task.Delay(1000);
-            classifiedResult = "Fire\r\n";
-            return classifiedResult;
+                return classifiedResult;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         private void StandardResponse_Click(object sender, RoutedEventArgs e)

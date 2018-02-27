@@ -278,8 +278,8 @@ namespace ImagineCupProject
             //mainFrame의 Content가 additionalQuestion이면 답변 분석하기 위한 란에 음성인식 텍스트 추가
             //additionalQuestion.testBox.Text = speechRecognition.Text;//////////////////////////////////////////////////////////////////////
 
-            //280, 200, 250자 정도에서 주기적으로 분석
-            if (callerStatement.Text.Length > 200)
+            //150자 정도에서 주기적으로 분석
+            if (callerStatement.Text.Length > 150)
             {
                 mainQuestion.textClassify.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 callerStatement.Text = "";
@@ -380,7 +380,7 @@ namespace ImagineCupProject
         //MessageBox로 currentEvent 값 확인
         private void InsertCurrentEvent(EventVO currentEvent)
         {
-            azureDatabase.InsertData(currentEvent);
+            //azureDatabase.InsertData(currentEvent);
         }
         private void SaveCurrentEventVO()
         {
