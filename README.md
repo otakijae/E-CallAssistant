@@ -1,5 +1,7 @@
-# ImagineCup2018
-Imagine Cup 2018 project / 2018 이매진컵 프로젝트
+# E-Call Assistant ImagineCup2018
+E-Call Assistant / Imagine Cup 2018 project / 2018 이매진컵 프로젝트
+
+![E-CallIcon](http://cfile29.uf.tistory.com/image/9994ED475A9550B018E726)
 
 [ImagineCup 개발배경](https://github.com/ninetyfivejae/ImagineCup2018/wiki/Imagine-Cup-2018-%EC%95%84%EC%9D%B4%EB%94%94%EC%96%B4-%EC%A0%95%EB%A6%AC)
 
@@ -7,7 +9,7 @@ Imagine Cup 2018 project / 2018 이매진컵 프로젝트
 
 ## System Flow
 
-![SystemFlow](http://cfile3.uf.tistory.com/image/99D489435A6C151B2A36E4)
+![SystemFlow](http://cfile5.uf.tistory.com/image/9928A44F5A9551431E20B9)
 
 - 상황접수 : 긴급신고가 들어오면 프로그램을 통해서 최초 상황을 접수하게 됩니다. 최초 접수 시간부터 출동 지시 시간, 접수 전화를 끊은 시간까지 기록이 됩니다. 신고자가 당황하지 않고 침착하게 설명을 할 수 있도록 근무자가 필수적인 질문으로 진술을 유도합니다.
 
@@ -23,16 +25,17 @@ Imagine Cup 2018 project / 2018 이매진컵 프로젝트
 
 ## UI
 - 전반적인 UI 틀 설계
-	- [참고 오픈소스](https://github.com/Abel13/AnimatedMenu1)
-
+  - [참고 오픈소스](https://github.com/Abel13/AnimatedMenu1)
 - Main Page
-![Main Page](http://cfile26.uf.tistory.com/image/99B4F63B5A6E4221134BF6)
-
+  ![Main Page](http://cfile27.uf.tistory.com/image/994C793E5A866A9D34566B)
+- MainPage Click to Answer Page - 전화가 오면 이 화면이 나오고 클릭하면 통화를 받게 된다.
+  ![Main Page Click to Answer](http://cfile21.uf.tistory.com/image/99B50B3E5A866A9D01CF9B)
 - Classified Manual Page with additional questions
-![Classified Manual Page with additional questions](http://cfile10.uf.tistory.com/image/99E2F43B5A6E421E1226B1)
-
+  ![Classified Manual Page with additional questions](http://cfile29.uf.tistory.com/image/992AB03E5A866A9C2AD8DC)
 - Medical Response Manual Page
-![Medical Response Manual Page](http://cfile28.uf.tistory.com/image/99AF993B5A6E422013C277)
+  ![Medical Response Manual Page](http://cfile28.uf.tistory.com/image/99AF993B5A6E422013C277)
+- Toast Notification
+  ![ToastNotification](http://cfile28.uf.tistory.com/image/9944493E5A866A9E113045)
 
 ---
 
@@ -47,9 +50,12 @@ Imagine Cup 2018 project / 2018 이매진컵 프로젝트
 
 - Graph
 
-![Graph Page](http://cfile8.uf.tistory.com/image/9944BD3B5A6E4222155349)
+![Graph Page](http://cfile30.uf.tistory.com/image/9913263E5A866A9B4108DF)
 
 ---
+
+## STT, Text Analytic, POS Tagging
+![STT, Text Analytic, POS Tagging](http://cfile8.uf.tistory.com/image/99D3B4475A9550B322F0A8)
 
 ## Pretrained google news data Word2Vec model 사용
 - C#프로그램에서 파이썬 코드 실행 후 string으로 argument 전달
@@ -85,6 +91,9 @@ except KeyError:
     print("Not in vocabulary")
 ```
 
+## Improving STT accuracy algorithm
+![Improving STT accuracy algorithm](http://cfile30.uf.tistory.com/image/999D85475A9550B6285057)
+
 ## Data Mining / Scraping Guardian news
 
 - 가디언지 뉴스 데이터 ==> 정제된 뉴스 데이터
@@ -98,6 +107,9 @@ except KeyError:
 - Google 검색에서 ```(category) site:www.guardian.com```이라고 검색하면 해당 사이트의 검색 결과만을 반환한다. 따라서, 구글에서 검색해서 나온 가디언지 링크들을 들어가서 기사 내용들을 가져온다.
 
 ## CNN Text Classification
+
+![CNNTextClassification](http://cfile30.uf.tistory.com/image/9955F5475A9550B72D0F2D)
+
 - [참고 문헌 / Implementing a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) 
 - 현재 75% 정확도 / 아직 학습해야할 카테고리가 더 있음 / 정확도 더 올릴 예정
 - Training Command Example : ```python train.py ./data/train.csv ./parameters.json```
