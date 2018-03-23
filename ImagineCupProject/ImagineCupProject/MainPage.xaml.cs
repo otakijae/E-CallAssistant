@@ -49,9 +49,6 @@ namespace ImagineCupProject
             additionalQuestion = new AdditionalQuestion(toastViewModel, loadingProcess, currentEvent);
             mainQuestion = new MainQuestion(additionalQuestion, toastViewModel, loadingProcess, currentEvent);
             mainFrame.Content = mainQuestion;
-            //AsyncRecognizeGcs("gs://emergencycall/911 pizza call - policer.wav");
-            Summarize();
-            SentimentAnalysis();
             phoneLoadingProcess.loadingText.Visibility = Visibility.Hidden;
         }
 
@@ -128,29 +125,6 @@ namespace ImagineCupProject
         private void listViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             mainFrame.Content = mainQuestion;
-        }
-
-        //  Summarize -  AYLIEN Text Analysis API 
-        public void Summarize()
-        {
-            string title = "emergency";
-            var summary2 = client.Summarize(text: text, title: title, sentencesNumber: 3).Sentences;
-
-            foreach (var sentence in summary2)
-            {
-                summary.Text += sentence;
-            }
-        }
-
-        //  SentimentAnalyze - AYLIEN Text Analysis API 
-        public void SentimentAnalysis()
-        {
-            Aylien.TextApi.Sentiment sentiment2 = client.Sentiment(text: text);
-            summary.Text += "\nsentiment : ";
-            summary.Text += sentiment2.Polarity + " " + sentiment2.PolarityConfidence;
-            summary.Text += "\n";
-            summary.Text += sentiment2.Subjectivity + " " + sentiment2.SubjectivityConfidence;
-
         }
 
         //Azure SpeechToText
