@@ -14,6 +14,9 @@ using System.Diagnostics;
 using System.Windows.Controls.Primitives;
 using System.Threading;
 using System.Windows.Media;
+using Newtonsoft.Json.Linq;
+using System.Text;
+using System.Net.Http;
 //using Aylien.TextApi;
 
 namespace ImagineCupProject
@@ -191,23 +194,34 @@ namespace ImagineCupProject
         {
             try
             {
-                string python = @"C:\Python36\python.exe";
-                string myPythonApp = "predict.py";
+                //string python = @"C:\Python36\python.exe";
+                //string myPythonApp = "predict.py";
 
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
-                myProcessStartInfo.CreateNoWindow = true;
-                myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                myProcessStartInfo.UseShellExecute = false;
-                myProcessStartInfo.RedirectStandardOutput = true;
-                myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
+                //ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+                //myProcessStartInfo.CreateNoWindow = true;
+                //myProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                //myProcessStartInfo.UseShellExecute = false;
+                //myProcessStartInfo.RedirectStandardOutput = true;
+                //myProcessStartInfo.Arguments = myPythonApp + " " + "./trained_model_1516629873/" + " \"" + keyWords + "\"";
 
-                Process myProcess = new Process();
-                myProcess.StartInfo = myProcessStartInfo;
-                myProcess.Start();
-                StreamReader myStreamReader = myProcess.StandardOutput;
-                classifiedResult = await myStreamReader.ReadToEndAsync();
-                myProcess.WaitForExit();
-                myProcess.Close();
+                //Process myProcess = new Process();
+                //myProcess.StartInfo = myProcessStartInfo;
+                //myProcess.Start();
+                //StreamReader myStreamReader = myProcess.StandardOutput;
+                //classifiedResult = await myStreamReader.ReadToEndAsync();
+                //myProcess.WaitForExit();
+                //myProcess.Close();
+
+                //### URL request ###
+                string url = "http://localhost:4000/predict?query=" + keyWords;
+                using (HttpClient client = new HttpClient())
+                using (HttpResponseMessage response = await client.GetAsync(url))
+                using (HttpContent content = response.Content)
+                {
+                    string result = await content.ReadAsStringAsync();
+                    JObject jo = JObject.Parse(result);
+                    classifiedResult = (string)jo["result"];
+                }
 
                 return classifiedResult;
             }

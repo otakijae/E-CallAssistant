@@ -10,6 +10,12 @@ from tensorflow.contrib import learn
 
 logging.getLogger().setLevel(logging.INFO)
 
+import flask
+from flask import Flask, request, render_template
+
+app = flask.Flask(__name__)
+
+@app.route('/predict', methods=["GET"])
 def console_predict():
 	"""Step 0: load trained model and parameters"""
 	params = json.loads(open('./parameters.json').read())
@@ -26,7 +32,12 @@ def console_predict():
 	###For Console input
 	#text = input("Input : ")
 	###For C# inter-processing
-	text = sys.argv[2]
+	#text = sys.argv[2]
+	###For URL request
+	text = flask.request.args['query']
+
+	logging.info('ENCODING : {}'.format(flask.request.args['query']))
+
 	li = [text]
 
 	x_raw = li
@@ -63,7 +74,8 @@ def console_predict():
 
 	logging.info('RESULT : {}'.format(actual_labels))
 	print(actual_labels[0])
-
+	result = {'result':actual_labels[0]}
+	return flask.jsonify(result)
 
 def predict_unseen_data():
 	"""Step 0: load trained model and parameters"""
@@ -135,6 +147,10 @@ def predict_unseen_data():
 		logging.critical('The prediction is complete')
 
 if __name__ == '__main__':
-	console_predict()
+	#console_predict()
 	# python3 predict.py ./trained_model_1478649295/ ./data/small_samples.json
 	#predict_unseen_data()
+
+	HOST = '127.0.0.1'
+	PORT = 4000
+	app.run(HOST, PORT)
