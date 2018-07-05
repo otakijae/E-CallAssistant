@@ -149,8 +149,9 @@ except KeyError:
 - [참고 문헌 / Implementing a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) 
 - 현재 75% 정확도 / 아직 학습해야할 카테고리가 더 있음 / 정확도 더 올릴 예정
 - Training Command Example : ```python train.py ./data/train.csv ./parameters.json```
-- Console Predict Command Example : ```python predict.py ./trained_model_1516543243/```
-- JSON file Predict Command Example : ```python predict.py ./trained_model_1516543243/ ./data/sample.json```
+- URL request : ```python predict.py ./trained_model_1516629873/``` 서버 실행 후 프로그램 실행
+- Console Predict Command Example : ```python predict.py ./trained_model_1516629873/```
+- JSON file Predict Command Example : ```python predict.py ./trained_model_1516629873/ ./data/sample.json```
 - C# 프로젝트 bin-Debug-(Environment.CurrentDirectory)에 "data_helper.py", "predict.py", "text_cnn.py", "train.py", trained model 위치 시켜서 실행하기
 - 예측 값
 ![CNNTextClassificationPrediction](http://cfile9.uf.tistory.com/image/99E6DA345AFFE3D80A1106)
