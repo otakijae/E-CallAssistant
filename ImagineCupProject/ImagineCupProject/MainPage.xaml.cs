@@ -132,7 +132,7 @@ namespace ImagineCupProject
         {
             var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
-            string subscriptionKey = "4863de893b5248f0a551f362c5811288";
+            string subscriptionKey = "8415e70a55d541a3b0cf40bdf9366c41";
             //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
             microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
                 speechRecognitionMode,
