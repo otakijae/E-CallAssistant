@@ -58,7 +58,7 @@ namespace ImagineCupProject
         {
             switch (category)
             {
-                case "Disaster\r\n":
+                case "Disaster":
                     classifiedManual.earthquake.Visibility = Visibility.Visible;
                     classifiedManual.flood.Visibility = Visibility.Visible;
                     classifiedManual.severeWeather.Visibility = Visibility.Visible;
@@ -70,8 +70,17 @@ namespace ImagineCupProject
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
+
+                    firstQuestion.Content = "Are you in the location right now?";
+                    secondQuestion.Content = "how is the overall damage situation?";
+                    thirdQuestion.Content = "Are you injured?";
+                    fourthQuestion.Content = "Are you with the patient?";
+                    fifthQuestion.Content = "Is the patient AWAKE & ABLE To TALK to you?";
+                    sixthQuestion.Content = "Is the patient BREATHING normal?";
+                    seventhQuestion.Content = "Is the patient BLEEDING?";
+                    eighthQuestion.Content = "When did this happen?";
                     break;
-                case "Terror\r\n":
+                case "Terror":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
                     classifiedManual.flood.Visibility = Visibility.Collapsed;
                     classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
@@ -83,8 +92,17 @@ namespace ImagineCupProject
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
+
+                    firstQuestion.Content = "Did you see the suspect?";
+                    secondQuestion.Content = "Can you depict of the suspect?";
+                    thirdQuestion.Content = "Does anybody injured in the accidents scene?";
+                    fourthQuestion.Content = "Are you with the patient?";
+                    fifthQuestion.Content = "Is the patient AWAKE & ABLE To TALK to you?";
+                    sixthQuestion.Content = "Is the patient BREATHING normal?";
+                    seventhQuestion.Content = "Is the patient BLEEDING?";
+                    eighthQuestion.Content = "How did the suspect escape?";
                     break;
-                case "Fire\r\n":
+                case "Fire":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
                     classifiedManual.flood.Visibility = Visibility.Collapsed;
                     classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
@@ -96,8 +114,17 @@ namespace ImagineCupProject
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
+
+                    firstQuestion.Content = "Are you in the location right now?";
+                    secondQuestion.Content = "When did this happen?";
+                    thirdQuestion.Content = "Does anybody injured in the accidents scene?";
+                    fourthQuestion.Content = "Are you with the patient?";
+                    fifthQuestion.Content = "Is the patient AWAKE & ABLE TO TALK to you?";
+                    sixthQuestion.Content = "Is the patient BREATHING normal?";
+                    seventhQuestion.Content = "Is the patient BLEEDING";
+                    eighthQuestion.Content = "Patient's AGE and SEX?";
                     break;
-                case "Violence\r\n":
+                case "Violence":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
                     classifiedManual.flood.Visibility = Visibility.Collapsed;
                     classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
@@ -109,8 +136,17 @@ namespace ImagineCupProject
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Visible;
                     classifiedManual.suicide.Visibility = Visibility.Visible;
                     classifiedManual.motorVehicleAccidents.Visibility = Visibility.Collapsed;
+
+                    firstQuestion.Content = "Are you in the location right now?";
+                    secondQuestion.Content = "How many suspects?";
+                    thirdQuestion.Content = "Did the suspect use weapons such as knife or gun?";
+                    fourthQuestion.Content = "Are you injured?";
+                    fifthQuestion.Content = "Are you with the patient?";
+                    sixthQuestion.Content = "Is the patient AWAKE & ABLE To TALK to you?";
+                    seventhQuestion.Content = "how is the overall damage situation?";
+                    eighthQuestion.Content = "Is the patient BLEEDING?";
                     break;
-                case "Motor vehicle accidents\r\n":
+                case "Motor vehicle accidents":
                     classifiedManual.earthquake.Visibility = Visibility.Collapsed;
                     classifiedManual.flood.Visibility = Visibility.Collapsed;
                     classifiedManual.severeWeather.Visibility = Visibility.Collapsed;
@@ -122,6 +158,15 @@ namespace ImagineCupProject
                     classifiedManual.childCruelTreatment.Visibility = Visibility.Collapsed;
                     classifiedManual.suicide.Visibility = Visibility.Collapsed;
                     classifiedManual.motorVehicleAccidents.Visibility = Visibility.Visible;
+
+                    firstQuestion.Content = "Are you in the location right now?";
+                    secondQuestion.Content = "how is the overall damage situation?";
+                    thirdQuestion.Content = "Are you with the patient?";
+                    fourthQuestion.Content = "Is the patient AWAKE & ABLE To TALK to you?";
+                    fifthQuestion.Content = "Is the patient BREATHING normal?";
+                    sixthQuestion.Content = "Is the patient BLEEDING?";
+                    seventhQuestion.Content = "Is the vehicle on fire?";
+                    eighthQuestion.Content = "Can you check if the vehicle is leaking oil?";
                     break;
                 default:
                     break;
@@ -259,17 +304,17 @@ namespace ImagineCupProject
             }
             else
             {
-                FirstQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //FirstQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void FirstQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void FirstQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventFirstANSWER = CheckClassifiedResultTrueOrFalse(firstAnswer, firstToggle);
-        }
+        //    currentEvent.EventFirstANSWER = CheckClassifiedResultTrueOrFalse(firstAnswer, firstToggle);
+        //}
 
 
 
@@ -298,17 +343,17 @@ namespace ImagineCupProject
             }
             else
             {
-                ThirdQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //ThirdQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void ThirdQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void ThirdQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventThirdANSWER = CheckClassifiedResultTrueOrFalse(thirdAnswer, thirdToggle);
-        }
+        //    currentEvent.EventThirdANSWER = CheckClassifiedResultTrueOrFalse(thirdAnswer, thirdToggle);
+        //}
 
 
 
@@ -328,17 +373,17 @@ namespace ImagineCupProject
             }
             else
             {
-                FourthQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //FourthQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void FourthQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void FourthQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventFourthANSWER = CheckClassifiedResultTrueOrFalse(fourthAnswer, fourthToggle);
-        }
+        //    currentEvent.EventFourthANSWER = CheckClassifiedResultTrueOrFalse(fourthAnswer, fourthToggle);
+        //}
 
 
 
@@ -358,17 +403,17 @@ namespace ImagineCupProject
             }
             else
             {
-                FifthQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //FifthQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void FifthQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void FifthQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventFifthANSWER = CheckClassifiedResultTrueOrFalse(fifthAnswer, fifthToggle);
-        }
+        //    currentEvent.EventFifthANSWER = CheckClassifiedResultTrueOrFalse(fifthAnswer, fifthToggle);
+        //}
 
 
 
@@ -388,17 +433,17 @@ namespace ImagineCupProject
             }
             else
             {
-                SixthQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //SixthQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void SixthQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void SixthQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventSixthANSWER = CheckClassifiedResultTrueOrFalse(sixthAnswer, sixthToggle);
-        }
+        //    currentEvent.EventSixthANSWER = CheckClassifiedResultTrueOrFalse(sixthAnswer, sixthToggle);
+        //}
 
 
 
@@ -418,17 +463,17 @@ namespace ImagineCupProject
             }
             else
             {
-                SeventhQuestionRun(testBox.Text);
-                loadingAnimation.Visibility = Visibility.Visible;
+                //SeventhQuestionRun(testBox.Text);
+                //loadingAnimation.Visibility = Visibility.Visible;
             }
         }
-        private async void SeventhQuestionRun(string keyWords)
-        {
-            await TextIsPositiveClassificationAsync(keyWords);
-            loadingAnimation.Visibility = Visibility.Hidden;
+        //private async void SeventhQuestionRun(string keyWords)
+        //{
+        //    await TextIsPositiveClassificationAsync(keyWords);
+        //    loadingAnimation.Visibility = Visibility.Hidden;
 
-            currentEvent.EventSeventhANSWER = CheckClassifiedResultTrueOrFalse(seventhAnswer, seventhToggle);
-        }
+        //    currentEvent.EventSeventhANSWER = CheckClassifiedResultTrueOrFalse(seventhAnswer, seventhToggle);
+        //}
 
 
 
