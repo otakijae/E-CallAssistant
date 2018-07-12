@@ -28,7 +28,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="textClassify"  Content="TextClassification" FontSize="8" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="TextClassify_Click" Visibility="Visible"/>
+                    <Button x:Name="textClassify"  Content="TextClassification" FontSize="8" Width="100" Height="30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="TextClassify_Click" Visibility="Hidden"/>
 
                     <TextBlock Text="Operator" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="1"/>
                     <TextBlock Text="Time" Foreground="Black" TextAlignment="Center" Padding="25" FontSize="23" FontFamily="Nirmala UI Semilight" Grid.Column="0" Grid.Row="2"/>
