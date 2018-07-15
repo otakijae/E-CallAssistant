@@ -19,6 +19,7 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainPage : UserControl
     {
+        
         MicrophoneRecognitionClient microphoneRecognitionClient;
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
@@ -132,7 +133,7 @@ namespace ImagineCupProject
         {
             var speechRecognitionMode = SpeechRecognitionMode.LongDictation;  //LongDictation 대신 ShortPhrase 선택
             string language = "en-us";
-            string subscriptionKey = "35753a29884544af9ca8aac23447a4fe";
+            string subscriptionKey = "8415e70a55d541a3b0cf40bdf9366c41";
             //string subscriptionKey = ConfigurationManager.AppSettings["5e3c0f17ea3f40b39cfb6ec28c77bf3e"];
             microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient(
                 speechRecognitionMode,
@@ -354,7 +355,7 @@ namespace ImagineCupProject
         //MessageBox로 currentEvent 값 확인
         private void InsertCurrentEvent(EventVO currentEvent)
         {
-            //azureDatabase.InsertData(currentEvent);
+            azureDatabase.InsertData(currentEvent);
         }
         private void SaveCurrentEventVO()
         {
