@@ -74,6 +74,9 @@ namespace ImagineCupProject
         {
             if (nextButton.Content.Equals("Next"))
             {
+                //근무자가 임의로 분류된 코드를 바꿨을 시에 변경한 코드로 매뉴얼을 제시해줌
+                additionalQuestion.ShowClassifiedManuals(mainQuestion.codeText.Text);
+
                 SaveCurrentEventVO();
 
                 if (currentEvent.EventLOCATION == "")
