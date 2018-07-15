@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Windows;
 
 namespace ImagineCupProject
@@ -27,25 +26,31 @@ namespace ImagineCupProject
                     currentEvent.EventEighthANSWER = "empty";
                 }
                 var cb = new SqlConnectionStringBuilder();
+                /*
                 cb.DataSource = "jangwonserver.database.windows.net";
                 cb.UserID = "jangwon";
                 cb.Password = "wkddnjs2!!";
                 cb.InitialCatalog = "emergencycallDatabase";
+                */
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
                     connection.Open();
 
+                    /*
                     sql = "insert into ECALL(EventOperator,eventStartTime,eventEndTime, eventLocation,eventPhoneNumber,eventCallerName,eventProblem,eventCode," +
                         "eventFirstAnswer,eventSecondAnswer,eventThirdAnswer,eventFourthAnswer,eventFifthAnswer,eventSixthAnswer,eventSeventhAnswer,eventEightAnswer) " +
                         "values(@EventOPERATOR,@EventSTARTTIME,@EventENDTIME,@EventLOCATION,@EventPHONENUMBER,@EventCALLERNAME,@EventPROBLEM,@EventCODE," +
                         "@FirstAnswer,@SecondAnswer,@ThirdAnswer,@FourthAnswer,@FifthAnswer,@SixthAnswer,@SeventhAnswer,@EightAnswer)";
-
-                    /*
+*/
+                    
                    sql = "insert into ECALL(EventOperator,eventStartTime,eventEndTime, eventLocation,eventPhoneNumber,eventCallerName,eventProblem,eventCode) " +
-                      "values(currentEvent.EventOPERATOR,currentEvent.EventSTARTTIME,currentEvent.EventENDTIME,currentEvent.EventLOCATION," +
-                      "currentEvent.EventPHONENUMBER,currentEvent.EventCALLERNAME,currentEvent.EventPROBLEM,currentEvent.EventCODE)";
-                      */
+                      "values(@EventOPERATOR,@EventSTARTTIME,@EventENDTIME,@EventLOCATION,@EventPHONENUMBER,@EventCALLERNAME,@EventPROBLEM,@EventCODE)";
+                      
                     SqlCommand cmd = new SqlCommand(sql, connection);
                     cmd.Parameters.AddWithValue("@EventOPERATOR", currentEvent.EventOPERATOR);
                     cmd.Parameters.AddWithValue("@EventSTARTTIME", currentEvent.EventSTARTTIME);
@@ -56,6 +61,7 @@ namespace ImagineCupProject
                     cmd.Parameters.AddWithValue("@EventPROBLEM", currentEvent.EventPROBLEM);
                     cmd.Parameters.AddWithValue("@EventCODE", currentEvent.EventCODE);
 
+                    /*
                     cmd.Parameters.AddWithValue("@FirstAnswer", currentEvent.EventFirstANSWER);
                     cmd.Parameters.AddWithValue("@SecondAnswer", currentEvent.EventSecondANSWER);
                     cmd.Parameters.AddWithValue("@ThirdAnswer", currentEvent.EventThirdANSWER);
@@ -64,6 +70,7 @@ namespace ImagineCupProject
                     cmd.Parameters.AddWithValue("@SixthAnswer", currentEvent.EventSixthANSWER);
                     cmd.Parameters.AddWithValue("@SeventhAnswer", currentEvent.EventSeventhANSWER);
                     cmd.Parameters.AddWithValue("@EightAnswer", currentEvent.EventEighthANSWER);
+                    */
 
                     if (cmd.ExecuteNonQuery() == 1)
                     {
@@ -87,11 +94,10 @@ namespace ImagineCupProject
             try
             {
                 var cb = new SqlConnectionStringBuilder();
-                cb.DataSource = "jangwonserver.database.windows.net";
-                cb.UserID = "jangwon";
-                cb.Password = "wkddnjs2!!";
-                cb.InitialCatalog = "emergencycallDatabase";
-
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
@@ -119,10 +125,10 @@ namespace ImagineCupProject
             try
             {
                 var cb = new SqlConnectionStringBuilder();
-                cb.DataSource = "jangwonserver.database.windows.net";
-                cb.UserID = "jangwon";
-                cb.Password = "wkddnjs2!!";
-                cb.InitialCatalog = "emergencycallDatabase";
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
 
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))
@@ -152,11 +158,10 @@ namespace ImagineCupProject
             try
             {
                 var cb = new SqlConnectionStringBuilder();
-                cb.DataSource = "jangwonserver.database.windows.net";
-                cb.UserID = "jangwon";
-                cb.Password = "wkddnjs2!!";
-                cb.InitialCatalog = "emergencycallDatabase";
-
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))
                 {
@@ -188,10 +193,10 @@ namespace ImagineCupProject
             try
             {
                 var cb = new SqlConnectionStringBuilder();
-                cb.DataSource = "jangwonserver.database.windows.net";
-                cb.UserID = "jangwon";
-                cb.Password = "wkddnjs2!!";
-                cb.InitialCatalog = "emergencycallDatabase";
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
 
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))

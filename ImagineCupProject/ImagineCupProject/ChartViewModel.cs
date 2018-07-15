@@ -46,10 +46,10 @@ namespace ImagineCupProject
             try
             {
                 var cb = new SqlConnectionStringBuilder();
-                cb.DataSource = "jangwonserver.database.windows.net";
-                cb.UserID = "jangwon";
-                cb.Password = "wkddnjs2!!";
-                cb.InitialCatalog = "emergencycallDatabase";
+                cb.DataSource = "mynewserver-20171214.database.windows.net";
+                cb.UserID = "ServerAdmin";
+                cb.Password = "JaeShin12!";
+                cb.InitialCatalog = "mySampleDatabase";
 
                 string sql;
                 using (var connection = new SqlConnection(cb.ConnectionString))

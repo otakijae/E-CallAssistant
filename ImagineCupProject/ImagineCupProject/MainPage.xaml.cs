@@ -19,6 +19,7 @@ namespace ImagineCupProject
     /// </summary>
     public partial class MainPage : UserControl
     {
+        
         MicrophoneRecognitionClient microphoneRecognitionClient;
         AzureDatabase azureDatabase;
         Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
@@ -354,7 +355,7 @@ namespace ImagineCupProject
         //MessageBox로 currentEvent 값 확인
         private void InsertCurrentEvent(EventVO currentEvent)
         {
-            //azureDatabase.InsertData(currentEvent);
+            azureDatabase.InsertData(currentEvent);
         }
         private void SaveCurrentEventVO()
         {
