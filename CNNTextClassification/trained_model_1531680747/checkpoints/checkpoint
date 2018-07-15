@@ -1,0 +1,6 @@
+model_checkpoint_path: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-9000"
+all_model_checkpoint_paths: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-6000"
+all_model_checkpoint_paths: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-6200"
+all_model_checkpoint_paths: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-8200"
+all_model_checkpoint_paths: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-8400"
+all_model_checkpoint_paths: "C:\\Users\\jangwonSon\\Documents\\E-CallAssistant\\CNNTextClassification\\trained_model_1531680747\\checkpoints\\model-9000"

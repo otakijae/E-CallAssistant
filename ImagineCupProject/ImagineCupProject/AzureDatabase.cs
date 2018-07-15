@@ -273,7 +273,7 @@ namespace ImagineCupProject
                         {
                             codeCount[3]++;
                         }
-                        else if (reader.GetString(8).ToLower().Equals("motor") | reader.GetString(8).ToLower().Equals("vehicle") | reader.GetString(8).ToLower().Equals("accidents"))
+                        else if (reader.GetString(8).ToLower().Contains("motor") || reader.GetString(8).ToLower().Contains("vehicle") || reader.GetString(8).ToLower().Contains("accidents"))
                         {
                             codeCount[4]++;
                         }

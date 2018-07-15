@@ -355,7 +355,7 @@ namespace ImagineCupProject
         //MessageBox로 currentEvent 값 확인
         private void InsertCurrentEvent(EventVO currentEvent)
         {
-            azureDatabase.InsertData(currentEvent);
+            //azureDatabase.InsertData(currentEvent);
         }
         private void SaveCurrentEventVO()
         {

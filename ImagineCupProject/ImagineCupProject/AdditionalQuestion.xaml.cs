@@ -194,9 +194,9 @@ namespace ImagineCupProject
                 myProcessStartInfo.UseShellExecute = false;
                 myProcessStartInfo.RedirectStandardOutput = true;
                 //신재혁 컴퓨터에서 실행 시
-                myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";
+                //myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518189792/checkpoints/\"" + " \"" + keyWords + "\"";
                 //손장원 컴퓨터에서 실행 시
-                //myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518617407/checkpoints/\"" + " \"" + keyWords + "\"";
+                myProcessStartInfo.Arguments = myPythonApp + " " + "--eval_train" + " " + "--checkpoint_dir=\"./runs/1518617407/checkpoints/\"" + " \"" + keyWords + "\"";
 
                 Process myProcess = new Process();
                 myProcess.StartInfo = myProcessStartInfo;
