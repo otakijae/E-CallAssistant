@@ -150,26 +150,9 @@ namespace ImagineCupProject
 
         public ChartViewModel()
         {
-            //PrintData();
+            PrintData();
 
-            code1 = 3;
-            code2 = 2;
-            code3 = 1;
-            code4 = 2;
-            code5 = 2;
-            code6 = 5;
-            time1 = 1;
-            time2 = 4;
-            time3 = 0;
-            time4 = 0;
-            time5 = 0;
-            time6 = 3;
-            time7 = 0;
-            time8 = 1;
-            time9 = 1;
-            time10 = 2;
-            time11 = 1;
-            time12 = 0;
+    
             var rnd = new Random();
             BarChartDrawer = new BarChartDrawer(new Point[]{
                 new Point(0, code1),

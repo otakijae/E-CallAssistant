@@ -31,13 +31,13 @@ namespace ImagineCupProject
             InitializeComponent();
             this.DataContext = new ChartViewModel();
             azureDatabase = new AzureDatabase();
-            //maxName = azureDatabase.PrintData();
-            maxName = "Not emergency-realated";
+            maxName = azureDatabase.PrintData();
+            //maxName = "Not emergency-realated";
             totalCallNumber();
-            //maxTime = Convert.ToInt32(maxName.Split(' ')[0]) * 2 - 2;
-            maxTime = 2;
-            //maxCode = maxName.Split(' ')[1];
-            maxCode = "5";
+            maxTime = Convert.ToInt32(maxName.Split(' ')[0]) * 2 ;
+            //maxTime = 2;
+            maxCode = maxName.Split(' ')[1];
+            //maxCode = "5";
             if (maxCode == "0")
             {
                 codeName = "Terror & Gunshot";
@@ -68,9 +68,9 @@ namespace ImagineCupProject
 
         public void totalCallNumber()
         {
-            //int total = azureDatabase.PrintTotalNumber();
-            int total = 16;
-
+            int total = azureDatabase.PrintTotalNumber();
+            //int total = 16;
+            
             operatorReceiveNumText.Text = "    operator JW received a total of " + total + " calls this month.";
         }
     }
