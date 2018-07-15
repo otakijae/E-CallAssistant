@@ -74,18 +74,18 @@ namespace ImagineCupProject
 
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        MessageBox.Show("Enroll!");
+                        //MessageBox.Show("Enroll!");
                     }
                     else
                     {
-                        MessageBox.Show("Database Error!");
+                        //MessageBox.Show("Database Error!");
                     }
                 }
 
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
         }
 
@@ -110,13 +110,13 @@ namespace ImagineCupProject
                     }
                     else
                     {
-                        MessageBox.Show("Database Error!");
+                        //MessageBox.Show("Database Error!");
                     }
                 }
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
         }
 
@@ -142,13 +142,13 @@ namespace ImagineCupProject
                     }
                     else
                     {
-                        MessageBox.Show("Database Error!");
+                        //MessageBox.Show("Database Error!");
                     }
                 }
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
         }
 
@@ -181,7 +181,7 @@ namespace ImagineCupProject
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
 
             return countCall;
@@ -315,7 +315,7 @@ namespace ImagineCupProject
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
             return returnName;
         }

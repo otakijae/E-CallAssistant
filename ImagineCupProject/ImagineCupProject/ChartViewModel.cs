@@ -144,7 +144,7 @@ namespace ImagineCupProject
             }
             catch (SqlException er)
             {
-                MessageBox.Show(er.ToString());
+                //MessageBox.Show(er.ToString());
             }
         }
 
